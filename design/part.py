@@ -57,9 +57,10 @@ def export_part(name, field, grid, material, frame, extra=None, print_faces=900_
     hero = m if hero_faces is None or len(m.faces) <= hero_faces else sdf.decimate(m, hero_faces)
     hero.export(WORK / f"{name}_hero.ply")
     tm(f"hero mesh: {len(hero.faces):,} faces")
-    pr = sdf.decimate(m, print_faces) if len(m.faces) > print_faces else m
+    from . import meshfix
+    pr, fixrep = meshfix.decimate_manifold(m, print_faces)
     pr.export(OUT / "print" / f"{name}.stl")
-    tm(f"print STL: {len(pr.faces):,} faces")
+    tm(f"print STL: {len(pr.faces):,} faces, {fixrep}")
     web = sdf.decimate(pr, web_faces) if len(pr.faces) > web_faces else pr
     web.export(WORK / f"{name}_web.ply")
     tm(f"web mesh: {len(web.faces):,} faces")
@@ -75,7 +76,7 @@ def export_part(name, field, grid, material, frame, extra=None, print_faces=900_
             P.PRINT["env_316l"] if material == "316L" else P.PRINT["env_alu"]))),
         longest_mm=round(float((b1 - b0).max()), 1),
         cost_usd_jlc_pcbway=cost_usd(vol, material),
-        print_stl=dict(faces=int(len(pr.faces)), watertight=bool(pr.is_watertight),
+        print_stl=dict(faces=int(len(pr.faces)), watertight=bool(pr.is_watertight), topology=fixrep,
                        mesh_volume_cm3=round(float(abs(pr.volume)) / 1000.0, 2)),
         surface_area_cm2=round(float(m.area) / 100.0, 1),
     )

@@ -164,7 +164,7 @@ def materials():
     MATS["tube"] = mat_tube()
     MATS["fitting"] = mat_simple("MAT_fit_blacknickel", (0.09, 0.09, 0.10), rough=0.22, metallic=1.0)
     MATS["rubber"] = mat_simple("MAT_rubber", (0.02, 0.02, 0.022), rough=0.7)
-    MATS["floor"] = mat_simple("MAT_floor", (0.010, 0.010, 0.012), rough=0.28)
+    MATS["floor"] = mat_simple("MAT_floor", (0.006, 0.0065, 0.0075), rough=0.42)
     return MATS
 
 
@@ -525,8 +525,8 @@ def light_rig(key=1.0, rim=1.0, fill=1.0, top=1.0, warm=(1.0, 0.92, 0.82), cool=
     lights = [
         area_light("key", c + Vector((-620, -760, 520)), c + Vector((0, -40, 20)), 9.0 * key, 620, warm, size_y_mm=900),
         area_light("fill", c + Vector((760, -620, 120)), c, 1.2 * fill, 900, cool, size_y_mm=1200),
-        area_light("rim_l", c + Vector((-760, 520, 420)), c + Vector((0, 60, 40)), 14.0 * rim, 300, cool, size_y_mm=1100, spread=120),
-        area_light("rim_r", c + Vector((700, 620, 300)), c + Vector((0, 60, 0)), 11.0 * rim, 260, (1.0, 0.86, 0.74), size_y_mm=1000, spread=120),
+        area_light("rim_l", c + Vector((-760, 520, 420)), c + Vector((0, 60, 40)), 14.0 * rim, 300, cool, size_y_mm=1100),
+        area_light("rim_r", c + Vector((700, 620, 300)), c + Vector((0, 60, 0)), 11.0 * rim, 260, (1.0, 0.86, 0.74), size_y_mm=1000),
         area_light("top", c + Vector((0, 60, 900)), c, 5.0 * top, 1100, (1, 1, 1), size_y_mm=700),
     ]
     STATE["lights"] = lights

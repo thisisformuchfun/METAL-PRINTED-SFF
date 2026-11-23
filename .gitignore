@@ -9,3 +9,6 @@ render/hdri/*.hdr
 sim/cht/_build/
 *.nbc
 *.nbi
+media/score/*.wav
+media/score/stems/
+build/

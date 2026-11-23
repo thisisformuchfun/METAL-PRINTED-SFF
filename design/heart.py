@@ -72,7 +72,7 @@ def build(h=0.25, verbose=True):
     r_res = sdf.capsule(xk, yk, zk, RES_A, RES_B, RES_R + WALL)
     env = np.maximum(r_res - 4.6, -(r_res + 0.6))               # 4.6 mm thick skin shell
     env = np.maximum(env, 16.0 - zk)                            # front + sides only
-    net = sdf.gyroid_network(grid, sk, LT["skin_cell"] * 0.82, bias=0.45, phase=(0.3, 1.2, 2.2), warp_amp=1.2, warp_len=29.0)
+    net = sdf.gyroid_network(grid, sk, LT["skin_cell"] * 0.82, bias=0.56, phase=(0.3, 1.2, 2.2), warp_amp=1.2, warp_len=29.0)
     skin = sdf.smax(net, env, 0.9)
     skin = np.maximum(skin, -(sdf.cylinder(xk, yk, zk, fa, fb, rs + 2.5)))
     f[sk] = sdf.smin(f[sk], skin, 0.9)

@@ -123,11 +123,12 @@ def build(h=0.25, verbose=True):
     wall = LT["wet_wall"] + LT["wet_root"] * np.exp(-np.maximum(zs - Z_FLOOR, 0.0) / LT["wet_root_len"])
     core = sdf.gyroid_sheet(grid, sl, LT["wet_cell"], wall.astype(np.float32),
                             phase=(-a5 * HOT[0], -a5 * HOT[1], -a5 * Z_FLOOR + 0.6))
-    z_split = Z_CORE1 + 0.5
-    core = np.maximum(core, zs - z_split)
+    # the two lattices never butt against each other: the core stops under the divider level, the gallery
+    # starts above it, and the 1 mm band between them is open in the riser gap (clean, manifold edges)
+    core = np.maximum(core, zs - (Z_CORE1 + 0.05))
     a8 = 2 * np.pi / LT["gallery_cell"]
     gph = (-a8 * SX + 0.9, -a8 * SY, -a8 * Z_DIV1)
-    gal = np.maximum(sdf.gyroid_sheet(grid, sl, LT["gallery_cell"], LT["gallery_wall"], phase=gph), z_split - zs)
+    gal = np.maximum(sdf.gyroid_sheet(grid, sl, LT["gallery_cell"], LT["gallery_wall"], phase=gph), (Z_DIV1 - 0.05) - zs)
     lat = np.minimum(core, gal)
     del core, gal
     lat = np.maximum(lat, np.maximum(ch2 - 0.45, np.maximum(Z_FLOOR - 0.4 - zs, zs - Z_GAL1 - 0.4)))
@@ -154,7 +155,7 @@ def build(h=0.25, verbose=True):
     ai = arms2(xa, ya, shrink=W)
     ch_arm = np.maximum(ai, np.maximum(CZ0 - za, za - CZ1))
     f[al] = np.maximum(f[al], -ch_arm)
-    galA = sdf.gyroid_sheet(grid, al, LT["gallery_cell"], LT["gallery_wall"], phase=gph)
+    galA = sdf.gyroid_network(grid, al, M["arm_cell"], bias=M["arm_bias"], phase=(0.4, 1.1, 2.0))
     galA = np.maximum(galA, np.maximum(ai - 0.45, np.maximum(CZ0 - 0.4 - za, za - CZ1 - 0.4)))
     f[al] = np.minimum(f[al], galA)
     del galA
@@ -166,7 +167,7 @@ def build(h=0.25, verbose=True):
     xb, yb, zb = grid.coords(bl)
     duct = sdf.box(xb, yb, zb, d_lo, d_hi, r=1.2)
     f[bl] = np.maximum(f[bl], -duct)
-    galB = np.maximum(sdf.gyroid_sheet(grid, bl, LT["gallery_cell"], LT["gallery_wall"], phase=gph), duct - 0.45)
+    galB = np.maximum(sdf.gyroid_network(grid, bl, M["arm_cell"], bias=M["arm_bias"], phase=(0.4, 1.1, 2.0)), duct - 0.45)
     f[bl] = np.minimum(f[bl], galB)
     # clear lattice under the outlet port
     sdf.apply(f, grid, (OUT[0] - 6.3, OUT[1] - 6.3, CZ0 + 3.0), (OUT[0] + 6.3, OUT[1] + 6.3, CZ1 + 0.1),
@@ -194,7 +195,7 @@ def build(h=0.25, verbose=True):
     env_a = np.maximum(a2k + 0.8, np.maximum(zs0 - zk, zk - top_a))
     env_a = np.maximum(env_a, -(b2k + 0.6))
     env = np.minimum(env_c, env_a)
-    net = sdf.gyroid_network(grid, sk, LT["skin_cell"] * 0.9, bias=0.5, phase=(1.9, 0.4, 1.1), warp_amp=1.4, warp_len=37.0)
+    net = sdf.gyroid_network(grid, sk, LT["skin_cell"] * 0.9, bias=0.62, phase=(1.9, 0.4, 1.1), warp_amp=1.4, warp_len=37.0)
     skin = sdf.smax(net, env, 1.0)
     del net, env, env_c, env_a
     for (px, py), zb_ in ((IN, Z_BOSS), (OUT, Z_ABOSS)):

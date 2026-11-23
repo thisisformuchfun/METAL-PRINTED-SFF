@@ -225,7 +225,7 @@ LOOP = dict(
 LATTICE = dict(
     wet_cell=5.0, wet_wall=0.85, wet_root=0.7, wet_root_len=1.3,   # sheet gyroid, coolant side
     gallery_cell=8.0, gallery_wall=0.9,
-    skin_cell=8.5, skin_wall=1.35,                                 # exterior "bone" gyroid
+    skin_cell=11.0, skin_wall=1.35,                                # exterior "bone" gyroid
     voronoi_cell=11.0, voronoi_strut=1.9,
 )
 
@@ -255,8 +255,9 @@ MONOBLOCK = dict(
     inlet_offset=(0.0, -4.0),     # port position relative to socket centre
     arm_left=dict(x=(28.5, 48.6), y=(68.0, 147.0)),
     arm_top=dict(x=(28.5, 120.0), y=(145.5, 167.5)),
-    arm_z=(6.0, 21.6), arm_channel_z=(8.0, 20.0), arm_skin_h=5.5,
-    bridge_y=(72.0, 90.0),
+    arm_z=(6.0, 23.7), arm_channel_z=(8.0, 22.1), arm_skin_h=4.6,
+    arm_cell=12.0, arm_bias=1.4,   # skeletal gyroid in the arms: low pressure drop, still self-supporting
+    bridge_y=(72.0, 104.0),
     outlet=(111.0, 156.5),
     lug_d=11.0, lug_z=(9.6, 13.6), lug_hole=4.2, lug_well=8.6,
     heater_cpu=(26.0, 20.0),      # effective hot patch on the IHS  [ASM]

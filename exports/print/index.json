@@ -1,0 +1,65 @@
+{
+ "frame_cervical": {
+  "faces": 161998,
+  "watertight": true,
+  "stl_mb": 8.1,
+  "mf3_mb": 2.6,
+  "volume_cm3": 33.98
+ },
+ "frame_dorsal": {
+  "faces": 304448,
+  "watertight": true,
+  "stl_mb": 15.2,
+  "mf3_mb": 4.9,
+  "volume_cm3": 65.16
+ },
+ "frame_lumbar": {
+  "faces": 223090,
+  "watertight": true,
+  "stl_mb": 11.2,
+  "mf3_mb": 3.9,
+  "volume_cm3": 39.39
+ },
+ "frame_pelvis": {
+  "faces": 400000,
+  "watertight": true,
+  "stl_mb": 20.0,
+  "mf3_mb": 6.9,
+  "volume_cm3": 104.64
+ },
+ "frame_thoracic": {
+  "faces": 242872,
+  "watertight": true,
+  "stl_mb": 12.1,
+  "mf3_mb": 4.2,
+  "volume_cm3": 45.05
+ },
+ "gpu_block": {
+  "faces": 1099999,
+  "watertight": false,
+  "stl_mb": 55.0,
+  "mf3_mb": 17.6,
+  "volume_cm3": 186.67
+ },
+ "heart": {
+  "faces": 499999,
+  "watertight": false,
+  "stl_mb": 25.0,
+  "mf3_mb": 9.5,
+  "volume_cm3": 57.96
+ },
+ "m2_sink": {
+  "faces": 500000,
+  "watertight": true,
+  "stl_mb": 25.0,
+  "mf3_mb": 7.9,
+  "volume_cm3": 11.68
+ },
+ "monoblock": {
+  "faces": 899999,
+  "watertight": false,
+  "stl_mb": 45.0,
+  "mf3_mb": 12.8,
+  "volume_cm3": 74.08
+ }
+}

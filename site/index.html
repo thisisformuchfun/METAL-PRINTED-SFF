@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--PAGE-->
+<title>MARROW</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a dissection read top to bottom like the plates of an anatomy atlas shot on a radiograph
+   light box - skin (film), skeleton, organs, blood (loop), evidence, print files. Dark-first. */
+:root {
+  --bg: #080d12; --bg-2: #0d141b; --plate: #111b24; --rule: #213040; --rule-2: #2c4054;
+  --ink: #e4ebf0; --ink-2: #a9b8c5; --ink-3: #74889a;
+  --steel: #8ea5b8; --alu: #d3dce3; --ruby: #e0284a; --ruby-ink: #ff5f7a; --ruby-deep: #5d0f1f;
+  --ok: #58c7a1; --warn: #e2b34d;
+  --display: "Bodoni Moda", "Didot", "Bodoni MT", "Times New Roman", serif;
+  --text: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --bg: #edf1f4; --bg-2: #e4e9ee; --plate: #f8fafb; --rule: #c9d3dc; --rule-2: #aebbc7;
+  --ink: #0d151d; --ink-2: #3b4a58; --ink-3: #61717f;
+  --steel: #4c6578; --alu: #5d6b77; --ruby: #b8142f; --ruby-ink: #b8142f; --ruby-deep: #f3d3d9;
+  --ok: #14795a; --warn: #8a6100; color-scheme: light; } }
+:root[data-theme="light"] {
+  --bg: #edf1f4; --bg-2: #e4e9ee; --plate: #f8fafb; --rule: #c9d3dc; --rule-2: #aebbc7;
+  --ink: #0d151d; --ink-2: #3b4a58; --ink-3: #61717f;
+  --steel: #4c6578; --alu: #5d6b77; --ruby: #b8142f; --ruby-ink: #b8142f; --ruby-deep: #f3d3d9;
+  --ok: #14795a; --warn: #8a6100; color-scheme: light; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-color: var(--ruby); }
+a:hover { color: var(--ruby-ink); }
+:focus-visible { outline: 2px solid var(--ruby-ink); outline-offset: 3px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.02; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font-size: clamp(2.1rem, 5.2vw, 3.9rem); }
+h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.12; }
+p { margin: 0; max-width: 64ch; color: var(--ink-2); }
+p strong, li strong { color: var(--ink); font-weight: 600; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* status strip + nav */
+.status { background: var(--bg-2); border-bottom: 1px solid var(--rule); }
+.status .wrap { display: flex; gap: 0.75rem; align-items: baseline; padding-block: 0.55rem; font-size: 0.82rem; color: var(--ink-2); }
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--warn); flex: none; transform: translateY(-1px); }
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg-2); }
+nav.top .wrap { display: flex; align-items: center; gap: 1.25rem; padding-block: 0.7rem; }
+.wordmark { font-family: var(--display); font-weight: 700; letter-spacing: 0.34em; font-size: 1rem; text-decoration: none; }
+nav.top ul { display: flex; gap: 1.1rem; list-style: none; margin: 0 0 0 auto; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
+nav.top ul a { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-2); }
+nav.top ul a:hover { color: var(--ruby-ink); }
+
+/* hero */
+.hero { position: relative; border-bottom: 1px solid var(--rule); background: #05080b; color: #e4ebf0; overflow: hidden; }
+.hero img.bg { display: block; width: 100%; height: clamp(440px, 74vw, 780px); object-fit: cover; object-position: 60% 50%; }
+.hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,8,11,0.93) 0%, rgba(5,8,11,0.62) 34%, rgba(5,8,11,0) 62%), linear-gradient(0deg, rgba(5,8,11,0.85) 0%, rgba(5,8,11,0) 30%); }
+.hero .copy { position: absolute; inset: 0; display: flex; align-items: center; }
+.hero .copy .wrap { width: 100%; }
+.hero h1 { font-size: clamp(3.6rem, 13vw, 10.5rem); font-weight: 600; letter-spacing: 0.02em; line-height: 0.86; color: #f1f5f8; }
+.hero .tag { font-family: var(--display); font-style: italic; font-size: clamp(1.3rem, 2.9vw, 2.25rem); margin-top: 0.8rem; color: #f1f5f8; }
+.hero .tag em { font-style: italic; color: #ff5f7a; }
+.hero p.lede { margin-top: 1.1rem; max-width: 44ch; color: #b7c4cf; font-size: 1.02rem; }
+.hero .mono { color: #8fa3b5; }
+.cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1.15rem; border: 1px solid var(--rule-2); color: var(--ink); background: transparent; cursor: pointer; border-radius: 2px; }
+.btn.primary { background: var(--ruby); border-color: var(--ruby); color: #fff; }
+.btn:hover { border-color: var(--ruby-ink); color: var(--ruby-ink); }
+.btn.primary:hover { color: #fff; filter: brightness(1.12); }
+.hero .btn { color: #e4ebf0; border-color: #3a4f63; }
+.vitals { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--rule); }
+.vitals > div { padding: 1.15rem 1rem 1.2rem 0; border-left: 1px solid var(--rule); padding-left: 1rem; min-width: 0; }
+.vitals > div:first-child { border-left: 0; padding-left: 0; }
+.vitals .v { font-family: var(--display); font-size: clamp(1.5rem, 3.2vw, 2.4rem); line-height: 1.05; }
+.vitals .v small { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-3); margin-left: 0.2rem; }
+.vitals .k { margin-top: 0.3rem; }
+
+/* sections */
+section { padding-block: clamp(3.2rem, 8vw, 6.5rem); border-bottom: 1px solid var(--rule); }
+.head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.head .plate-no { margin-bottom: 0.9rem; display: flex; gap: 0.6rem; align-items: center; }
+.head .plate-no::after { content: ""; height: 1px; background: var(--rule-2); flex: 1; }
+.head p + p { margin-top: 0.8rem; }
+figure { margin: 0; }
+figure.plate { background: #05080b; border: 1px solid var(--rule); }
+figure.plate img, figure.plate video { display: block; width: 100%; height: auto; }
+figcaption { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--ink-3); padding: 0.6rem 0.8rem; border-top: 1px solid var(--rule); background: var(--plate); line-height: 1.5; }
+figcaption b { color: var(--ink-2); font-weight: 500; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.stack { display: grid; gap: 1.25rem; }
+
+/* film */
+.film { position: relative; }
+.film video { aspect-ratio: 16 / 9; background: #000; }
+
+/* viewer */
+.viewer { display: grid; grid-template-columns: minmax(0, 1fr) 300px; border: 1px solid var(--rule); background: var(--plate); }
+.stage { position: relative; min-height: 420px; aspect-ratio: 4 / 3; background: radial-gradient(120% 90% at 50% 35%, #16222e 0%, #070b10 70%); max-width: 100%; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.stage .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stage .load { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.stage .hint { position: absolute; left: 0.8rem; bottom: 0.7rem; color: #8fa3b5; }
+.panel { border-left: 1px solid var(--rule); padding: 1rem; display: grid; gap: 1.1rem; align-content: start; min-width: 0; }
+.panel h4 { margin: 0 0 0.5rem; font-family: var(--mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.seg { display: flex; border: 1px solid var(--rule-2); }
+.seg button { flex: 1; background: transparent; color: var(--ink-2); border: 0; border-left: 1px solid var(--rule-2); padding: 0.5rem 0.3rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ruby); color: #fff; }
+.layers { display: grid; gap: 0.35rem; }
+.layers label { display: flex; gap: 0.6rem; align-items: center; font-size: 0.9rem; color: var(--ink-2); cursor: pointer; }
+.sw { width: 0.8rem; height: 0.8rem; flex: none; border: 1px solid var(--rule-2); }
+input[type="range"] { width: 100%; accent-color: var(--ruby); }
+input[type="checkbox"] { accent-color: var(--ruby); }
+.legend { height: 0.6rem; background: linear-gradient(90deg, #000004, #420a68, #932667, #dd513a, #fca50a, #fcffa4); border: 1px solid var(--rule-2); }
+.legend-ticks { display: flex; justify-content: space-between; }
+
+/* tables */
+.scroll { overflow-x: auto; border: 1px solid var(--rule); background: var(--plate); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; white-space: nowrap; }
+td.wraps { white-space: normal; min-width: 16rem; }
+th { font-family: var(--mono); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+.pill { display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.12rem 0.45rem; border: 1px solid currentColor; border-radius: 99px; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.steel { color: var(--steel); } .pill.alu { color: var(--alu); }
+
+/* organ cards */
+.organ { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 0; border: 1px solid var(--rule); background: var(--plate); }
+.organ + .organ { margin-top: 1.25rem; }
+.organ figure { border-right: 1px solid var(--rule); background: #05080b; }
+.organ figure img { display: block; width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
+.organ .body { padding: clamp(1.1rem, 2.6vw, 2rem); display: grid; gap: 0.9rem; align-content: start; min-width: 0; }
+.organ dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.3rem 1rem; margin: 0.3rem 0 0; font-size: 0.9rem; }
+.organ dt { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.2rem; }
+.organ dd { margin: 0; color: var(--ink); font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.86rem; }
+.organ:nth-of-type(even) figure { order: 2; border-right: 0; border-left: 1px solid var(--rule); }
+
+/* charts */
+.chart { border: 1px solid var(--rule); background: var(--plate); padding: 1rem; min-width: 0; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart .ctl { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.6rem; }
+.key { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.82rem; color: var(--ink-2); }
+.key span { display: inline-flex; gap: 0.4rem; align-items: center; }
+.key i { width: 1.2rem; height: 0; border-top: 2px solid; display: inline-block; }
+.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--rule); background: var(--plate); margin-top: 1.25rem; }
+.readout > div { padding: 0.9rem 1rem; border-left: 1px solid var(--rule); min-width: 0; }
+.readout > div:first-child { border-left: 0; }
+.readout .v { font-family: var(--display); font-size: clamp(1.4rem, 2.8vw, 2rem); line-height: 1.1; }
+.finding { border-left: 3px solid var(--ruby); padding: 0.2rem 0 0.2rem 1.1rem; margin-top: 1.5rem; }
+.finding p { color: var(--ink); max-width: 70ch; }
+
+details { border: 1px solid var(--rule); background: var(--plate); }
+details + details { margin-top: 0.6rem; }
+summary { cursor: pointer; padding: 0.8rem 1rem; font-weight: 500; }
+details .in { padding: 0 1rem 1rem; display: grid; gap: 0.6rem; }
+details ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); display: grid; gap: 0.35rem; }
+details li { max-width: 78ch; }
+
+.tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.tier { border: 1px solid var(--rule); background: var(--plate); padding: 1.3rem; display: grid; gap: 0.7rem; align-content: start; min-width: 0; }
+.tier .price { font-family: var(--display); font-size: 2rem; line-height: 1; }
+.tier ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); font-size: 0.92rem; display: grid; gap: 0.25rem; }
+footer { padding-block: 2.2rem 3rem; color: var(--ink-3); font-size: 0.85rem; }
+footer p { color: var(--ink-3); max-width: 90ch; }
+footer p + p { margin-top: 0.6rem; }
+
+@media (max-width: 860px) {
+  .head, .two, .three, .organ, .viewer, .tiers { grid-template-columns: minmax(0, 1fr); }
+  .organ figure, .organ:nth-of-type(even) figure { order: 0; border: 0; border-bottom: 1px solid var(--rule); }
+  .panel { border-left: 0; border-top: 1px solid var(--rule); }
+  .vitals, .readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vitals > div:nth-child(3), .readout > div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .vitals > div:nth-child(n+3), .readout > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .readout > div:nth-child(3) { padding-left: 1rem; }
+  nav.top ul { gap: 0.8rem; }
+  nav.top ul li.opt { display: none; }
+  .hero .veil { background: linear-gradient(0deg, rgba(5,8,11,0.95) 0%, rgba(5,8,11,0.55) 55%, rgba(5,8,11,0.15) 100%); }
+  .hero .copy { align-items: flex-end; padding-bottom: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<!--HEADEND--></head>
+<body><!--/HEADEND-->
+
+<div class="status"><div class="wrap"><span class="dot" aria-hidden="true"></span><span><strong>Design study, not a shipping product.</strong> Every temperature, pressure and stress on this page comes from simulation. Nothing here has been printed or tested yet.</span></div></div>
+
+<nav class="top" aria-label="Sections"><div class="wrap">
+  <a class="wordmark" href="#top">MARROW</a>
+  <ul>
+    <li><a href="#film">Film</a></li>
+    <li><a href="#anatomy">Anatomy</a></li>
+    <li class="opt"><a href="#bones">Bones</a></li>
+    <li class="opt"><a href="#organs">Organs</a></li>
+    <li><a href="#loop">Loop</a></li>
+    <li class="opt"><a href="#evidence">Evidence</a></li>
+    <li><a href="#print">Print it</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="top">
+  <img class="bg" src="media/hero.jpg" alt="MARROW seen from the front left: a mini-ITX board and an RTX 4090 mounted on a tilted plane, each under a printed aluminium cold plate, joined by clear tubes of red coolant, on a thin printed-steel frame.">
+  <div class="veil"></div>
+  <div class="copy"><div class="wrap">
+    <div class="mono">Pre-launch preview &middot; metal-printed SFF</div>
+    <h1>MARROW</h1>
+    <div class="tag">Printed bone. <em>Liquid marrow.</em></div>
+    <p class="lede">An open small-form-factor chassis for a mini-ITX AM5 board and a liquid-cooled RTX 4090. Five steel bones, four aluminium organs, one loop. Every part fits a 300&nbsp;mm metal printer.</p>
+    <div class="cta"><a class="btn primary" href="#film">Watch the film</a><a class="btn" href="#print">Get the print files</a></div>
+  </div></div>
+</header>
+
+<div class="wrap"><div class="vitals" id="vitals">
+  <div><div class="v"><span data-b="env">300 × 305 × 376</span><small>mm</small></div><div class="mono k">Envelope, W × D × H</div></div>
+  <div><div class="v"><span data-b="steel_kg">2.3</span><small>kg</small></div><div class="mono k">Printed 316L, five segments</div></div>
+  <div><div class="v"><span data-b="longest">283</span><small>mm</small></div><div class="mono k">Longest printed part (limit 300)</div></div>
+  <div><div class="v"><span data-b="gpu_hot">–</span><small>°C</small></div><div class="mono k">4090 hot spot at 450 W, simulated</div></div>
+</div></div>
+
+<section id="film"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate I &middot; Skin</div><h2>Eighty seconds of metal and coolant.</h2></div>
+    <div><p>Rendered from the same geometry that produces the print files. The score was synthesised in code for this film; sound starts when you press play.</p></div>
+  </div>
+  <figure class="plate film">
+    <video id="filmv" controls preload="metadata" poster="media/film_poster.jpg" playsinline>
+      <source src="media/film.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>Fig. 1</b> &nbsp;Launch film. Path-traced in Blender Cycles; all figures quoted in it are simulated.</figcaption>
+  </figure>
+</div></section>
+
+<section id="anatomy"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate II &middot; Anatomy</div><h2>Take it apart.</h2></div>
+    <div><p>Drag to turn the machine. Switch layers off to see what sits underneath, or change the view to the simulated metal temperature and the coolant's path through the two cold plates.</p></div>
+  </div>
+  <div class="viewer">
+    <div class="stage" id="stage">
+      <img class="poster" id="poster" src="media/viewer_poster.jpg" alt="Three-quarter view of the assembled chassis.">
+      <button class="btn primary load" id="load3d" type="button">Load 3D model</button>
+      <div class="mono hint" id="hint" hidden>Drag to orbit &middot; pinch or scroll to zoom</div>
+    </div>
+    <div class="panel">
+      <div><h4>View</h4>
+        <div class="seg" role="group" aria-label="View mode">
+          <button type="button" data-mode="material" aria-pressed="true">Metal</button>
+          <button type="button" data-mode="thermal" aria-pressed="false">Heat</button>
+          <button type="button" data-mode="flow" aria-pressed="false">Flow</button>
+        </div>
+        <div id="thermal-legend" hidden style="margin-top:0.7rem">
+          <div class="legend"></div>
+          <div class="legend-ticks mono"><span>inlet +0 K</span><span data-b="tscale">+ – K</span></div>
+        </div>
+      </div>
+      <div><h4>Layers</h4>
+        <div class="layers">
+          <label><input type="checkbox" id="ly-steel" data-layer="steel" checked><span class="sw" style="background:#70808f"></span>Bones &middot; 316L steel</label>
+          <label><input type="checkbox" id="ly-alu" data-layer="alu" checked><span class="sw" style="background:#cdd6dd"></span>Organs &middot; AlSi10Mg</label>
+          <label><input type="checkbox" id="ly-loop" data-layer="loop" checked><span class="sw" style="background:#e0284a"></span>Loop &middot; tubes and fittings</label>
+          <label><input type="checkbox" id="ly-host" data-layer="host" checked><span class="sw" style="background:#1b2530"></span>Host &middot; board, GPU, PSU, radiators</label>
+        </div>
+      </div>
+      <div><h4><label for="explode">Separate the layers</label></h4><input type="range" id="explode" min="0" max="100" value="0"></div>
+      <p class="mono" style="text-transform:none;letter-spacing:0.02em" id="viewer-note">The web model is simplified; the print files carry the full lattice.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="bones"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate III &middot; Skeleton</div><h2>Five bones, ten bolts.</h2></div>
+    <div>
+      <p>The frame is one closed ring down the middle of the machine: a front spine leaning back 25° behind the board and the graphics card, a rear spine behind the radiators, a crown and a keel. Ribs reach out to every mounting hole. The radiators hang off the rear spine like lungs, and the power supply sits low in the pelvis as ballast.</p>
+      <p>It prints as five 316L segments joined by half-lap knuckles with two M5 bolts each, so the longest piece clears a 300&nbsp;mm build plate at both JLC3DP and PCBWay.</p>
+    </div>
+  </div>
+  <div class="two">
+    <figure class="plate"><img src="media/frame.jpg" alt="The bare steel frame: a leaning front spine with ribs, a vertical rear spine with three rib pairs, and a four-footed base." loading="lazy"><figcaption><b>Fig. 2</b> &nbsp;The skeleton alone. Solid round members, 6 to 12 mm thick, bead-blasted.</figcaption></figure>
+    <figure class="plate"><img src="media/rear.jpg" alt="Rear view: the steel ribs wrap over two stacked radiators." loading="lazy"><figcaption><b>Fig. 3</b> &nbsp;Rear spine and rib pairs carrying two 240 mm radiators.</figcaption></figure>
+  </div>
+  <div class="stack" style="margin-top:1.25rem">
+    <div class="scroll"><table id="fea-table">
+      <thead><tr><th>Load case</th><th class="n">Peak deflection</th><th class="n">Peak stress</th><th class="n">Margin on yield</th></tr></thead>
+      <tbody><tr><td colspan="4">Loading…</td></tr></tbody>
+    </table></div>
+    <figure class="plate"><img src="sim/sim_fea.png" alt="Three stress plots of the frame, one per load case." loading="lazy"><figcaption><b>Fig. 4</b> &nbsp;Von Mises stress from a <span data-b="fea_el">–</span>-element finite-element model carrying <span data-b="fea_mass">–</span> kg of hardware. Joints are treated as bonded.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="organs"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate IV &middot; Organs</div><h2>Four organs, no gaskets.</h2></div>
+    <div><p>Each cold plate is a single aluminium print. Coolant runs through a sheet-gyroid core that needs no supports and leaves no sealed pockets, so powder shakes out through the two ports. The outside wears a bone-like gyroid skin swollen over a Voronoi pattern; it is dry, and there for the look and a little passive area.</p></div>
+  </div>
+
+  <article class="organ">
+    <figure><img src="media/cut_gpu.jpg" alt="Cutaway of the graphics-card block showing a fine gyroid layer under a coarser one, with two threaded ports." loading="lazy"></figure>
+    <div class="body">
+      <div class="mono">Organ I &middot; replaces the 4090's stock cooler</div>
+      <h3>Full-cover block for the RTX 4090 SUPRIM LIQUID</h3>
+      <p>Coolant drops through a slot nozzle straight onto the die, spreads sideways through a 6.5&nbsp;mm gyroid core over the GPU and all twelve memory chips, rises around a divider and leaves through a coarser gallery. Solid wings pick up the 26 VRM stages through thermal pads.</p>
+      <dl>
+        <dt>Mass</dt><dd data-b="p.gpu_block.mass">–</dd>
+        <dt>Size</dt><dd data-b="p.gpu_block.bbox">–</dd>
+        <dt>Die, 390 W</dt><dd data-b="gpu_rise">–</dd>
+        <dt>Pressure drop</dt><dd data-b="gpu_dp">–</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="organ">
+    <figure><img src="media/board.jpg" alt="The motherboard with an L-shaped aluminium block over the CPU and both VRM banks." loading="lazy"></figure>
+    <div class="body">
+      <div class="mono">Organ II &middot; replaces the board's VRM heatsinks</div>
+      <h3>CPU and VRM monoblock for AM5</h3>
+      <p>One print covers the processor and both VRM banks. After the CPU core the coolant crosses a bridge into an L-shaped arm over the power stages. It mounts on the stock AM5 backplate with four spring screws.</p>
+      <dl>
+        <dt>Mass</dt><dd data-b="p.monoblock.mass">–</dd>
+        <dt>Size</dt><dd data-b="p.monoblock.bbox">–</dd>
+        <dt>CPU pad, 120 W</dt><dd data-b="mono_rise">–</dd>
+        <dt>Pressure drop</dt><dd data-b="mono_dp">–</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="organ">
+    <figure><img src="media/heart.jpg" alt="A pump top with a small capsule-shaped reservoir wrapped in lattice." loading="lazy"></figure>
+    <div class="body">
+      <div class="mono">Organ III &middot; the heart</div>
+      <h3>Pump top with a 41 mL atrium</h3>
+      <p>A printed top for a DDC-class pump. The capsule above the volute is the whole reservoir: it traps air, feeds the impeller from directly above and carries the fill port at the high point of the loop.</p>
+      <dl>
+        <dt>Mass</dt><dd data-b="p.heart.mass">–</dd>
+        <dt>Size</dt><dd data-b="p.heart.bbox">–</dd>
+        <dt>Reservoir</dt><dd>41 mL</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="organ">
+    <figure><img src="media/macro_skin.jpg" alt="Close view of printed aluminium lattice." loading="lazy"></figure>
+    <div class="body">
+      <div class="mono">Organ IV &middot; passive</div>
+      <h3>M.2 and chipset sink</h3>
+      <p>A spreader plate under a true 3-D Voronoi strut lattice. It is the one part that is not on the loop, and the model says it is the weakest: in still air it holds about <strong data-b="m2_w">–</strong> before the SSD pad runs 45&nbsp;K over the room.</p>
+      <dl>
+        <dt>Mass</dt><dd data-b="p.m2_sink.mass">–</dd>
+        <dt>Size</dt><dd data-b="p.m2_sink.bbox">–</dd>
+        <dt>At 13 W</dt><dd data-b="m2_rise">–</dd>
+      </dl>
+    </div>
+  </article>
+</div></section>
+
+<section id="loop"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate V &middot; Blood</div><h2>One loop through everything.</h2></div>
+    <div><p>Heart, graphics card, processor and VRM, upper radiator, lower radiator, heart. Six tubes, twelve fittings, no separate reservoir. Move the fan speed to see where the loop model puts the temperatures.</p></div>
+  </div>
+  <div class="chart">
+    <div class="ctl">
+      <div class="seg" role="group" aria-label="Load case" style="min-width:16rem">
+        <button type="button" data-load="full" aria-pressed="true">Full load 592 W</button>
+        <button type="button" data-load="gaming" aria-pressed="false">Gaming 467 W</button>
+      </div>
+      <label class="mono" for="rpm" style="flex:1;min-width:14rem">Radiator fans <span id="rpm-v" class="num">1500</span> rpm<input type="range" id="rpm" min="800" max="2000" step="100" value="1500"></label>
+    </div>
+    <svg id="loop-chart" viewBox="0 0 900 340" role="img" aria-label="Simulated temperatures against fan speed"></svg>
+    <div class="key">
+      <span><i style="border-color:var(--ruby)"></i>4090 hot spot, aluminium block</span>
+      <span><i style="border-color:var(--ruby);border-top-style:dashed"></i>4090 hot spot, steel block</span>
+      <span><i style="border-color:var(--alu)"></i>CPU junction</span>
+      <span><i style="border-color:var(--steel)"></i>Coolant, hottest point</span>
+    </div>
+  </div>
+  <div class="readout" id="readout">
+    <div><div class="mono">4090 hot spot</div><div class="v"><span data-r="gpu">–</span> °C</div></div>
+    <div><div class="mono">CPU junction</div><div class="v"><span data-r="cpu">–</span> °C</div></div>
+    <div><div class="mono">Coolant</div><div class="v"><span data-r="cool">–</span> °C</div></div>
+    <div><div class="mono">Flow &middot; loop drop</div><div class="v"><span data-r="flow">–</span></div></div>
+  </div>
+  <div class="finding"><p><strong>Why the organs are aluminium and only the bones are steel.</strong> <span data-b="steel_finding">The same block geometry was simulated in 316L. Steel conducts roughly a ninth as well as printed aluminium, and the 4090 concentrates 390 W on six square centimetres.</span></p></div>
+</div></section>
+
+<section id="evidence"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate VI &middot; Evidence</div><h2>How the numbers were made.</h2></div>
+    <div><p>The cold plates were simulated at two scales. A patch of each lattice was resolved directly with a lattice-Boltzmann flow solver and a finite-volume heat solver. Its measured resistance and heat transfer then drive a block-level conjugate model built from the same CAD fields as the print files.</p></div>
+  </div>
+  <div class="two">
+    <figure class="plate"><img src="sim/sim_cell.png" alt="Speed of the coolant inside the gyroid core, in plan and in side view." loading="lazy"><figcaption><b>Fig. 5</b> &nbsp;Resolved flow in the 5 mm gyroid core between its floor and divider (0.125 mm voxels).</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_gpu_flow.png" alt="Flow spreading from the central nozzle across the gyroid core." loading="lazy"><figcaption><b>Fig. 6</b> &nbsp;Block-level flow in the 4090 core. The dashed slot is the nozzle; the red outline is the die.</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_gpu_metal.png" alt="Temperature of the underside of the graphics-card block." loading="lazy"><figcaption><b>Fig. 7</b> &nbsp;Metal temperature on the underside: die, memory lands and the two VRM rails.</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_mono.png" alt="Flow path and temperature of the CPU and VRM monoblock." loading="lazy"><figcaption><b>Fig. 8</b> &nbsp;Monoblock: coolant path through core, bridge and arm, and the underside temperature.</figcaption></figure>
+  </div>
+  <div class="two" style="margin-top:1.25rem">
+    <div class="chart"><div class="mono" style="margin-bottom:0.5rem">Lattice resistance, resolved &rarr; fitted</div><svg id="dp-chart" viewBox="0 0 440 280" role="img" aria-label="Pressure gradient against speed for three lattices"></svg></div>
+    <div class="chart"><div class="mono" style="margin-bottom:0.5rem">Volumetric heat transfer, resolved &rarr; fitted</div><svg id="ha-chart" viewBox="0 0 440 280" role="img" aria-label="Heat transfer against speed for three lattices"></svg></div>
+  </div>
+  <div class="scroll" style="margin-top:1.25rem"><table id="val-table">
+    <thead><tr><th>Check</th><th>Reference</th><th class="n">Result</th><th>Reading</th></tr></thead>
+    <tbody><tr><td colspan="4">Loading…</td></tr></tbody>
+  </table></div>
+  <div style="margin-top:1.25rem">
+    <details><summary>What is assumed rather than measured</summary><div class="in"><ul id="assume">
+      <li><strong>Motherboard layout.</strong> The exact board is not known, so the VRM positions under the monoblock are a representative AM5 mini-ITX layout. Nine numbers in <code>design/params.py</code> must be set from the real board before the monoblock is ordered.</li>
+      <li><strong>Component heights on the 4090.</strong> Hole positions and outlines were measured from PCB photographs to about ±0.3 mm. Heights of the die, inductors and capacitors are not published; measure the card and set the pad heights.</li>
+      <li><strong>Aluminium conductivity.</strong> 130 W/m·K, a conservative as-built value for SLM AlSi10Mg. Stress relief raises it.</li>
+      <li><strong>Radiators, pump, TIM, CPU package.</strong> Taken from typical published behaviour, not from parts on a bench. The loop chart carries a ±20 % band on radiator performance.</li>
+      <li><strong>Coolant.</strong> Premixed water with about 25 % glycol at 40 °C.</li>
+    </ul></div></details>
+    <details><summary>What the model leaves out</summary><div class="in"><ul>
+      <li>The lattice is homogenised at block level, so local hot spots between individual gyroid walls are averaged away. The unit-cell runs under-predict plate heat transfer by about 5 % against the analytic value, which errs on the safe side.</li>
+      <li>Jet momentum and recirculation in the open plenums are reduced to loss coefficients.</li>
+      <li>Contact resistance of pads and paste is added in the loop model, not in the block model.</li>
+      <li>Frame joints are bonded in the stress model; bolt preload and slip are not simulated.</li>
+      <li>No part has been pressure-tested. Printed aluminium this thin needs a leak test, and usually sealing, before it sees a pump.</li>
+    </ul></div></details>
+  </div>
+</div></section>
+
+<section id="print"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate VII &middot; Print</div><h2>Nine files, two print shops.</h2></div>
+    <div><p>The limits below are the tighter of JLC3DP and PCBWay, read from their own pages and quote tools in November 2026. Neither prints copper, which is why the wet parts are aluminium. Prices are automated pre-review quotes scaled by volume.</p></div>
+  </div>
+  <div class="scroll"><table id="parts-table">
+    <thead><tr><th>Part</th><th>Metal</th><th class="n">Mass</th><th class="n">Bounding box, mm</th><th>300 mm plate</th><th class="n">JLC3DP</th><th class="n">PCBWay</th></tr></thead>
+    <tbody><tr><td colspan="7">Loading…</td></tr></tbody>
+  </table></div>
+  <div class="two" style="margin-top:1.25rem">
+    <details open><summary>After printing</summary><div class="in"><ul>
+      <li><strong>Tap the ports.</strong> Every coolant port is printed as an 11.8 mm pilot for G1/4; spot-face the seat for the O-ring.</li>
+      <li><strong>Lap the contact pads.</strong> The die, IHS and memory lands are as-printed surfaces (Ra 3 to 12 µm). Fly-cut or lap them flat.</li>
+      <li><strong>Tap the small threads.</strong> M3 and M4 holes are pilots; both shops recommend tapping below M6.</li>
+      <li><strong>Leak-test at 1 bar</strong> before filling, and seal if it weeps.</li>
+    </ul></div></details>
+    <details open><summary>Design rules the files were checked against</summary><div class="in"><ul>
+      <li>Envelope 300 × 300 × 290 mm for 316L (PCBWay's cube cut by JLC3DP's 290 mm axis).</li>
+      <li>Thinnest wall 0.8 mm; lattice walls are 0.85 to 0.9 mm, shells 1.6 mm and up.</li>
+      <li>No enclosed cavities: every void is connected to a port or the outside, checked on the voxel field.</li>
+      <li>Holes 1.5 mm and larger; powder escape through the 11.8 mm ports.</li>
+    </ul></div></details>
+  </div>
+</div></section>
+
+<section id="campaign"><div class="wrap">
+  <div class="head">
+    <div><div class="mono plate-no">Plate VIII &middot; Campaign</div><h2>What a launch would offer.</h2></div>
+    <div><p>This page is a preview. No campaign is live and no pledges are being taken. The tiers show how the project would be offered once a printed prototype has been built and measured; prices are today's print quotes, not a promise.</p></div>
+  </div>
+  <div class="tiers">
+    <div class="tier"><div class="mono">Tier 1</div><h3>The files</h3><div class="price">Open</div><ul><li>Parametric source and print files</li><li>Simulation code and results</li><li>Already in the repository</li></ul></div>
+    <div class="tier"><div class="mono">Tier 2</div><h3>The organs</h3><div class="price"><span data-b="alu_cost">–</span></div><ul><li>Four AlSi10Mg prints: 4090 block, monoblock, heart, M.2 sink</li><li>As quoted by the print shops, before machining</li></ul></div>
+    <div class="tier"><div class="mono">Tier 3</div><h3>The body</h3><div class="price"><span data-b="all_cost">–</span></div><ul><li>Organs plus the five-piece 316L skeleton</li><li>Fittings, tubing, pump and radiators not included</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>MARROW is an independent design study. RTX, SUPRIM, AM5 and the names of the print services belong to their owners and are used only to say what the parts fit. Studio lighting uses a CC0 environment map from Poly Haven. The score is original and synthesised in code.</p>
+  <p class="mono" style="text-transform:none">Source, print files and simulation code: the project repository.</p>
+</div></footer>
+
+<script src="js/app.js"></script>
+<script src="js/viewer.bundle.js" defer></script>
+<!--/PAGE-->
+</body>
+</html>

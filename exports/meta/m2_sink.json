@@ -29,6 +29,14 @@
  "print_stl": {
   "faces": 500000,
   "watertight": true,
+  "topology": {
+   "faces": 500000,
+   "boundary_edges": 0,
+   "non_manifold_edges": 0,
+   "non_manifold_vertices": 0,
+   "components": 1,
+   "watertight": true
+  },
   "mesh_volume_cm3": 11.68
  },
  "surface_area_cm2": 126.9,

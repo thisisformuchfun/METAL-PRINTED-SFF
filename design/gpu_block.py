@@ -144,12 +144,13 @@ def build(h=0.25, verbose=True):
     wall = LT["wet_wall"] + LT["wet_root"] * np.exp(-np.maximum(zs - Z_FLOOR, 0.0) / LT["wet_root_len"])
     core = sdf.gyroid_sheet(grid, sl, LT["wet_cell"], wall.astype(np.float32),
                             phase=(-a5 * CX, -a5 * CY, -a5 * Z_FLOOR + 0.6))
-    z_split = Z_CORE1 + 0.5
-    core = np.maximum(core, zs - z_split)
+    # the two lattices never butt against each other: the core stops under the divider level, the gallery
+    # starts above it, and the 1 mm band between them is open in the riser gap (clean, manifold edges)
+    core = np.maximum(core, zs - (Z_CORE1 + 0.05))
     a8 = 2 * np.pi / LT["gallery_cell"]
     gal = sdf.gyroid_sheet(grid, sl, LT["gallery_cell"], LT["gallery_wall"],
                            phase=(-a8 * CX + 0.9, -a8 * CY, -a8 * Z_DIV1))
-    gal = np.maximum(gal, z_split - zs)
+    gal = np.maximum(gal, (Z_DIV1 - 0.05) - zs)
     lat = np.minimum(core, gal)
     del core, gal
     lat = np.maximum(lat, np.maximum(ch2 - 0.45, np.maximum(Z_FLOOR - 0.4 - zs, zs - Z_GAL1 - 0.4)))
@@ -206,7 +207,7 @@ def build(h=0.25, verbose=True):
     env_c = np.maximum(cok + 0.8, np.maximum(Z_ROOF1 - 0.6 - zk, zk - top_c))
     env = np.minimum(env_w, env_c)
     del env_w, env_c
-    net = sdf.gyroid_network(grid, sk, LT["skin_cell"], bias=0.55, phase=(0.7, 2.1, 0.3),
+    net = sdf.gyroid_network(grid, sk, LT["skin_cell"], bias=0.72, phase=(0.7, 2.1, 0.3),
                              warp_amp=1.5, warp_len=41.0)
     skin = sdf.smax(net, env, 1.0)
     del net, env
