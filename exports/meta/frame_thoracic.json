@@ -1,0 +1,36 @@
+{
+ "name": "frame_thoracic",
+ "material": "316L",
+ "frame": "world",
+ "voxel_mm": 0.5,
+ "volume_cm3": 45.43,
+ "mass_g": 362.6,
+ "bbox_mm": [
+  200.2,
+  110.6,
+  214.4
+ ],
+ "bbox_lo": [
+  -129.26,
+  116.33,
+  147.82
+ ],
+ "bbox_hi": [
+  70.98,
+  226.95,
+  362.2
+ ],
+ "fits_envelope": true,
+ "longest_mm": 214.4,
+ "cost_usd_jlc_pcbway": [
+  79.96,
+  121.76
+ ],
+ "print_stl": {
+  "faces": 242872,
+  "watertight": true,
+  "mesh_volume_cm3": 45.05
+ },
+ "surface_area_cm2": 205.8,
+ "islands_removed_voxels": 0
+}

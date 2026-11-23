@@ -1,0 +1,36 @@
+{
+ "name": "frame_cervical",
+ "material": "316L",
+ "frame": "world",
+ "voxel_mm": 0.5,
+ "volume_cm3": 34.24,
+ "mass_g": 273.2,
+ "bbox_mm": [
+  234.2,
+  92.4,
+  121.7
+ ],
+ "bbox_lo": [
+  -117.09,
+  213.0,
+  254.0
+ ],
+ "bbox_hi": [
+  117.09,
+  305.41,
+  375.68
+ ],
+ "fits_envelope": true,
+ "longest_mm": 234.2,
+ "cost_usd_jlc_pcbway": [
+  60.26,
+  91.75
+ ],
+ "print_stl": {
+  "faces": 161998,
+  "watertight": true,
+  "mesh_volume_cm3": 33.98
+ },
+ "surface_area_cm2": 145.1,
+ "islands_removed_voxels": 0
+}

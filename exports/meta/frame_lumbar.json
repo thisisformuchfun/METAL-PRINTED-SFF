@@ -1,0 +1,36 @@
+{
+ "name": "frame_lumbar",
+ "material": "316L",
+ "frame": "world",
+ "voxel_mm": 0.5,
+ "volume_cm3": 39.77,
+ "mass_g": 317.3,
+ "bbox_mm": [
+  239.3,
+  92.6,
+  202.7
+ ],
+ "bbox_lo": [
+  -118.29,
+  53.78,
+  13.69
+ ],
+ "bbox_hi": [
+  120.98,
+  146.39,
+  216.39
+ ],
+ "fits_envelope": true,
+ "longest_mm": 239.3,
+ "cost_usd_jlc_pcbway": [
+  69.99,
+  106.58
+ ],
+ "print_stl": {
+  "faces": 223090,
+  "watertight": true,
+  "mesh_volume_cm3": 39.39
+ },
+ "surface_area_cm2": 192.3,
+ "islands_removed_voxels": 0
+}

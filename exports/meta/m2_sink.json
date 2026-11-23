@@ -1,0 +1,57 @@
+{
+ "name": "m2_sink",
+ "material": "AlSi10Mg",
+ "frame": "board",
+ "voxel_mm": 0.25,
+ "volume_cm3": 11.75,
+ "mass_g": 31.4,
+ "bbox_mm": [
+  107.0,
+  27.0,
+  17.4
+ ],
+ "bbox_lo": [
+  27.98,
+  17.48,
+  2.4
+ ],
+ "bbox_hi": [
+  135.02,
+  44.52,
+  19.8
+ ],
+ "fits_envelope": true,
+ "longest_mm": 107.0,
+ "cost_usd_jlc_pcbway": [
+  12.45,
+  17.62
+ ],
+ "print_stl": {
+  "faces": 500000,
+  "watertight": true,
+  "mesh_volume_cm3": 11.68
+ },
+ "surface_area_cm2": 126.9,
+ "checks": {
+  "struts": 1104,
+  "islands_removed_voxels": 1392,
+  "closed_void_voxels": 1,
+  "z_levels": {
+   "plate": [
+    4.6,
+    6.8
+   ],
+   "top": 19.8
+  },
+  "screws": [
+   [
+    112.5,
+    31.0
+   ],
+   [
+    33.0,
+    39.5
+   ]
+  ]
+ }
+}

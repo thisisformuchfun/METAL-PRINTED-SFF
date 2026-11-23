@@ -1,0 +1,88 @@
+{
+ "name": "heart",
+ "material": "AlSi10Mg",
+ "frame": "heart",
+ "voxel_mm": 0.25,
+ "volume_cm3": 58.05,
+ "mass_g": 155.0,
+ "bbox_mm": [
+  74.0,
+  112.7,
+  51.0
+ ],
+ "bbox_lo": [
+  -42.0,
+  -44.5,
+  -0.75
+ ],
+ "bbox_hi": [
+  32.0,
+  68.2,
+  50.3
+ ],
+ "fits_envelope": true,
+ "longest_mm": 112.7,
+ "cost_usd_jlc_pcbway": [
+  61.54,
+  87.08
+ ],
+ "print_stl": {
+  "faces": 499999,
+  "watertight": false,
+  "mesh_volume_cm3": 57.96
+ },
+ "surface_area_cm2": 398.5,
+ "checks": {
+  "reservoir_ml": 40.9,
+  "islands_removed_voxels": 5,
+  "ports": {
+   "out": [
+    -21.5,
+    -22.0,
+    19.0
+   ],
+   "inlet_back": [
+    0.0,
+    47.0,
+    9.3
+   ],
+   "fill": [
+    0.0,
+    68.2,
+    28.5
+   ]
+  },
+  "ears": [
+   [
+    -37.0,
+    -6.0
+   ],
+   [
+    -27.0,
+    55.0
+   ],
+   [
+    23.0,
+    -39.5
+   ]
+  ],
+  "screws": [
+   [
+    -25.0,
+    -25.0
+   ],
+   [
+    25.0,
+    -25.0
+   ],
+   [
+    -25.0,
+    25.0
+   ],
+   [
+    25.0,
+    25.0
+   ]
+  ]
+ }
+}

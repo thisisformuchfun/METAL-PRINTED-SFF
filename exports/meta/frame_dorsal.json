@@ -1,0 +1,36 @@
+{
+ "name": "frame_dorsal",
+ "material": "316L",
+ "frame": "world",
+ "voxel_mm": 0.5,
+ "volume_cm3": 65.67,
+ "mass_g": 524.1,
+ "bbox_mm": [
+  234.3,
+  23.3,
+  268.0
+ ],
+ "bbox_lo": [
+  -117.13,
+  283.11,
+  22.0
+ ],
+ "bbox_hi": [
+  117.13,
+  306.42,
+  290.0
+ ],
+ "fits_envelope": true,
+ "longest_mm": 268.0,
+ "cost_usd_jlc_pcbway": [
+  115.58,
+  176.0
+ ],
+ "print_stl": {
+  "faces": 304448,
+  "watertight": true,
+  "mesh_volume_cm3": 65.16
+ },
+ "surface_area_cm2": 279.6,
+ "islands_removed_voxels": 0
+}

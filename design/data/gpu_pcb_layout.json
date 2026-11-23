@@ -1,0 +1,1512 @@
+{
+ "title": "MSI GeForce RTX 4090 SUPRIM LIQUID (X) 24G - PCB MS-V510 VER 2.2 - layout estimated from review photos",
+ "generated": "2026-11-23",
+ "units": "mm",
+ "coordinate_frame": {
+  "view": "component (GPU die) side",
+  "origin": "intersection of the bracket-end PCB edge line and the main PCIe-side (bottom) PCB edge line; the 15 x 8.25 mm bracket tab and the gold-finger tongue extend to negative Y",
+  "x": "+X along the card length away from the I/O bracket",
+  "y": "+Y from the PCIe-connector edge towards the top edge",
+  "back_side_features": "given in the same frame (back photos mirrored)"
+ },
+ "value_tags": {
+  "photo-estimate": "measured in this work on the TechPowerUp bare-PCB photos",
+  "url": "published value, source URL given"
+ },
+ "photos": {
+  "suprim_liquid_x_front": "https://www.techpowerup.com/review/msi-geforce-rtx-4090-suprim-liquid-x/images/front_full.jpg",
+  "suprim_liquid_x_back": "https://www.techpowerup.com/review/msi-geforce-rtx-4090-suprim-liquid-x/images/back_full.jpg",
+  "suprim_x_front": "https://www.techpowerup.com/review/msi-geforce-rtx-4090-suprim-x/images/front_full.jpg",
+  "suprim_x_back": "https://www.techpowerup.com/review/msi-geforce-rtx-4090-suprim-x/images/back_full.jpg",
+  "note": "Both boards carry the silkscreen 'MS-V510 VER:2.2'. Every position below was measured on at least one photo of each card unless noted; the two cards agree within the stated uncertainty."
+ },
+ "scale_reference": {
+  "method": "PCIe x16 gold-finger contact pitch. Two points: centre of the first contact after the key notch (B12) and centre of the last contact (B82) on the component side (A12/A82 on the solder side), found by a least-squares line through the 70 inter-finger gap centres.",
+  "assumed_real_length": 70.0,
+  "basis": "PCI Express CEM r2.0 sec. 5.2 'The connector has a 1.00 mm contact pitch'; Fig. 5-3: 'N' spaces at 1.00 mm, N = 70 for x16; notch centre to B11/B12 = 1.50 mm; tongue start to notch centre 12.15; notch centre to tongue end (DIM B, x16) 72.15; notch width 1.90 +/- 0.06; card thickness 1.57",
+  "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf",
+  "raw_pixels": {
+   "suprim_liquid_x_front": {
+    "B12_x": 1103.7,
+    "B82_x": 2266.6,
+    "row_y": 2335,
+    "px_per_mm": 16.612
+   },
+   "suprim_x_front": {
+    "B12_x": 1119.6,
+    "B82_x": 2301.5,
+    "row_y": 2350,
+    "px_per_mm": 16.885
+   },
+   "suprim_liquid_x_back": {
+    "B12_x": 4228.25,
+    "B82_x": 2837.05,
+    "row_y": 2770,
+    "px_per_mm": 19.874
+   },
+   "suprim_x_back": {
+    "B12_x": 4237.6,
+    "B82_x": 2840.2,
+    "row_y": 2775,
+    "px_per_mm": 19.963
+   }
+  },
+  "rectification": "four straight PCB edges fitted with sub-pixel accuracy (rms 0.2-1.0 px), homography to a rectangle, then every photo normalised to the 266.60 x 127.25 mm outline",
+  "pcb_length_from_finger_scale_per_photo": [
+   266.09,
+   266.47,
+   266.97,
+   266.98
+  ],
+  "pcb_height_from_finger_scale_per_photo": [
+   127.2,
+   127.3,
+   127.5,
+   127.4
+  ],
+  "cross_checks": [
+   {
+    "what": "key-notch centre X from bracket-end PCB edge",
+    "measured": 57.18,
+    "published": 57.15,
+    "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf (Fig. 6-1)"
+   },
+   {
+    "what": "gold-finger tongue X start / end",
+    "measured": [
+     45.06,
+     129.27
+    ],
+    "published": [
+     45.0,
+     129.3
+    ],
+    "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf (57.15 - 12.15, 57.15 + 72.15)"
+   },
+   {
+    "what": "bracket tab width x depth",
+    "measured": [
+     15.0,
+     8.25
+    ],
+    "published": [
+     15.0,
+     8.25
+    ],
+    "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf (Fig. 6-1) and https://download.alphacool.com/datasheet/ENG_13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_datasheet.pdf"
+   },
+   {
+    "what": "B1 to B82 contact distance",
+    "measured_range": [
+     82.97,
+     83.06
+    ],
+    "published": 83.0,
+    "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf"
+   },
+   {
+    "what": "GDDR6X package body",
+    "measured": [
+     13.95,
+     12.0
+    ],
+    "published": [
+     14.0,
+     12.0
+    ],
+    "source": "Micron 180-ball FBGA 12.0 x 14.0 mm (KPA) - https://www.mouser.com/datasheet/2/671/MICT_S_A0010818333_1-2574641.pdf (via search snippet; file itself not retrievable here)",
+    "note": "silkscreen outline around each chip measures 14.28 x 12.26"
+   },
+   {
+    "what": "GPU package (white stiffener frame, apparent)",
+    "measured_range": [
+     51.2,
+     51.6
+    ],
+    "published": 51.0,
+    "source": "51 x 51 mm quoted by Wccftech (search snippet) / assumed same as GA102 by https://locuza.substack.com/p/nvidias-ad102-officially-revealed"
+   },
+   {
+    "what": "AD102 die area",
+    "measured": "23.4 x 26.4 = 618 mm2 (visible die edge)",
+    "published": "608.44 mm2 (NVIDIA figure, excludes scribe lines); 618 mm2 with scribe estimated by Locuza",
+    "source": "https://locuza.substack.com/p/nvidias-ad102-officially-revealed"
+   },
+   {
+    "what": "PCB outline",
+    "measured": "266.63 +/- 0.43 x 127.35 +/- 0.13 (mean of 4 photos)",
+    "published": [
+     266.6,
+     127.25
+    ],
+    "source": "https://download.alphacool.com/datasheet/ENG_13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_datasheet.pdf"
+   }
+  ]
+ },
+ "pcb_outline": {
+  "length_x": {
+   "value": 266.6,
+   "uncertainty": 0.3,
+   "source": "https://download.alphacool.com/datasheet/ENG_13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_datasheet.pdf (backplate/board 266.60); photo 266.63 +/- 0.43"
+  },
+  "height_y": {
+   "value": 127.25,
+   "uncertainty": 0.2,
+   "source": "https://download.alphacool.com/datasheet/ENG_13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_datasheet.pdf (127.25); photo 127.35 +/- 0.13"
+  },
+  "thickness": {
+   "value": 1.57,
+   "source": "https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf (edge-finger thickness; not measured)"
+  },
+  "note_excludes": "length excludes the I/O bracket; height excludes the gold-finger tongue (to Y = -12.75) and the bracket tab (to Y = -8.25)",
+  "corner_radius": {
+   "value": 3.8,
+   "uncertainty": 0.3,
+   "where": "top-left, top-step outer corner, far-end top, far-end bottom",
+   "source": "photo-estimate"
+  },
+  "features": [
+   {
+    "name": "top-edge recess for 12VHPWR",
+    "x": [
+     237.1,
+     266.6
+    ],
+    "top_edge_y": 117.2,
+    "depth": 10.05,
+    "inner_corner_radius_approx": 1.0,
+    "source": "photo-estimate"
+   },
+   {
+    "name": "bracket tab (carries hole MEC12)",
+    "x": [
+     0,
+     15.0
+    ],
+    "y": [
+     -8.25,
+     0
+    ],
+    "source": "photo-estimate; CEM Fig. 6-1 15.00 x 8.25"
+   },
+   {
+    "name": "PCI-exclusion key tab",
+    "x": [
+     33.35,
+     41.5
+    ],
+    "y": [
+     -8.1,
+     0
+    ],
+    "source": "photo-estimate; CEM Fig. 6-1 nominal 33.35..41.35"
+   },
+   {
+    "name": "gold-finger tongue",
+    "x": [
+     45.0,
+     129.3
+    ],
+    "y": [
+     -12.75,
+     0
+    ],
+    "source": "CEM nominal; photo 45.06..129.27, bottom -12.6"
+   },
+   {
+    "name": "key notch in tongue",
+    "centre_x": 57.15,
+    "width": 1.9,
+    "slot_top_y": -4.3,
+    "source": "CEM nominal; photo centre 57.18"
+   },
+   {
+    "name": "retention hook (x16 graphics-card latch feature, CEM Fig. 6-3)",
+    "x": [
+     132.05,
+     144.75
+    ],
+    "y": [
+     -9.65,
+     0
+    ],
+    "free_finger": {
+     "x": [
+      139.05,
+      144.75
+     ],
+     "y": [
+      -9.65,
+      -4.5
+     ]
+    },
+    "gap_after_tongue_x": [
+     129.3,
+     132.05
+    ],
+    "source": "photo-estimate"
+   }
+  ],
+  "interior_cutouts": "none found (only round mounting holes and connector through-holes)",
+  "polygon_xy": [
+   [
+    0,
+    -8.25
+   ],
+   [
+    0,
+    127.25
+   ],
+   [
+    237.1,
+    127.25
+   ],
+   [
+    237.1,
+    117.2
+   ],
+   [
+    266.6,
+    117.2
+   ],
+   [
+    266.6,
+    0
+   ],
+   [
+    139.05,
+    0
+   ],
+   [
+    139.05,
+    -4.5
+   ],
+   [
+    144.75,
+    -4.5
+   ],
+   [
+    144.75,
+    -7.3
+   ],
+   [
+    143.3,
+    -9.65
+   ],
+   [
+    132.05,
+    -9.65
+   ],
+   [
+    132.05,
+    -3.6
+   ],
+   [
+    129.3,
+    -3.6
+   ],
+   [
+    129.3,
+    -12.75
+   ],
+   [
+    58.1,
+    -12.75
+   ],
+   [
+    58.1,
+    -4.3
+   ],
+   [
+    56.2,
+    -4.3
+   ],
+   [
+    56.2,
+    -12.75
+   ],
+   [
+    45.0,
+    -12.75
+   ],
+   [
+    45.0,
+    0.0
+   ],
+   [
+    41.55,
+    0.0
+   ],
+   [
+    41.55,
+    -8.1
+   ],
+   [
+    33.35,
+    -8.1
+   ],
+   [
+    33.35,
+    0
+   ],
+   [
+    15.0,
+    0
+   ],
+   [
+    15.0,
+    -8.25
+   ]
+  ],
+  "polygon_note": "sharp-cornered simplification, CCW from the bracket-tab bottom-left corner; apply the 3.8 mm radii listed above",
+  "uncertainty": "outline 0.3 mm; edge-connector side features 0.2 mm"
+ },
+ "pcie_edge_connector": {
+  "tongue_x_start": {
+   "value": 45.0,
+   "photo": 45.06
+  },
+  "tongue_x_end": {
+   "value": 129.3,
+   "photo": 129.27
+  },
+  "tongue_bottom_y": {
+   "value": -12.75,
+   "photo": -12.6
+  },
+  "key_notch_centre_x": {
+   "value": 57.15,
+   "photo": 57.18
+  },
+  "contact_centres_x": {
+   "B1": {
+    "value": 45.65,
+    "photo": 45.68
+   },
+   "B11": {
+    "value": 55.65,
+    "photo": 55.67
+   },
+   "B12": {
+    "value": 58.65,
+    "photo": 58.68
+   },
+   "B82": {
+    "value": 128.65,
+    "photo": 128.67
+   }
+  },
+  "source": "values = PCIe CEM nominal (https://tecsmith.github.io/homeassistant-pc-switch/specs/pci-express-card-electromechanical-specification-revision-2.pdf) placed with the notch at 57.15 from the bracket-end PCB edge; 'photo' = photo-estimate",
+  "uncertainty": 0.15
+ },
+ "gpu": {
+  "chip": "NVIDIA AD102-300-A1",
+  "centre": {
+   "x": 116.55,
+   "y": 59.2,
+   "uncertainty": 0.2,
+   "source": "photo-estimate (mean of package frame, die, memory-array symmetry and mounting-hole pattern centre 116.51/59.26)"
+  },
+  "package": {
+   "size_x": 51.0,
+   "size_y": 51.0,
+   "x": [
+    91.05,
+    142.05
+   ],
+   "y": [
+    33.7,
+    84.7
+   ],
+   "source": "51 x 51 mm from secondary sources (Wccftech via search snippet; https://locuza.substack.com/p/nvidias-ad102-officially-revealed assumes GA102 package); photo shows 51.2-51.6 apparent incl. adhesive fillet",
+   "stiffener_frame_inner_opening": {
+    "size_x": 38.0,
+    "size_y": 37.95,
+    "source": "photo-estimate"
+   }
+  },
+  "die": {
+   "size_x": 23.4,
+   "size_y": 26.4,
+   "uncertainty": 0.25,
+   "centre": {
+    "x": 116.6,
+    "y": 59.1
+   },
+   "x": [
+    104.9,
+    128.3
+   ],
+   "y": [
+    45.9,
+    72.3
+   ],
+   "long_side": "along Y (card height)",
+   "source": "photo-estimate",
+   "published_area_mm2": 608.44,
+   "published_area_source": "https://locuza.substack.com/p/nvidias-ad102-officially-revealed (quotes NVIDIA figure via Ryan Smith); no published die width/height found"
+  }
+ },
+ "mounting_holes": {
+  "gpu_cooler_holes": {
+   "TL": {
+    "x": 87.09,
+    "y": 93.07,
+    "drill_dia_approx": 4.0,
+    "front_pad_dia": 6.3,
+    "back_pad_dia": 10.0,
+    "photos_used": 2,
+    "source": "photo-estimate"
+   },
+   "TR": {
+    "x": 145.94,
+    "y": 93.04,
+    "drill_dia_approx": 4.0,
+    "front_pad_dia": 6.3,
+    "back_pad_dia": 10.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "BL": {
+    "x": 87.11,
+    "y": 25.44,
+    "drill_dia_approx": 4.0,
+    "front_pad_dia": 6.3,
+    "back_pad_dia": 10.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "BR": {
+    "x": 145.92,
+    "y": 25.49,
+    "drill_dia_approx": 4.0,
+    "front_pad_dia": 6.3,
+    "back_pad_dia": 10.0,
+    "photos_used": 1,
+    "source": "photo-estimate"
+   },
+   "spacing_x": 58.83,
+   "spacing_y": 67.59,
+   "diagonal": 89.61,
+   "pattern_centre": {
+    "x": 116.51,
+    "y": 59.26
+   },
+   "note": "rectangular (not square) pattern; large 10 mm bare-copper lands on the back side",
+   "uncertainty": 0.15,
+   "source": "photo-estimate"
+  },
+  "other_holes": {
+   "MEC1": {
+    "x": 170.61,
+    "y": 106.63,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC2": {
+    "x": 139.64,
+    "y": 117.55,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC3": {
+    "x": 98.71,
+    "y": 117.56,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 2,
+    "source": "photo-estimate"
+   },
+   "MEC4": {
+    "x": 22.31,
+    "y": 109.49,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 2,
+    "source": "photo-estimate"
+   },
+   "MEC5": {
+    "x": 4.85,
+    "y": 93.44,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC6": {
+    "x": 222.9,
+    "y": 65.47,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 4,
+    "source": "photo-estimate"
+   },
+   "MEC7": {
+    "x": 222.81,
+    "y": 5.05,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC8": {
+    "x": 202.42,
+    "y": 119.25,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC9": {
+    "x": 170.83,
+    "y": 10.76,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 3,
+    "source": "photo-estimate"
+   },
+   "MEC11": {
+    "x": 261.09,
+    "y": 95.38,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 4,
+    "source": "photo-estimate"
+   },
+   "MEC12": {
+    "x": 7.06,
+    "y": -5.01,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 4,
+    "source": "photo-estimate"
+   },
+   "MEC13": {
+    "x": 22.29,
+    "y": 12.03,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 4,
+    "source": "photo-estimate"
+   },
+   "MEC14": {
+    "x": 261.08,
+    "y": 5.01,
+    "drill_dia_approx": 3.4,
+    "front_pad_dia": 5.5,
+    "back_pad_dia": 6.0,
+    "photos_used": 4,
+    "source": "photo-estimate"
+   }
+  },
+  "other_holes_note": "names are the PCB silkscreen labels; MEC12 sits in the bracket tab (Y < 0). Drill diameters are apparent values (+/- 0.2). Which of these the stock AIO plate, the VRM heatsink and the backplate use was not determined.",
+  "uncertainty": 0.15,
+  "count": 17
+ },
+ "memory": {
+  "type": "12 x Micron GDDR6X, FBGA code D8BZC (2 GB each), all on the GPU side",
+  "package_body": {
+   "long": 14.0,
+   "short": 12.0,
+   "source": "Micron 180-ball FBGA 12.0 x 14.0 mm; confirmed on photo within 0.1 mm"
+  },
+  "chips": {
+   "M1": {
+    "x": 81.25,
+    "y": 78.42,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M2": {
+    "x": 81.25,
+    "y": 65.57,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M3": {
+    "x": 81.27,
+    "y": 52.78,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M4": {
+    "x": 81.27,
+    "y": 39.97,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M5": {
+    "x": 104.14,
+    "y": 96.07,
+    "w_x": 12.0,
+    "h_y": 14.0,
+    "source": "photo-estimate"
+   },
+   "M6": {
+    "x": 116.94,
+    "y": 96.08,
+    "w_x": 12.0,
+    "h_y": 14.0,
+    "source": "photo-estimate"
+   },
+   "M7": {
+    "x": 127.09,
+    "y": 25.74,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M8": {
+    "x": 129.81,
+    "y": 96.07,
+    "w_x": 12.0,
+    "h_y": 14.0,
+    "source": "photo-estimate"
+   },
+   "M9": {
+    "x": 151.82,
+    "y": 78.36,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M10": {
+    "x": 151.81,
+    "y": 65.59,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M11": {
+    "x": 151.82,
+    "y": 52.74,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   },
+   "M12": {
+    "x": 151.83,
+    "y": 39.96,
+    "w_x": 14.0,
+    "h_y": 12.0,
+    "source": "photo-estimate"
+   }
+  },
+  "groups": {
+   "left_of_gpu": [
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+   ],
+   "above_gpu": [
+    "M5",
+    "M6",
+    "M8"
+   ],
+   "right_of_gpu": [
+    "M9",
+    "M10",
+    "M11",
+    "M12"
+   ],
+   "below_gpu": [
+    "M7"
+   ]
+  },
+  "pitch": {
+   "columns_y": 12.82,
+   "top_row_x": 12.83
+  },
+  "names": "PCB silkscreen labels",
+  "uncertainty": 0.2,
+  "height": "not determined"
+ },
+ "vrm": {
+  "summary": "GPU: 26 phases (14 on the bracket side + 12 on the far side of the GPU), MPS MP2891 controller, MP86957 70 A power stages; memory: 4 phases (2 each side). Phase count/parts: https://www.kitguru.net/components/graphic-cards/dominic-moass/msi-rtx-4090-suprim-liquid-x-review/2/ and https://en.overclocking.com/review-msi-rtx-4090-suprim-liquid-x/3/; 14/12 split and positions counted on the photos.",
+  "phase_row_pitch_y": 8.552,
+  "phase_row_centres_y": [
+   7.8,
+   16.35,
+   24.9,
+   33.46,
+   42.01,
+   50.56,
+   59.11,
+   67.66,
+   76.22,
+   84.77,
+   93.32,
+   101.87,
+   110.42,
+   118.98
+  ],
+  "bracket_side_bank": {
+   "phases": 14,
+   "row_centres_y": [
+    7.8,
+    16.35,
+    24.9,
+    33.46,
+    42.01,
+    50.56,
+    59.11,
+    67.66,
+    76.22,
+    84.77,
+    93.32,
+    101.87,
+    110.42,
+    118.98
+   ],
+   "drmos_row": {
+    "bbox": {
+     "x": [
+      30.05,
+      36.3
+     ],
+     "y": [
+      5.12,
+      121.66
+     ]
+    },
+    "each": "6.25 x 5.36 silkscreen outline (5 x 6 mm LGA, long side along X)",
+    "source": "photo-estimate"
+   },
+   "inductor_row": {
+    "bbox": {
+     "x": [
+      37.82,
+      51.7
+     ],
+     "y": [
+      3.89,
+      122.89
+     ]
+    },
+    "body_x": [
+     38.38,
+     50.85
+    ],
+    "each": "footprint 13.9 x 7.8, body approx 12.5 x 7.1",
+    "source": "photo-estimate"
+   },
+   "capacitors_front": "none populated (rows of tinned pads only at X 22-26 and X 52.5-56.5)",
+   "distance_to_gpu_centre_x": [
+    64.8,
+    86.5
+   ]
+  },
+  "far_side_bank": {
+   "phases": 12,
+   "row_centres_y": [
+    16.35,
+    24.9,
+    33.46,
+    42.01,
+    50.56,
+    59.11,
+    67.66,
+    76.22,
+    84.77,
+    93.32,
+    101.87,
+    110.42
+   ],
+   "inductor_row": {
+    "bbox": {
+     "x": [
+      183.95,
+      197.8
+     ],
+     "y": [
+      12.44,
+      114.33
+     ]
+    },
+    "body_x": [
+     184.8,
+     197.27
+    ],
+    "source": "photo-estimate"
+   },
+   "drmos_row": {
+    "bbox": {
+     "x": [
+      199.35,
+      205.6
+     ],
+     "y": [
+      13.67,
+      113.1
+     ]
+    },
+    "source": "photo-estimate"
+   },
+   "capacitor_row": {
+    "type": "13 x aluminium polymer can, 180 uF 16 V, dia 6.3",
+    "centre_x": 212.95,
+    "centres_y": [
+     13.05,
+     20.15,
+     27.49,
+     34.7,
+     41.96,
+     49.21,
+     56.54,
+     74.59,
+     81.79,
+     88.98,
+     96.18,
+     103.34,
+     110.47
+    ],
+    "bbox": {
+     "x": [
+      209.0,
+      216.5
+     ],
+     "y": [
+      9.6,
+      113.9
+     ]
+    },
+    "source": "photo-estimate",
+    "uncertainty": 0.3
+   },
+   "distance_to_gpu_centre_x": [
+    67.4,
+    89.0
+   ]
+  },
+  "memory_vrm": {
+   "power_stages_centres": {
+    "U8": [
+     77.4,
+     99.9
+    ],
+    "U3": [
+     77.2,
+     22.2
+    ],
+    "U18": [
+     155.5,
+     99.4
+    ],
+    "U17": [
+     155.9,
+     22.5
+    ]
+   },
+   "inductors_LR15_centres": {
+    "L38": [
+     65.7,
+     96.7
+    ],
+    "L37": [
+     65.8,
+     25.5
+    ],
+    "L40": [
+     165.4,
+     94.7
+    ],
+    "L39": [
+     165.6,
+     25.8
+    ]
+   },
+   "inductor_footprint": "8.4 x 13.4 (body approx 7 x 7)",
+   "source": "photo-estimate",
+   "uncertainty": 0.5
+  },
+  "other_inductors_bbox_x0_y0_x1_y1": {
+   "L52_2R2": [
+    84.0,
+    110.3,
+    91.0,
+    117.3
+   ],
+   "L49_1R5": [
+    93.1,
+    11.2,
+    99.8,
+    17.6
+   ],
+   "L50_1R5": [
+    101.3,
+    11.2,
+    108.0,
+    17.6
+   ],
+   "L140_R82": [
+    186.7,
+    114.6,
+    196.3,
+    123.5
+   ],
+   "L33_L34_R22_input_filter": [
+    242.3,
+    78.0,
+    256.2,
+    95.2
+   ],
+   "L36_4R7": [
+    248.5,
+    54.9,
+    254.3,
+    60.4
+   ],
+   "L113_4R7": [
+    251.0,
+    10.8,
+    256.8,
+    16.1
+   ]
+  },
+  "back_side_capacitor_fields_approx": {
+   "under_bracket_side_bank": {
+    "x": [
+     21,
+     49
+    ],
+    "y": [
+     2,
+     124
+    ]
+   },
+   "under_far_side_bank": {
+    "x": [
+     186,
+     200.5
+    ],
+    "y": [
+     5,
+     106
+    ]
+   },
+   "note": "rows of 7343-size polymer/tantalum capacitors; relevant for a backplate only",
+   "uncertainty": 1.0
+  },
+  "component_heights": {
+   "published": "none found in any fetched source",
+   "parallax_estimate_low_confidence": {
+    "gpu_phase_inductor": "about 4 (3 to 5.5)",
+    "aluminium_can_capacitor": "about 5.5 (4 to 7)",
+    "12vhpwr_header": "about 8 to 9"
+   },
+   "note": "derived from top-face parallax and an uncertain camera distance; do not design clearances from these - measure the card"
+  },
+  "uncertainty": "row centres 0.2; silkscreen-based X extents 0.2; body extents 0.3",
+  "other_front_capacitors_approx_bbox_x0_y0_x1_y1": {
+   "polymer_chip_470_near_L38": [
+    61.6,
+    84.6,
+    70.2,
+    89.1
+   ],
+   "polymer_chip_470_near_L37": [
+    62.0,
+    33.2,
+    70.4,
+    38.0
+   ],
+   "polymer_chip_470_near_L40": [
+    161.8,
+    81.9,
+    170.3,
+    86.3
+   ],
+   "polymer_chip_470_near_L39": [
+    162.5,
+    34.9,
+    170.8,
+    39.0
+   ],
+   "polymer_chip_330_near_DP_J1": [
+    10.9,
+    87.1,
+    15.1,
+    95.8
+   ],
+   "polymer_chip_330_near_HDMI": [
+    14.0,
+    21.7,
+    22.4,
+    26.2
+   ],
+   "source": "photo-estimate",
+   "uncertainty": 0.7
+  }
+ },
+ "power_connector_12vhpwr": {
+  "ref": "J9",
+  "side": "front",
+  "type": "16-pin (12 power + 4 sense) right-angle header",
+  "orientation": "mating face towards +Y, at the recessed top edge (Y about 117.2); cable leaves over the card's top edge",
+  "footprint_bbox": {
+   "x": [
+    237.8,
+    257.0
+   ],
+   "y": [
+    103.8,
+    117.2
+   ]
+  },
+  "centre_x": 247.35,
+  "power_pins": {
+   "x": [
+    239.85,
+    242.85,
+    245.85,
+    248.84,
+    251.84,
+    254.85
+   ],
+   "rows_y": [
+    105.36,
+    108.35
+   ],
+   "pitch": 3.0
+  },
+  "sense_pins": {
+   "x": [
+    244.33,
+    246.34,
+    248.34,
+    250.35
+   ],
+   "y": 109.98,
+   "pitch": 2.0
+  },
+  "hold_down_slots_approx": [
+   [
+    240.6,
+    112.6
+   ],
+   [
+    254.0,
+    112.6
+   ]
+  ],
+  "source": "photo-estimate",
+  "uncertainty": 0.15
+ },
+ "bios_switch": {
+  "ref": "SW1",
+  "side": "back",
+  "body_bbox": {
+   "x": [
+    224.8,
+    231.5
+   ],
+   "y": [
+    122.1,
+    124.9
+   ]
+  },
+  "actuator": "slides along X, protrudes towards the top edge",
+  "positions": {
+   "SILENT": "towards the bracket (-X)",
+   "GAMING": "towards the far end (+X)"
+  },
+  "source": "photo-estimate",
+  "uncertainty": 0.5
+ },
+ "headers": {
+  "front": {
+   "J10": {
+    "bbox": [
+     106.5,
+     114.4,
+     118.2,
+     120.4
+    ],
+    "desc": "4-pin, red, populated on both cards"
+   },
+   "J8": {
+    "bbox": [
+     120.1,
+     114.4,
+     131.9,
+     120.4
+    ],
+    "desc": "4-pin, black; populated on Suprim X, NOT populated on the Suprim Liquid X sample"
+   },
+   "J805": {
+    "bbox": [
+     229.9,
+     2.4,
+     241.9,
+     8.5
+    ],
+    "desc": "4-pin 2.0 mm, white, side entry from the bottom edge, populated on both"
+   },
+   "J801": {
+    "bbox": [
+     243.7,
+     2.9,
+     255.6,
+     8.3
+    ],
+    "desc": "4-pin 2.0 mm, black, side entry from the bottom edge, populated on both"
+   },
+   "J11": {
+    "holes": [
+     [
+      6.05,
+      121.0
+     ],
+     [
+      11.2,
+      121.0
+     ],
+     [
+      13.7,
+      121.0
+     ]
+    ],
+    "outline_bbox": [
+     4.5,
+     117.8,
+     15.3,
+     127.2
+    ],
+    "desc": "3 through-holes, unpopulated"
+   },
+   "J6_PJP1": {
+    "pins_x": [
+     254.4,
+     256.5,
+     258.4
+    ],
+    "y": {
+     "J6": 29.0,
+     "PJP1": 25.9
+    },
+    "desc": "3-pin through-hole, unpopulated"
+   }
+  },
+  "back": {
+   "J16": {
+    "bbox": [
+     222.6,
+     104.2,
+     229.2,
+     115.4
+    ],
+    "desc": "4-pin SMD footprint, unpopulated on the Liquid X sample"
+   },
+   "J7": {
+    "bbox": [
+     76.4,
+     103.7,
+     84.8,
+     115.1
+    ],
+    "desc": "4-pin SMD footprint, unpopulated on the Liquid X sample"
+   },
+   "LEDC1": {
+    "bbox": [
+     258.2,
+     33.2,
+     260.3,
+     38.4
+    ]
+   },
+   "LEDC2": {
+    "bbox": [
+     258.2,
+     46.4,
+     260.3,
+     51.4
+    ]
+   },
+   "LEDC3": {
+    "bbox": [
+     258.2,
+     59.4,
+     260.3,
+     64.4
+    ]
+   },
+   "LEDC4": {
+    "bbox": [
+     258.2,
+     75.6,
+     260.3,
+     80.6
+    ]
+   }
+  },
+  "bbox_format": "[x0, y0, x1, y1]",
+  "function_assignment": "not determined (which header is fan / pump / RGB)",
+  "source": "photo-estimate",
+  "uncertainty": 0.5
+ },
+ "display_outputs": {
+  "side": "front",
+  "connectors": {
+   "DP_J1": {
+    "centre_y": 76.7,
+    "bbox": [
+     -0.3,
+     67.9,
+     15.2,
+     85.5
+    ]
+   },
+   "DP_J2": {
+    "centre_y": 55.7,
+    "bbox": [
+     -0.3,
+     46.9,
+     15.2,
+     64.5
+    ]
+   },
+   "DP_J3": {
+    "centre_y": 34.7,
+    "bbox": [
+     -0.3,
+     25.9,
+     15.2,
+     43.5
+    ]
+   },
+   "HDMI_J4": {
+    "centre_y": 12.9,
+    "bbox": [
+     -0.3,
+     4.0,
+     15.2,
+     21.7
+    ]
+   }
+  },
+  "cage_footprint_bbox": {
+   "x": [
+    -4.0,
+    15.2
+   ],
+   "y": [
+    4.0,
+    85.5
+   ]
+  },
+  "note": "bbox = on-board footprint incl. lead rows; shells overhang the bracket-end PCB edge to X about -4; DP pitch 21.0",
+  "shell_tab_slots_xy": {
+   "x": [
+    2.6,
+    10.9
+   ],
+   "DP_J1_y": [
+    68.3,
+    85.1
+   ],
+   "DP_J2_y": [
+    47.3,
+    64.1
+   ],
+   "DP_J3_y": [
+    26.3,
+    43.1
+   ],
+   "HDMI_y": [
+    5.0,
+    20.9
+   ]
+  },
+  "source": "photo-estimate",
+  "uncertainty": 0.5,
+  "heights": "not determined"
+ },
+ "published_specs_suprim_liquid_24g": {
+  "source": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-4090-SUPRIM-LIQUID-24G.pdf",
+  "card_dimensions": [
+   280,
+   140,
+   43
+  ],
+  "radiator_plus_fan_dimensions": [
+   274,
+   121,
+   55
+  ],
+  "tube": "L470 +/- 10 x D11.2",
+  "weight_card_g": 2353,
+  "weight_package_g": 3837,
+  "power_connector": "16-pin x 1",
+  "power_consumption_w": {
+   "silent": 450,
+   "gaming": 480
+  },
+  "recommended_psu_w": 1000,
+  "minimum_psu_w": 850,
+  "outputs": "DisplayPort x 3 (v1.4a), HDMI x 1 (HDMI 2.1a)",
+  "clocks_mhz": {
+   "boost": 2595,
+   "extreme_performance": 2610
+  },
+  "radiator": "240 mm aluminium",
+  "review_measurements_liquid_x": {
+   "source": "https://www.tomshardware.com/reviews/msi-rtx-4090-suprim-liquid-x-review/2",
+   "card": [
+    280,
+    139,
+    42
+   ],
+   "radiator": [
+    275,
+    117,
+    54
+   ],
+   "tubing_cm": 44,
+   "weight_with_radiator_g": 2336,
+   "card_only_g": "about 1350 +/- 50",
+   "slots": 2,
+   "radiator_fans": "2 x 120 mm",
+   "card_fan_mm": 95
+  },
+  "review_measurements_kitguru": {
+   "source": "https://www.kitguru.net/components/graphic-cards/dominic-moass/msi-rtx-4090-suprim-liquid-x-review/2/",
+   "radiator_thickness": 27,
+   "fan_thickness": 27.5,
+   "tubing_cm": 47,
+   "card_fan_mm": 100,
+   "aio_maker": "Cooler Master"
+  }
+ },
+ "aftermarket_blocks": {
+  "alphacool_13459": {
+   "compatibility": [
+    "Gaming Trio 24G",
+    "Gaming X Trio 24G (V510-006R)",
+    "Suprim Liquid X 24G",
+    "Suprim X 24G (V510-001R)"
+   ],
+   "sources": [
+    "https://shop.alphacool.com/en/shop/gpu-water-cooling/nvidia/13459-alphacool-eisblock-aurora-acryl-gpx-n-rtx-4090-suprim-with-backplate",
+    "https://download.alphacool.com/homepage/compatibility_list_Nvidia.pdf"
+   ],
+   "block_lwh": [
+    266.6,
+    160,
+    34.6
+   ],
+   "backplate_lwh": [
+    266.6,
+    127.25,
+    6
+   ],
+   "ports": "4 x G1/4, 6.00 deep",
+   "terminal_x": [
+    82.82,
+    183.82
+   ],
+   "port_centres_x": [
+    103.82,
+    137.82
+   ],
+   "port_spacing": 34.0,
+   "port_centreline_y": 140.75,
+   "terminal_top_y": 151.75,
+   "block_thickness": [
+    24.72,
+    27.02
+   ],
+   "thermal_pads": "1 mm on VRM and memory, 3 mm on the PCB back",
+   "drawing_source": "https://download.alphacool.com/datasheet/ENG_13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_datasheet.pdf",
+   "manual": "https://download.alphacool.com/manual/13459_Alphacool_Eisblock_Aurora_Acryl_GPX-N_RTX_4090_Suprim_with_Backplate_Manual.pdf",
+   "note": "X from the bracket-end PCB edge, Y from the main PCIe-side PCB edge (drawing gives 149.00 / 160.00 from the bracket-tab bottom, 8.25 lower)"
+  },
+  "bykski_n_ms4090trio_x": {
+   "compatibility": [
+    "Suprim",
+    "Suprim X",
+    "Suprim Liquid X",
+    "Gaming X Trio"
+   ],
+   "source": "https://www.bykski.us/products/bykski-full-coverage-gpu-water-block-and-backplate-for-msi-geforce-rtx-4090-gaming-x-trio-n-ms4090trio-x",
+   "dimensions": "not published on the page"
+  },
+  "ek_quantum_vector2_trio_rtx_4090": {
+   "compatibility_per_retailer_listing_unverified": [
+    "Gaming Trio",
+    "Gaming X Trio",
+    "Suprim",
+    "Suprim Liquid",
+    "Suprim Liquid X",
+    "Suprim X"
+   ],
+   "dimensions_unverified": [
+    307,
+    155,
+    27
+   ],
+   "coldplate": "11 mm copper",
+   "note": "ekwb.com and the retailer pages refused this environment; values come from search-result summaries only"
+  },
+  "thermaltake_pacific_v_rtx_4090_plus_msi": {
+   "compatibility": [
+    "Gaming X Trio",
+    "Suprim X"
+   ],
+   "dimensions_lwh": [
+    251.5,
+    158.7,
+    24.05
+   ],
+   "threads": "G1/4",
+   "source": "https://th.thermaltake.com/pacific-v-rtx-4090-plus-msi-gaming-trio-suprim-gpu-water-block.html"
+  },
+  "watercool_heatkiller": "no block for this PCB found"
+ },
+ "not_determined": [
+  "component heights (no datasheet or dimensioned drawing obtained; parallax figures are rough)",
+  "first-hand confirmation that the non-X SUPRIM LIQUID 24G uses PCB MS-V510 (and which revision a given card has)",
+  "which mounting holes the stock AIO cold plate, VRM heatsink and backplate use; screw sizes",
+  "function and pinout of J10 / J8 / J805 / J801 / J16 / J7",
+  "location of the MP2891 controller",
+  "exact drill diameters and plating of the holes (apparent values +/- 0.2)",
+  "stock cold-plate / pump envelope and tube exit positions",
+  "published AD102 die width x height and package drawing; GDDR6X package height",
+  "EK and Bykski dimensioned drawings; TechPowerUp review text (pages sit behind a bot check)"
+ ],
+ "access_notes": {
+  "www.msi.com": "not contacted (answers 403 to this environment)",
+  "storage-asset.msi.com": "MSI datasheet CDN; served the SUPRIM LIQUID 24G datasheet PDF to a plain request (global/au/uk/cz copies); the /in/ copy returned 403 and was skipped",
+  "www.techpowerup.com": "review HTML pages return HTTP 200 with a JavaScript bot-check page only (not solved, text not read); the four *_full.jpg PCB photos were served normally; three other URLs returned 403 'Exploit scan', after which no further requests were made",
+  "refused_or_failed": [
+   "www.ekwb.com (403)",
+   "overclockers.co.uk (403)",
+   "www.caseking.de (403)",
+   "www.igorslab.de review page 3 (403)",
+   "www.mouser.com datasheet (HTTP/2 stream error)",
+   "www.farnell.com datasheet (empty reply)",
+   "phanteks.com product page (404)"
+  ]
+ },
+ "photo_consistency_note": "The Suprim Liquid X front photo shows a +0.10..0.18 mm mid-board X bulge relative to the other three photos and to the PCIe contact ruler; its X values were down-weighted. Before normalisation the four photos disagree on the PCB length by up to 0.9 mm (0.33 %)."
+}

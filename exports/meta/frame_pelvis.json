@@ -1,0 +1,36 @@
+{
+ "name": "frame_pelvis",
+ "material": "316L",
+ "frame": "world",
+ "voxel_mm": 0.5,
+ "volume_cm3": 105.59,
+ "mass_g": 842.6,
+ "bbox_mm": [
+  254.4,
+  282.5,
+  111.4
+ ],
+ "bbox_lo": [
+  -127.18,
+  18.82,
+  1.54
+ ],
+ "bbox_hi": [
+  127.18,
+  301.34,
+  112.99
+ ],
+ "fits_envelope": true,
+ "longest_mm": 282.5,
+ "cost_usd_jlc_pcbway": [
+  185.84,
+  282.99
+ ],
+ "print_stl": {
+  "faces": 400000,
+  "watertight": true,
+  "mesh_volume_cm3": 104.64
+ },
+ "surface_area_cm2": 509.2,
+ "islands_removed_voxels": 0
+}
