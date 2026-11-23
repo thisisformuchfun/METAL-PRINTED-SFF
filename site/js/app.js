@@ -130,7 +130,10 @@
     while (svg.firstChild) { svg.removeChild(svg.firstChild); }
     var al = loopRows(d, 'AlSi10Mg', state.load), st = loopRows(d, '316L', state.load);
     if (!al.length) { el('text', { x: 20, y: 40, fill: css('--ink-3'), 'font-size': 14 }, svg, 'Loop model results are not available.'); return; }
-    var W = 900, H = 340, L = 54, R = 20, T = 14, B = 40;
+    // the viewBox follows the rendered width, so labels keep their size on a phone
+    var cw = Math.round(svg.getBoundingClientRect().width) || 900, narrow = cw < 560;
+    var W = Math.max(300, Math.min(900, cw)), H = narrow ? 260 : 340, L = narrow ? 40 : 54, R = narrow ? 10 : 20, T = 14, B = 40;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     var ymin = 20, ymax = 130;
     var vals = al.concat(st);
     ymax = Math.min(160, Math.max(100, Math.ceil(Math.max.apply(null, vals.map(function (r) { return r.gpu_hotspot_c; })) / 10) * 10 + 10));
@@ -141,13 +144,13 @@
       el('line', { x1: L, x2: W - R, y1: Y(t), y2: Y(t), stroke: rule, 'stroke-width': 1 }, svg);
       el('text', { x: L - 8, y: Y(t) + 4, 'text-anchor': 'end', fill: ink3, 'font-size': 12, 'font-family': 'IBM Plex Mono, monospace' }, svg, t + '°');
     }
-    for (var r = 800; r <= 2000; r += 200) {
-      el('text', { x: X(r), y: H - 14, 'text-anchor': 'middle', fill: ink3, 'font-size': 12, 'font-family': 'IBM Plex Mono, monospace' }, svg, String(r));
+    for (var r = 800; r <= 2000; r += (narrow ? 400 : 200)) {
+      el('text', { x: X(r), y: H - 18, 'text-anchor': 'middle', fill: ink3, 'font-size': 12, 'font-family': 'IBM Plex Mono, monospace' }, svg, String(r));
     }
-    el('text', { x: W - R, y: H - 0, 'text-anchor': 'end', fill: ink3, 'font-size': 11, 'font-family': 'IBM Plex Mono, monospace' }, svg, 'fan speed, rpm');
+    el('text', { x: W - R, y: H - 3, 'text-anchor': 'end', fill: ink3, 'font-size': 11, 'font-family': 'IBM Plex Mono, monospace' }, svg, 'fan speed, rpm');
     // 4090 thermal limit
     el('line', { x1: L, x2: W - R, y1: Y(88), y2: Y(88), stroke: warn, 'stroke-width': 1, 'stroke-dasharray': '2 5' }, svg);
-    el('text', { x: W - R, y: Y(88) - 6, 'text-anchor': 'end', fill: warn, 'font-size': 11, 'font-family': 'IBM Plex Mono, monospace' }, svg, '4090 begins to throttle near 88 °C');
+    el('text', { x: W - R, y: Y(88) - 6, 'text-anchor': 'end', fill: warn, 'font-size': 11, 'font-family': 'IBM Plex Mono, monospace' }, svg, narrow ? '4090 throttles near 88 °C' : '4090 begins to throttle near 88 °C');
     function band(rows, key, color) {
       var up = rows.map(function (r) { return X(r.rpm) + ',' + Y(Math.min(ymax, r[key][1])); });
       var dn = rows.map(function (r) { return X(r.rpm) + ',' + Y(Math.min(ymax, r[key][0])); }).reverse();
@@ -186,7 +189,9 @@
     var lat = d && d.sims && d.sims.cell && d.sims.cell.lattices;
     if (!svg || !lat) { return; }
     while (svg.firstChild) { svg.removeChild(svg.firstChild); }
-    var W = 440, H = 280, L = 52, R = 14, T = 10, B = 40;
+    var cw = Math.round(svg.getBoundingClientRect().width) || 440;
+    var W = Math.max(280, Math.min(440, cw)), H = 280, L = 52, R = 14, T = 10, B = 40;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     var colors = { core: css('--ruby'), gallery: css('--steel'), arm: css('--alu') };
     var names = { core: '5 mm core', gallery: '8 mm gallery', arm: 'VRM arm' };
     var xs = [], ys = [], series = {};
@@ -272,6 +277,8 @@
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
     var redraw = function () { drawLoop(); drawFit('#dp-chart', 'dp'); drawFit('#ha-chart', 'ha'); };
     if (mq.addEventListener) { mq.addEventListener('change', redraw); }
+    var rz = null;
+    window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(redraw, 150); });
     new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
@@ -280,6 +287,16 @@
     state.data = d;
     window.MARROW_DATA = d;
     parts(d); fea(d); macro(d); validation(d);
+    var fullRows = loopRows(d, 'AlSi10Mg', 'full'), gameRows = loopRows(d, 'AlSi10Mg', 'gaming');
+    var at = function (rows, rpm) { return rows.filter(function (r) { return r.rpm === rpm; })[0]; };
+    if (at(fullRows, 1500) && at(gameRows, 1500)) {
+      var cool = fullRows.filter(function (r) { return r.cpu_tj_c <= 89; })[0];
+      bind('cpu_note', 'At the synthetic full load (120 W into an X3D processor, which no game does) the model puts the CPU junction at ' +
+        f(at(fullRows, 1500).cpu_tj_c, 1) + ' °C with the fans at 1500 rpm. The limit of the Ryzen 7 X3D parts is 89 °C, so it would hold temperature by throttling' +
+        (cool ? ' until the fans reach ' + cool.rpm + ' rpm (' + f(cool.cpu_tj_c, 1) + ' °C)' : '') +
+        '. Most of that rise is inside the chip, between the stacked die and its lid, not in the block. At a 75 W gaming load the junction is ' +
+        f(at(gameRows, 1500).cpu_tj_c, 0) + ' °C, and the 4090 stays ' + f(88 - at(fullRows, 1500).gpu_hotspot_c, 0) + ' K under its own limit even at full load.');
+    }
     $$('[data-load]').forEach(function (b) {
       var lk = b.getAttribute('data-load');
       var row = loopRows(d, 'AlSi10Mg', lk)[0];

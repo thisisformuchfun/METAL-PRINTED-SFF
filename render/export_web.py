@@ -60,6 +60,8 @@ def select_tree(objs):
     bpy.ops.object.select_all(action="DESELECT")
     for o in objs:
         o.select_set(True)
+        if o is root:                    # the root goes along as the common parent, not with all it holds
+            continue
         for c in o.children_recursive:
             c.hide_set(False)
             c.select_set(True)

@@ -57,13 +57,13 @@ if fea:
 sim_rows = []
 if g:
     h = g["heaters"]
-    sim_rows.append(f"| 4090 block, AlSi10Mg | {g['flow_lpm']:.0f} L/min | {g['dp_Pa']/1000:.1f} kPa | die +{h['1']['T_mean_rise_K']:.1f} K (peak +{h['1']['T_max_rise_K']:.1f}), memory +{h['2']['T_mean_rise_K']:.1f} K, VRM +{h['3']['T_mean_rise_K']:.1f} K | {g['energy_closure_pct']:+.2f} % |")
+    sim_rows.append(f"| 4090 block, AlSi10Mg | {g['flow_lpm']:.0f} L/min | {g['dp_Pa']/1000:.1f} kPa | die +{h['1']['T_mean_rise_K']:.1f} K (peak +{h['1']['T_max_rise_K']:.1f}), memory +{h['2']['T_mean_rise_K']:.1f} K, VRM +{h['3']['T_mean_rise_K']:.1f} K | {abs(g['energy_closure_pct']):.2f} % |")
 if gs:
     h = gs["heaters"]
-    sim_rows.append(f"| 4090 block, 316L (for comparison) | {gs['flow_lpm']:.0f} L/min | {gs['dp_Pa']/1000:.1f} kPa | die +{h['1']['T_mean_rise_K']:.1f} K, memory +{h['2']['T_mean_rise_K']:.1f} K, VRM +{h['3']['T_mean_rise_K']:.1f} K | {gs['energy_closure_pct']:+.2f} % |")
+    sim_rows.append(f"| 4090 block, 316L (for comparison) | {gs['flow_lpm']:.0f} L/min | {gs['dp_Pa']/1000:.1f} kPa | die +{h['1']['T_mean_rise_K']:.1f} K, memory +{h['2']['T_mean_rise_K']:.1f} K, VRM +{h['3']['T_mean_rise_K']:.1f} K | {abs(gs['energy_closure_pct']):.2f} % |")
 if c:
     h = c["heaters"]
-    sim_rows.append(f"| CPU + VRM monoblock, AlSi10Mg | {c['flow_lpm']:.0f} L/min | {c['dp_Pa']/1000:.1f} kPa | CPU pad +{h['1']['T_mean_rise_K']:.1f} K, VRM +{h['2']['T_mean_rise_K']:.1f} K | {c['energy_closure_pct']:+.2f} % |")
+    sim_rows.append(f"| CPU + VRM monoblock, AlSi10Mg | {c['flow_lpm']:.0f} L/min | {c['dp_Pa']/1000:.1f} kPa | CPU pad +{h['1']['T_mean_rise_K']:.1f} K, VRM +{h['2']['T_mean_rise_K']:.1f} K | {abs(c['energy_closure_pct']):.2f} % |")
 sim_table = "\n".join(sim_rows)
 
 loop_rows = []
@@ -93,9 +93,12 @@ cpu_line = ""
 _r = lp("AlSi10Mg", "full", 1500)
 _g = lp("AlSi10Mg", "gaming", 1500)
 if _r and _g:
+    _cool = [x for x in sorted(loop, key=lambda x: x["rpm"]) if x["material"] == "AlSi10Mg" and x["load"] == "full" and x["cpu_tj_c"] <= 89.0]
+    _fan = f" until the fans reach {_cool[0]['rpm']} rpm ({_cool[0]['cpu_tj_c']:.1f} C)" if _cool else ""
     cpu_line = (f"**CPU margin.** At the synthetic full load (120 W into an X3D part, which no game does) the model puts the junction at "
-                f"{_r['cpu_tj_c']:.0f} C, right at the 89 C limit of the Ryzen 7 X3D parts; most of that is the chip's own junction-to-lid "
-                f"resistance (0.30 K/W assumed), not the block. At a 75 W gaming load it is {_g['cpu_tj_c']:.0f} C.")
+                f"{_r['cpu_tj_c']:.1f} C with the fans at 1500 rpm. The limit of the Ryzen 7 X3D parts is 89 C, so the chip would hold temperature by "
+                f"throttling{_fan}. Most of that rise is the chip's own junction-to-lid resistance (0.30 K/W assumed), not the block. "
+                f"At a 75 W gaming load the junction is {_g['cpu_tj_c']:.0f} C.")
 
 val = S.get("validation")
 val_lines = ""
@@ -157,7 +160,7 @@ structure is 316L and everything that carries heat is aluminium.
 **Cold plates** (two-scale conjugate model, `sim/cell` + `sim/macro`; temperatures are rises over the coolant
 entering the block):
 
-| Case | Flow | Pressure drop | Pad temperatures | Energy balance |
+| Case | Flow | Pressure drop | Pad temperatures | Energy balance error |
 |---|---|---|---|---|
 {sim_table}
 

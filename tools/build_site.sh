@@ -11,7 +11,8 @@ jpg() { # src dst width quality
   [ -f "$1" ] && ffmpeg -y -loglevel error -i "$1" -vf "scale=$3:-2:flags=lanczos" -q:v "${4:-3}" "$2" && echo "  $2" || echo "  (missing $1)"
 }
 S=build/stills
-jpg $S/hero_front.png   site/media/hero.jpg          1920 2
+if [ -f $S/hero_wide.png ]; then jpg $S/hero_wide.png site/media/hero.jpg 1920 2; else jpg $S/hero_front.png site/media/hero.jpg 1920 2; fi
+jpg $S/hero_front.png   site/media/hero_front.jpg    1600
 jpg $S/frame_only.png   site/media/frame.jpg         1600
 jpg $S/rear_ribs.png    site/media/rear.jpg          1600
 jpg $S/cut_gpu.png      site/media/cut_gpu.jpg       1600

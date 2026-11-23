@@ -59,7 +59,7 @@ nav.top ul a:hover { color: var(--ruby-ink); }
 
 /* hero */
 .hero { position: relative; border-bottom: 1px solid var(--rule); background: #05080b; color: #e4ebf0; overflow: hidden; }
-.hero img.bg { display: block; width: 100%; height: clamp(440px, 74vw, 780px); object-fit: cover; object-position: 60% 50%; }
+.hero img.bg { display: block; width: 100%; height: clamp(440px, 74vw, 780px); object-fit: cover; object-position: 78% 50%; }
 .hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,8,11,0.93) 0%, rgba(5,8,11,0.62) 34%, rgba(5,8,11,0) 62%), linear-gradient(0deg, rgba(5,8,11,0.85) 0%, rgba(5,8,11,0) 30%); }
 .hero .copy { position: absolute; inset: 0; display: flex; align-items: center; }
 .hero .copy .wrap { width: 100%; }
@@ -184,6 +184,7 @@ footer p + p { margin-top: 0.6rem; }
   nav.top ul li.opt { display: none; }
   .hero .veil { background: linear-gradient(0deg, rgba(5,8,11,0.95) 0%, rgba(5,8,11,0.55) 55%, rgba(5,8,11,0.15) 100%); }
   .hero .copy { align-items: flex-end; padding-bottom: 1.6rem; }
+  .hero img.bg { object-position: 88% 50%; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
@@ -297,7 +298,7 @@ footer p + p { margin-top: 0.6rem; }
 
 <section id="organs"><div class="wrap">
   <div class="head">
-    <div><div class="mono plate-no">Plate IV &middot; Organs</div><h2>Four organs, no gaskets.</h2></div>
+    <div><div class="mono plate-no">Plate IV &middot; Organs</div><h2>Four organs, printed whole.</h2></div>
     <div><p>Each cold plate is a single aluminium print. Coolant runs through a sheet-gyroid core that needs no supports and leaves no sealed pockets, so powder shakes out through the two ports. The outside wears a bone-like gyroid skin swollen over a Voronoi pattern; it is dry, and there for the look and a little passive area.</p></div>
   </div>
 
@@ -389,6 +390,7 @@ footer p + p { margin-top: 0.6rem; }
     <div><div class="mono">Coolant</div><div class="v"><span data-r="cool">–</span> °C</div></div>
     <div><div class="mono">Flow &middot; loop drop</div><div class="v"><span data-r="flow">–</span></div></div>
   </div>
+  <div class="finding"><p><strong>Where the margin is thin.</strong> <span data-b="cpu_note">At the synthetic full load the processor sits at its junction limit; the graphics card keeps its margin.</span></p></div>
   <div class="finding"><p><strong>Why the organs are aluminium and only the bones are steel.</strong> <span data-b="steel_finding">The same block geometry was simulated in 316L. Steel conducts roughly a ninth as well as printed aluminium, and the 4090 concentrates 390 W on six square centimetres.</span></p></div>
 </div></section>
 
@@ -425,6 +427,12 @@ footer p + p { margin-top: 0.6rem; }
       <li>Contact resistance of pads and paste is added in the loop model, not in the block model.</li>
       <li>Frame joints are bonded in the stress model; bolt preload and slip are not simulated.</li>
       <li>No part has been pressure-tested. Printed aluminium this thin needs a leak test, and usually sealing, before it sees a pump.</li>
+    </ul></div></details>
+    <details><summary>Before you order anything</summary><div class="in"><ul>
+      <li><strong>Power supply.</strong> MSI lists 850 W as the minimum for this card and recommends 1000 W. The 650 W unit this build was drawn around is below that and predates the 16-pin connector. Plan to replace it; the bay takes an ATX unit up to 180 mm long.</li>
+      <li><strong>One metal in the loop.</strong> The cold plates are aluminium, so the radiators must be aluminium too (the SUPRIM's own 240 mm radiator is), with stainless or anodised fittings and a coolant that carries aluminium inhibitors. Copper or brass in the same loop will corrode the blocks.</li>
+      <li><strong>Finish the prints.</strong> Tap the G1/4 ports and spot-face their seats, lap the die, lid and memory lands flat, then leak-test at 1 bar before filling.</li>
+      <li><strong>Measure first.</strong> Set your board's VRM positions and the card's component heights in <code>design/params.py</code>, then regenerate the two blocks.</li>
     </ul></div></details>
   </div>
 </div></section>

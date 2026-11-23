@@ -64,18 +64,19 @@ if mode == "organs":
     name = "organs"
 elif mode == "cutaway":
     o = ms.import_mesh(ms.BUILD / "gpu_block_cut_hero.ply", "gpu_cut", Matrix.Identity(4), mats["alu"], coll)
+    o.parent = None                      # measure in mm, outside the scaled root
+    o.matrix_world = Matrix.Identity(4)
     bpy.context.view_layer.update()
     lo, hi = bounds(o)
-    c = (lo + hi) / 2
-    o.parent = None
-    o.matrix_world = Matrix.Translation(Vector((-c.x, -lo.y, -lo.z)))
+    die_x = ms.L["gpu"]["centre"][0]
+    o.matrix_world = Matrix.Translation(Vector((-die_x, -lo.y, -lo.z)))      # die centre at x = 0, cut face on y = 0
     ms.adopt(o, coll)
     ms.CENTER = Vector((0.0, 20.0, 12.0))
     ms.add_floor()
     ms.set_world(strength=0.22, rot_deg=10)
     ms.light_rig(key=0.5, rim=0.6, fill=0.7, top=0.5)
     cam = ms.camera(lens=85)
-    ms.aim(cam, Vector((-150, -330, 150)), Vector((-4, 0, 11)), fstop=7.0)
+    ms.aim(cam, Vector((-95, -360, 135)), Vector((0, 0, 10)), fstop=16.0)
     name = "cut_gpu"
 else:
     raise SystemExit("unknown mode")

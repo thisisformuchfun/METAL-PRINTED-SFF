@@ -28,6 +28,8 @@ def S(x, s, n=0.0):
 SHOTS = {
     # --- wide heroes
     "hero_front": dict(loc=ms.orbit(-27, 12, 1260), tgt=C + Vector((0, -10, -4)), lens=50, fstop=10.0),
+    # the site banner: same view as hero_front, pulled back and aimed to the machine's left so the title has room
+    "hero_wide": dict(loc=ms.orbit(-27, 12, 1400, C + Vector((-187, 85, -4))), tgt=C + Vector((-187, 85, -4)), lens=50, fstop=10.0),
     "hero_low": dict(loc=ms.orbit(-40, 2, 1150), tgt=C + Vector((-6, 0, 6)), lens=45, fstop=9.0),
     "hero_right": dict(loc=ms.orbit(34, 15, 1260), tgt=C + Vector((8, -10, -4)), lens=50, fstop=10.0),
     "rear_ribs": dict(loc=ms.orbit(150, 11, 1220), tgt=C + Vector((0, 30, 4)), lens=50, fstop=10.0),
@@ -118,21 +120,29 @@ def render_still(name, out_dir, res=(1920, 1080), spp=96, depth=True, threads=4,
         near=near, far=far, focus=d, lens=sh["lens"], sensor=36.0, res=list(res))))
 
 
-def render_orbit(name, out_dir, frames, total, res=(960, 540), spp=40, az0=-62.0, az1=38.0, el=11.0, dist=960.0,
-                 lens=55.0, threads=4, tgt=None):
+def render_orbit(name, out_dir, frames, total, res=(1280, 720), spp=48, az0=-39.0, az1=-15.0, el=12.0, dist=1260.0,
+                 lens=50.0, threads=4, tgt=None, exposure=0.0, push=60.0, side=0.0):
+    """A slow real camera arc around the machine (frames are cross-blended by the film editor, so keep the
+    step between frames near a pixel: about 0.3 degrees)."""
     out_dir = pathlib.Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    sc = ms.render_settings(res=res, spp=spp, threads=threads)
+    show_only(None)
+    sc = ms.render_settings(res=res, spp=spp, threads=threads, exposure=exposure)
     sc.use_nodes = False
+    sc.render.use_persistent_data = True              # only the camera moves: keep the BVH between frames
     cam = sc.camera
     cam.data.lens = lens
-    tgt = C + Vector((0, -6, -4)) if tgt is None else tgt
+    tgt = C + Vector((0, -10, -4)) if tgt is None else tgt
     for f in frames:
         t = f / max(total - 1, 1)
-        e = t * t * (3 - 2 * t)                       # ease in/out
+        e = 0.4 * t + 0.6 * t * t * (3 - 2 * t)       # gentle ease in/out
         az = az0 + (az1 - az0) * e
-        ms.aim(cam, ms.orbit(az, el + 3.0 * math.sin(math.pi * t), dist - 60.0 * math.sin(math.pi * t), tgt), tgt, fstop=8.0)
+        loc = ms.orbit(az, el + 1.5 * math.sin(math.pi * t), dist - push * e, tgt)
+        view = (tgt - loc).normalized()
+        right = view.cross(Vector((0, 0, 1))).normalized()
+        ms.aim(cam, loc, tgt - right * side, fstop=10.0)      # side > 0: look left of the pivot, the machine sits right of centre
         ms.render_still(out_dir / f"{name}_{f:04d}.png")
+        print("RENDERED", f, flush=True)
 
 
 def main():
@@ -156,8 +166,9 @@ def main():
             render_still(n, opts["out"], res=res, spp=int(opts["spp"]), threads=int(opts["threads"]), exposure=float(opts["exposure"]))
     elif mode == "orbit":
         a, b = [int(v) for v in opts["frames"].split(":")]
+        kw = {k: float(opts[k]) for k in ("az0", "az1", "el", "dist", "lens", "push", "side") if k in opts}
         render_orbit(names[0] if names else "orbit", opts["out"], range(a, b + 1), int(opts["total"]), res=res, spp=int(opts["spp"]),
-                     threads=int(opts["threads"]))
+                     threads=int(opts["threads"]), exposure=float(opts["exposure"]), **kw)
 
 
 if __name__ == "__main__":

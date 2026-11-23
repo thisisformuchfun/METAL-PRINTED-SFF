@@ -4,7 +4,7 @@ Rendered stills (build/stills/<shot>.png + depth) are turned into moving shots b
 parallax drift, simulation plates are animated from the solver output, supers are set in the site's
 typefaces, and everything is cut to the bar grid of the score (96 BPM, 2.5 s per bar).
 
-    /opt/venv/bin/python media/film/make_film.py [--preview]
+    /opt/venv/bin/python media/film/make_film.py [--preview] [--no-orbit]
 """
 from __future__ import annotations
 
@@ -162,18 +162,26 @@ RUBY = (255, 84, 112, 255)
 def super_(label, title, sub=None, big=False):
     L = []
     x, y = 78, H - 150
-    if big:
-        L.append(("mono", 15, label, W / 2, H / 2 - 122, "mm", DIMC))
-        L.append(("display", 150, title, W / 2, H / 2 - 8, "mm", BONE))
+    if big:                                   # title card: set left, the machine is composed to the right
+        L.append(("mono", 15, label, x + 6, H / 2 - 104, "ls", DIMC))
+        L.append(("display", 106, title, x, H / 2 + 26, "ls", BONE))
         if sub:
-            L.append(("italic", 34, sub, W / 2, H / 2 + 96, "mm", BONE))
-        return text_layer(L)
+            L.append(("italic", 31, sub, x + 5, H / 2 + 78, "ls", BONE))
+        return text_layer(L), "left"
     if label:
         L.append(("mono", 14, label, x, y - 16, "ls", DIMC))
     L.append(("display", 54, title, x, y + 44, "ls", BONE))
     if sub:
         L.append(("mono", 15, sub, x, y + 78, "ls", DIMC))
-    return text_layer(L)
+    return text_layer(L), "low"
+
+
+def scrims():
+    """Soft dark fields that sit under the type: lower-left for the lower thirds, left for the title cards."""
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    low = np.clip((yy - (H - 340)) / 260.0, 0, 1) ** 1.2 * (0.30 + 0.70 * np.clip(1 - xx / (0.80 * W), 0, 1)) * 0.82
+    left = np.clip(1 - xx / (0.60 * W), 0, 1) ** 1.1 * 0.80
+    return dict(low=low[..., None], left=left[..., None])
 
 
 def timeline(numbers):
@@ -187,14 +195,14 @@ def timeline(numbers):
     add(20.0, 5.0, "frame_only", dict(z0=1.03, z1=1.10, px=-18), super_("FIVE SEGMENTS · TEN BOLTS", "A skeleton.", f"LONGEST PART {n['longest']} MM · FITS A 300 MM BUILD PLATE"))
     add(25.0, 5.0, "organs", dict(z0=1.10, z1=1.03, px=22), super_("FOUR PRINTED ALUMINIUM PARTS", "Its organs.", "GYROID INSIDE · BONE SKIN OUTSIDE · EACH ONE PIECE"))
     add(30.0, 4.85, "sim_flow", None, super_("RESOLVED, THEN SCALED UP", "Coolant through a gyroid.", "LATTICE-BOLTZMANN FLOW · FINITE-VOLUME HEAT"))
-    add(35.0, 10.0, "orbit", dict(z0=1.0, z1=1.16, px=-44, py=8), super_("PRE-LAUNCH PREVIEW", "MARROW", "Printed bone. Liquid marrow.", big=True), sup_in=0.05)
+    add(35.0, 10.0, "orbit", dict(z0=1.0, z1=1.14, px=-44, py=8, cx0=0.34), super_("PRE-LAUNCH PREVIEW", "MARROW", "Printed bone. Liquid marrow.", big=True), sup_in=0.05)
     add(45.0, 5.0, "board", dict(z0=1.04, z1=1.12, px=-20, py=6), super_("ORGAN II", "CPU and VRM, one block."))
     add(50.0, 5.0, "gpu", dict(z0=1.12, z1=1.04, px=24), super_("ORGAN I", "A 4090, under gyroid.", f"{n['gpu_w']} W · DIE +{n['gpu_rise']} K OVER COOLANT · SIMULATED"))
     add(55.0, 5.0, "rear_ribs", dict(z0=1.03, z1=1.10, px=-24), super_("TWO 240 MM RADIATORS", "Ribs over lungs."))
     add(60.0, 5.0, "sim_heat", None, super_("FULL LOAD · SIMULATED", f"{n['gpu_hot']} °C at the hot spot.", f"{n['heat_w']} W THROUGH ONE LOOP · FANS AT 1500 RPM · 25 °C ROOM"))
     add(65.0, 5.0, "heart", dict(z0=1.10, z1=1.03, px=18, py=-6), super_("ORGAN III", "A heart with a 41 mL atrium."))
     add(70.0, 5.0, "hero_low", dict(z0=1.02, z1=1.10, px=-26), super_("EVERY PART FITS A 300 MM PRINTER", "Print it. Bolt it. Fill it."))
-    add(75.0, 9.0, "hero_front", dict(z0=1.08, z1=1.02, px=14), super_("DESIGN STUDY · ALL FIGURES SIMULATED", "MARROW", "Printed bone. Liquid marrow.", big=True), fade=(0.0, 3.2), sup_in=0.05)
+    add(75.0, 9.0, "hero_front", dict(z0=1.08, z1=1.02, px=14, cx0=0.34), super_("DESIGN STUDY · ALL FIGURES SIMULATED", "MARROW", "Printed bone. Liquid marrow.", big=True), fade=(0.0, 3.2), sup_in=0.05)
     return T
 
 
@@ -231,10 +239,11 @@ def main(preview=False):
             srcs[k] = Sequence(SIMV / k, "*.png")
         else:
             srcs[k] = Still(k)
-        if k == "orbit" and not srcs[k].ok:
+        if k == "orbit" and (not srcs[k].ok or "--no-orbit" in sys.argv):
             srcs[k] = Still("hero_right")          # no rendered orbit yet: drift across the three-quarter still instead
         print(k, "ok" if srcs[k].ok else "MISSING", flush=True)
     vig = vignette()
+    scr = scrims()
     total = int(84.0 * FPS)
     step = 6 if preview else 1
     raw = OUT / ("film_preview.mp4" if preview else "film_video.mp4")
@@ -261,8 +270,11 @@ def main(preview=False):
                 g *= min(1.0, 0.35 + (t - sh["start"]) / 0.12) if sh["start"] > 0 and fi == 0 else 1.0
                 frame = frame * vig * g
                 if sh["sup"] is not None:
+                    layer, kind = sh["sup"]
                     a = ease((t - sh["start"] - sh["sup_in"]) / 0.5) * ease((sh["start"] + sh["dur"] - 0.25 - t) / 0.45)
-                    frame = comp(frame, sh["sup"], a * (g if fo > 0 else 1.0))
+                    a *= g if fo > 0 else 1.0
+                    frame = frame * (1 - scr[kind] * a)
+                    frame = comp(frame, layer, a)
                 break
         frame = frame + rng.normal(0, 0.006, frame.shape).astype(np.float32)        # fine grain against banding
         proc.stdin.write((np.clip(frame, 0, 1) * 255).astype(np.uint8).tobytes())
