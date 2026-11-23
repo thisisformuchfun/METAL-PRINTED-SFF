@@ -321,7 +321,7 @@ footer p + p { margin-top: 0.6rem; }
     <div class="body">
       <div class="mono">Organ II &middot; replaces the board's VRM heatsinks</div>
       <h3>CPU and VRM monoblock for AM5</h3>
-      <p>One print covers the processor and both VRM banks. After the CPU core the coolant crosses a bridge into an L-shaped arm over the power stages. It mounts on the stock AM5 backplate with four spring screws.</p>
+      <p>One print covers the processor and both VRM banks. After the CPU core the coolant crosses a bridge into an L-shaped arm over the power stages. A solid tail runs down from the CPU body to the M.2 sink, so the drive and the chipset reject their heat into the loop as well. It mounts on the stock AM5 backplate with four spring screws.</p>
       <dl>
         <dt>Mass</dt><dd data-b="p.monoblock.mass">–</dd>
         <dt>Size</dt><dd data-b="p.monoblock.bbox">–</dd>
@@ -348,13 +348,15 @@ footer p + p { margin-top: 0.6rem; }
   <article class="organ">
     <figure><img src="media/macro_skin.jpg" alt="Close view of printed aluminium lattice." loading="lazy"></figure>
     <div class="body">
-      <div class="mono">Organ IV &middot; passive</div>
+      <div class="mono">Organ IV &middot; clamped to the loop</div>
       <h3>M.2 and chipset sink</h3>
-      <p>A spreader plate under a true 3-D Voronoi strut lattice. It is the one part that is not on the loop, and the model says it is the weakest: in still air it holds about <strong data-b="m2_w">–</strong> before the SSD pad runs 45&nbsp;K over the room.</p>
+      <p>A spreader plate under a true 3-D Voronoi strut lattice. The first version was passive, and the model failed it: alone in still air it holds about <strong data-b="m2_w">–</strong>. So the monoblock grew a tail. The sink's land now clamps under it through a gap pad, and <strong data-b="m2_loop_share">most of the heat</strong> leaves through the coolant.</p>
       <dl>
         <dt>Mass</dt><dd data-b="p.m2_sink.mass">–</dd>
         <dt>Size</dt><dd data-b="p.m2_sink.bbox">–</dd>
-        <dt>At 13 W</dt><dd data-b="m2_rise">–</dd>
+        <dt>SSD at 7 W</dt><dd data-b="m2_ssd">–</dd>
+        <dt>Chipset at 6 W</dt><dd data-b="m2_chip">–</dd>
+        <dt>Lattice alone</dt><dd data-b="m2_rise">–</dd>
       </dl>
     </div>
   </article>
@@ -368,8 +370,8 @@ footer p + p { margin-top: 0.6rem; }
   <div class="chart">
     <div class="ctl">
       <div class="seg" role="group" aria-label="Load case" style="min-width:16rem">
-        <button type="button" data-load="full" aria-pressed="true">Full load 592 W</button>
-        <button type="button" data-load="gaming" aria-pressed="false">Gaming 467 W</button>
+        <button type="button" data-load="full" aria-pressed="true">Full load</button>
+        <button type="button" data-load="gaming" aria-pressed="false">Gaming</button>
       </div>
       <label class="mono" for="rpm" style="flex:1;min-width:14rem">Radiator fans <span id="rpm-v" class="num">1500</span> rpm<input type="range" id="rpm" min="800" max="2000" step="100" value="1500"></label>
     </div>

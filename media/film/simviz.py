@@ -136,7 +136,8 @@ def heat(tag="gpu_block_AlSi10Mg_3", frames=120):
     mask = ts >= 0
     ts = np.where(mask, ts, 0.0)
     B = P.GPU_BLOCK
-    v = View(B["plan_x"][0] - 4, B["plan_x"][1] + 22, B["plan_y"][0] - 4, B["plan_y"][1] + 4, margin=36)
+    ix, iy = np.where(mask.any(axis=1))[0], np.where(mask.any(axis=0))[0]
+    v = View(xa[ix[0]] - 4, xa[ix[-1]] + 4, ya[iy[0]] - 4, ya[iy[-1]] + 4, margin=36)
     tmax = float(ts.max())
     rgb, m, (mx, my) = v.image(ts, xa, ya, cm.inferno, 0.0, tmax, mask)
     u = (np.arange(W) - v.ox) / v.sc

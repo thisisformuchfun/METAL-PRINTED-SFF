@@ -49,17 +49,17 @@
   "volume_cm3": 58.26
  },
  "m2_sink": {
-  "faces": 500000,
+  "faces": 471534,
   "watertight": true,
-  "stl_mb": 25.0,
-  "mf3_mb": 7.9,
-  "volume_cm3": 11.68
+  "stl_mb": 23.6,
+  "mf3_mb": 6.9,
+  "volume_cm3": 12.15
  },
  "monoblock": {
   "faces": 900000,
   "watertight": true,
   "stl_mb": 45.0,
-  "mf3_mb": 12.8,
-  "volume_cm3": 73.13
+  "mf3_mb": 12.7,
+  "volume_cm3": 79.72
  }
 }

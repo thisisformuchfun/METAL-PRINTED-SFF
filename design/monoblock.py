@@ -41,6 +41,8 @@ W = M["wall"]
 IN = (SX + M["inlet_offset"][0], SY + M["inlet_offset"][1])
 HOT = (SX + BD["hotspot_offset"][0], SY + BD["hotspot_offset"][1])
 OUT = M["outlet"]
+TL = M["tail"]
+TZ0, TZ1 = TL["z"]
 
 
 def trench(x, y, z):
@@ -51,6 +53,23 @@ def trench(x, y, z):
     w = wb + (wt - wb) * np.clip((z - z0) / (Z_CORE1 - z0), 0.0, 1.0)
     return np.maximum(np.maximum(np.abs(y - HOT[1]) - 0.5 * w, np.abs(x - HOT[0]) - (0.5 * jl + 0.8)),
                       np.maximum(z0 - z, z - z1))
+
+
+def tail2(x, y):
+    """Plan outline of the conduction tail: a wide lap pad that takes in the two lower lugs, necking in
+    to the CPU body (2-D smooth union, so the faces stay flat)."""
+    lap = sdf.rect2(x, y, (TL["x"][0], TL["y0"]), (TL["x"][1], TL["y_neck"]), r=5.0)
+    neck = sdf.rect2(x, y, (TL["neck_x"][0], TL["y_neck"] - 8.0), (TL["neck_x"][1], SY - CH[1] / 2 - W + 2.0), r=1.5)
+    return sdf.smin(lap, neck, 7.0)
+
+
+def tail_sdf(x, y, z):
+    return sdf.smax(tail2(x, y), np.maximum(TZ0 - z, z - TZ1), 0.5)
+
+
+def lap_zone(x, y):
+    """Footprint of the lap joint on the M.2 sink land (True inside)."""
+    return (x >= TL["x"][0] + 0.5) & (x <= TL["x"][1] - 0.5) & (y >= TL["y0"] + 0.5) & (y <= P.M2_SINK["y"][1])
 
 
 def lugs():
@@ -78,7 +97,7 @@ def arms2(x, y, shrink=0.0):
 
 def build(h=0.25, verbose=True):
     tm = part.Timer()
-    grid = sdf.Grid((25.0, 43.0, 1.5), (124.0, 171.0, Z_BOSS + 1.5), h)
+    grid = sdf.Grid((25.0, 34.0, 1.5), (124.0, 171.0, Z_BOSS + 1.5), h)
     if verbose:
         print(f"monoblock grid {grid.shape} = {np.prod(grid.n) / 1e6:.1f} M voxels")
     x, y, z = grid.coords()
@@ -120,7 +139,9 @@ def build(h=0.25, verbose=True):
         sdf.apply(f, grid, (lx - r, ly - r, lz0), (lx + r, ly + r, lz1),
                   lambda X, Y, Z, lx=lx, ly=ly, r=r: sdf.smax(sdf.circle2(X, Y, (lx, ly), r),
                                                               np.maximum(lz0 - Z, Z - lz1), 0.6), op="union", k=1.5)
-    tm("lugs")
+    # ---------------- conduction tail to the M.2 / chipset sink ----------------
+    sdf.apply(f, grid, (TL["x"][0], TL["y0"], TZ0), (TL["x"][1], SY - CH[1] / 2 - W + 2.0, TZ1), tail_sdf, op="union")
+    tm("lugs + tail")
 
     # ---------------- CPU wet chamber ----------------
     ch_lo = (SX - CH[0] / 2, SY - CH[1] / 2, Z_FLOOR)
@@ -228,6 +249,9 @@ def build(h=0.25, verbose=True):
         rw = M["lug_well"] / 2
         sdf.apply(f, grid, (lx - rw, ly - rw, lz1), (lx + rw, ly + rw, Z_BOSS + 2),
                   lambda X, Y, Z, lx=lx, ly=ly, rw=rw: sdf.cyl_z(X, Y, Z, (lx, ly), rw, lz1, 60.0), op="cut")
+    for (tx, ty) in TL["screws"]:              # M3 clearance through the tail
+        sdf.apply(f, grid, (tx - 2.5, ty - 2.5, TZ0 - 1.0), (tx + 2.5, ty + 2.5, TZ1 + 1.0),
+                  lambda X, Y, Z, tx=tx, ty=ty: sdf.cyl_z(X, Y, Z, (tx, ty), 1.7, -5.0, 50.0), op="cut")
     tm("ports + lug holes")
 
     removed = sdf.keep_largest_solid(f, h)
@@ -304,6 +328,7 @@ def sim_domain(f, grid, path):
     cpu2 = (np.abs(xs - HOT[0]) <= hx / 2) & (np.abs(ys - HOT[1]) <= hy / 2)
     heater[below_void & cpu2 & (zs < Z_UNDER + 0.2)] = 1
     heater[below_void & (zs < AZ0 - 0.5) & (arms2(xs, ys) < 0)] = 2
+    heater[below_void & lap_zone(xs, ys) & (zs < TZ0 + 0.8)] = 3
     np.savez_compressed(path, mat=mat, heater=heater, dx_m=h * 1e-3, origin_mm=np.array(grid.lo),
                         note="axes x, y (board frame), z up from PCB")
     return dict(shape=list(mat.shape), fluid_cells=int((mat == 0).sum() + (mat > 250).sum()),

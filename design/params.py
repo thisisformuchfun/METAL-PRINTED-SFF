@@ -263,8 +263,13 @@ MONOBLOCK = dict(
     outlet=(111.0, 156.5),
     lug_d=11.0, lug_z=(9.6, 13.6), lug_hole=4.2, lug_well=8.6,
     heater_cpu=(26.0, 20.0),      # effective hot patch on the IHS  [ASM]
+    # conduction tail: a solid tongue from the CPU body down to the M.2 / chipset sink, so that sink is on
+    # the loop too. Lap joint over the sink's land: 0.5 mm gap pad, 2x M3.
+    tail=dict(x=(47.5, 112.5), neck_x=(57.0, 103.0), y0=36.5, y_neck=57.0, z=(9.6, 13.6),
+              screws=[(68.0, 40.5), (92.0, 40.5)], pad=0.5, pad_k=6.0),
 )
-M2_SINK = dict(material="AlSi10Mg", x=(28.0, 135.0), y=(17.5, 44.5), base=2.2, lattice_h=13.0)
+M2_SINK = dict(material="AlSi10Mg", x=(28.0, 135.0), y=(17.5, 44.5), base=2.2, lattice_h=13.0,
+               land=dict(x=(47.5, 131.5), y0=36.0))      # raised land under the monoblock tail (+ chipset root)
 HEART = dict(
     material="AlSi10Mg", centre_show=(93.0, 236.0), pump_body=(62.0, 62.0, 38.0),
     volute_d=42.0, volute_h=11.0, res_ml=45.0,

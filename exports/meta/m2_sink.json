@@ -3,8 +3,8 @@
  "material": "AlSi10Mg",
  "frame": "board",
  "voxel_mm": 0.25,
- "volume_cm3": 11.75,
- "mass_g": 31.4,
+ "volume_cm3": 12.21,
+ "mass_g": 32.6,
  "bbox_mm": [
   107.0,
   27.0,
@@ -23,32 +23,33 @@
  "fits_envelope": true,
  "longest_mm": 107.0,
  "cost_usd_jlc_pcbway": [
-  12.45,
-  17.62
+  12.95,
+  18.32
  ],
  "print_stl": {
-  "faces": 500000,
+  "faces": 471534,
   "watertight": true,
   "topology": {
-   "faces": 500000,
+   "faces": 471534,
    "boundary_edges": 0,
    "non_manifold_edges": 0,
    "non_manifold_vertices": 0,
    "components": 1,
    "watertight": true
   },
-  "mesh_volume_cm3": 11.68
+  "mesh_volume_cm3": 12.15
  },
- "surface_area_cm2": 126.9,
+ "surface_area_cm2": 115.5,
  "checks": {
   "struts": 1104,
-  "islands_removed_voxels": 1392,
-  "closed_void_voxels": 1,
+  "islands_removed_voxels": 1582,
+  "closed_void_voxels": 51,
   "z_levels": {
    "plate": [
     4.6,
     6.8
    ],
+   "land": 9.1,
    "top": 19.8
   },
   "screws": [
@@ -59,6 +60,16 @@
    [
     33.0,
     39.5
+   ]
+  ],
+  "tail_screws": [
+   [
+    68.0,
+    40.5
+   ],
+   [
+    92.0,
+    40.5
    ]
   ]
  }

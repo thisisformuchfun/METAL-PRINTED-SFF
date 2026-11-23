@@ -42,8 +42,9 @@ ASSUME = dict(
 )
 
 LOADS = {
-    "gaming": dict(label="4K gaming", gpu=380.0, cpu=75.0, vrm=12.0),
-    "full": dict(label="Synthetic full load", gpu=450.0, cpu=120.0, vrm=22.0),
+    # aux = M.2 SSD + chipset, which reach the loop through the monoblock's conduction tail
+    "gaming": dict(label="4K gaming", gpu=380.0, cpu=75.0, vrm=12.0, aux=6.0),
+    "full": dict(label="Synthetic full load", gpu=450.0, cpu=120.0, vrm=22.0, aux=13.0),
 }
 
 
@@ -105,7 +106,7 @@ def solve(material, blocks, load, rpm, pump_speed=1.0, rad_scale=1.0):
     q = operating_point(sys_dp, pump_speed)
     mdot = q / 60000.0 * a["rho"]
     C = mdot * a["cp"]
-    p_tot = load["gpu"] + load["cpu"] + load["vrm"] + a["pump_heat_w"] * pump_speed ** 3
+    p_tot = load["gpu"] + load["cpu"] + load["vrm"] + load.get("aux", 0.0) + a["pump_heat_w"] * pump_speed ** 3
     # two radiators in series, each an exchanger against ambient air with capacity UA_eff = W/K
     wk = rad_wk(rpm) * rad_scale
     eff = 1.0 - math.exp(-wk / C)                # water-side effectiveness of one radiator
@@ -116,7 +117,7 @@ def solve(material, blocks, load, rpm, pump_speed=1.0, rad_scale=1.0):
         Tg_in = T
         T += load["gpu"] / C
         Tm_in = T
-        T += (load["cpu"] + load["vrm"]) / C
+        T += (load["cpu"] + load["vrm"] + load.get("aux", 0.0)) / C
         Tr_in = T
         for _ in range(2):
             T -= eff * (T - a["ambient_c"])
@@ -140,7 +141,8 @@ def solve(material, blocks, load, rpm, pump_speed=1.0, rad_scale=1.0):
     cpu_tj = cpu_ihs + (a["cpu_tim_k_per_w"] + a["cpu_package_k_per_w"]) * load["cpu"]
     return dict(material=material, rpm=rpm, flow_lpm=round(q, 2), loop_dp_kpa=round(sys_dp(q), 1),
                 dp_gpu_kpa=round(g["k"] * q ** g["n"], 2), dp_mono_kpa=round(m["k"] * q ** m["n"], 2),
-                heat_w=round(p_tot, 0), coolant_gpu_in_c=round(Tg_in, 1), coolant_max_c=round(Tr_in, 1),
+                heat_w=round(p_tot, 0), coolant_gpu_in_c=round(Tg_in, 1), coolant_mono_in_c=round(Tm_in, 2),
+                coolant_max_c=round(Tr_in, 1),
                 coolant_rise_k=round(Tr_in - Tg_in, 1), delta_coolant_ambient_k=round(Tr_in - a["ambient_c"], 1),
                 R_gpu_k_per_w=round(Rg, 4), R_cpu_k_per_w=round(Rc, 4),
                 gpu_die_c=round(gpu_die, 1), gpu_hotspot_c=round(gpu_hot, 1),

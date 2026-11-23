@@ -99,7 +99,13 @@
     if (s) {
       var mid = s.cases[1];
       bind('m2_w', f(s.power_for_45K_W, 0) + ' W');
-      bind('m2_rise', '+' + f(mid.rise_ssd_K, 0) + ' K at the SSD (h = ' + f(mid.h_W_m2K, 0) + ' W/m²K)');
+      bind('m2_rise', '+' + f(mid.rise_ssd_K, 0) + ' K at 13 W, which fails');
+      var cp = s.coupled;
+      if (cp) {
+        bind('m2_ssd', f(cp.ssd_c, 0) + ' °C');
+        bind('m2_chip', f(cp.chipset_c, 0) + ' °C');
+        bind('m2_loop_share', f(100 * cp.q_to_loop_W / (cp.q_to_loop_W + cp.q_to_air_W), 0) + ' % of the heat');
+      }
     }
   }
 
@@ -274,6 +280,11 @@
     state.data = d;
     window.MARROW_DATA = d;
     parts(d); fea(d); macro(d); validation(d);
+    $$('[data-load]').forEach(function (b) {
+      var lk = b.getAttribute('data-load');
+      var row = loopRows(d, 'AlSi10Mg', lk)[0];
+      if (row) { b.textContent = (lk === 'full' ? 'Full load ' : 'Gaming ') + f(row.heat_w, 0) + ' W'; }
+    });
     drawLoop(); drawFit('#dp-chart', 'dp'); drawFit('#ha-chart', 'ha');
   }).catch(function (e) { console.warn('site data unavailable', e); });
 })();

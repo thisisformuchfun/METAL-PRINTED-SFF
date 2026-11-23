@@ -141,9 +141,10 @@ def mono_case(h=0.5):
     hx, hy = M["heater_cpu"]
     heater[below_void & (np.abs(x - HOT[0]) <= hx / 2) & (np.abs(y - HOT[1]) <= hy / 2) & (z < MB.Z_UNDER + 0.3)] = 1
     heater[below_void & (z < MB.AZ0 - 0.5) & (MB.arms2(x, y) < 0)] = 2
+    heater[below_void & MB.lap_zone(x, y) & (z < MB.TZ0 + 0.8)] = 3
     BD = P.BOARD
-    powers = {1: BD["cpu_power_w"], 2: BD["vrm_power_w"]}
-    names = {1: "CPU (IHS hot patch)", 2: "VRM power stages"}
+    powers = {1: BD["cpu_power_w"], 2: BD["vrm_power_w"], 3: BD["m2_power_w"] + BD["chipset_power_w"]}
+    names = {1: "CPU (IHS hot patch)", 2: "VRM power stages", 3: "M.2 + chipset sink (through the tail)"}
     return dict(name="monoblock", grid=grid, zone=zone, lattice=lattice, slot=slot, inlet=inlet, outlet=outlet,
                 heater=heater, powers=powers, heater_names=names, frame="board")
 

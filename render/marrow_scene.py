@@ -415,6 +415,49 @@ def add_cylinder(name, a, b, r, mat, coll, verts=48):
     return o
 
 
+def add_fasteners():
+    """Screw heads on the board-side organs: AM5 spring screws on the monoblock lugs, the two M3 screws of the
+    tail-to-sink lap joint and the sink's own two screws. BOARD frame, mm."""
+    B, MBk, MS = L["board"], L["monoblock"], L["m2_sink"]
+    mat = MATS["fitting"]
+    out = []
+
+    def head(name, x, y, z0, d, hgt, socket_d):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=40, radius=d / 2, depth=hgt, location=(0, 0, 0))
+        o = bpy.context.object
+        o.name = name
+        bpy.ops.mesh.primitive_cylinder_add(vertices=6, radius=socket_d / 2, depth=hgt * 0.9, location=(0, 0, hgt * 0.32))
+        cut = bpy.context.object
+        bm = o.modifiers.new("socket", "BOOLEAN")
+        bm.operation = "DIFFERENCE"
+        bm.object = cut
+        bpy.context.view_layer.objects.active = o
+        bpy.ops.object.modifier_apply(modifier="socket")
+        bpy.data.objects.remove(cut, do_unlink=True)
+        o.data.materials.append(mat)
+        bv = o.modifiers.new("bevel", "BEVEL")
+        bv.width = 0.3
+        bv.segments = 2
+        bv.limit_method = "ANGLE"
+        place(o, M_BOARD @ Matrix.Translation((x, y, z0 + hgt / 2)))
+        out.append(o)
+
+    sx, sy = B["socket"]
+    ax, ay = B["am5_holes"]
+    z_lug = MBk["lug_z"][1]
+    for i, (dx, dy) in enumerate(((-1, -1), (1, -1), (-1, 1), (1, 1))):
+        head(f"scr_am5_{i}", sx + dx * ax / 2, sy + dy * ay / 2, z_lug, 7.6, 5.0, 3.6)
+    tl = MBk.get("tail")
+    if tl:
+        for i, (tx, ty) in enumerate(tl["screws"]):
+            head(f"scr_tail_{i}", tx, ty, tl["z"][1], 5.5, 3.0, 2.9)
+    m2 = B["m2"]
+    z_boss = m2["z_top"] + 1.0 + MS["base"] + 2.0
+    for i, (qx, qy) in enumerate(((m2["x"][1] + 2.5, 0.5 * (m2["y"][0] + m2["y"][1])), (MS["x"][0] + 5.0, MS["y"][1] - 5.0))):
+        head(f"scr_m2_{i}", qx, qy, z_boss, 5.5, 2.4, 2.9)
+    return out
+
+
 # ----------------------------------------------------------------------------
 # off-the-shelf components (procedural models from pc_parts)
 # ----------------------------------------------------------------------------
@@ -633,6 +676,7 @@ def build(lod="hero", components=True, tubes=True, floor=True, only=None, cables
     add_printed(lod=lod, only=only)
     if components:
         add_components()
+        add_fasteners()
         if tubes:
             add_loop()
         if cables:

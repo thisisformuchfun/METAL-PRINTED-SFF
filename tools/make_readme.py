@@ -10,7 +10,7 @@ P, S = d["parts"], d["sims"]
 ORDER = ["gpu_block", "monoblock", "heart", "m2_sink", "frame_pelvis", "frame_lumbar", "frame_thoracic", "frame_dorsal", "frame_cervical"]
 NAMES = {
     "gpu_block": "Organ I - RTX 4090 full-cover block", "monoblock": "Organ II - CPU + VRM monoblock (AM5)",
-    "heart": "Organ III - pump top + 41 mL reservoir", "m2_sink": "Organ IV - M.2 / chipset sink (passive)",
+    "heart": "Organ III - pump top + 41 mL reservoir", "m2_sink": "Organ IV - M.2 / chipset sink (clamped to the monoblock tail)",
     "frame_pelvis": "Pelvis - keel, feet, PSU cradle, riser shelf", "frame_lumbar": "Lumbar - lower front spine, GPU ribs",
     "frame_thoracic": "Thoracic - upper front spine, board ribs", "frame_dorsal": "Dorsal - lower rear spine, radiator ribs",
     "frame_cervical": "Cervical - upper rear spine, crown",
@@ -78,9 +78,24 @@ m2 = S.get("m2_sink")
 m2_line = ""
 if m2:
     mid = m2["cases"][1]
-    m2_line = (f"The passive M.2/chipset sink is the weak organ: with {sum(m2['power_w'].values()):.0f} W on it in still air the SSD pad runs "
-               f"+{m2['cases'][2]['rise_ssd_K']:.0f} to +{m2['cases'][0]['rise_ssd_K']:.0f} K over the room (film coefficient 10 to 5 W/m2K). "
-               f"It holds about {m2['power_for_45K_W']:.0f} W at +45 K. Fine for an idle or gaming SSD, marginal for sustained writes.")
+    m2_line = (f"**M.2 / chipset sink.** The first version of this part was passive, and the model failed it: with "
+               f"{sum(m2['power_w'].values()):.0f} W on it in still air the SSD pad ran +{m2['cases'][2]['rise_ssd_K']:.0f} to "
+               f"+{m2['cases'][0]['rise_ssd_K']:.0f} K over the room (film coefficient 10 to 5 W/m2K), so the lattice alone is good "
+               f"for about {m2['power_for_45K_W']:.0f} W.")
+    cp = m2.get("coupled")
+    if cp:
+        share = 100 * cp["q_to_loop_W"] / (cp["q_to_loop_W"] + cp["q_to_air_W"])
+        m2_line += (f" The monoblock therefore has a solid conduction tail that clamps onto the sink through a {m2['assumptions']['pad_t_mm']} mm gap pad. "
+                    f"With that, at full load the model puts the SSD controller at {cp['ssd_c']:.0f} C and the chipset at {cp['chipset_c']:.0f} C "
+                    f"(7 W and 6 W continuous, coolant {cp['coolant_mono_in_c']:.0f} C), and {share:.0f} % of the heat leaves through the loop.")
+
+cpu_line = ""
+_r = lp("AlSi10Mg", "full", 1500)
+_g = lp("AlSi10Mg", "gaming", 1500)
+if _r and _g:
+    cpu_line = (f"**CPU margin.** At the synthetic full load (120 W into an X3D part, which no game does) the model puts the junction at "
+                f"{_r['cpu_tj_c']:.0f} C, right at the 89 C limit of the Ryzen 7 X3D parts; most of that is the chip's own junction-to-lid "
+                f"resistance (0.30 K/W assumed), not the block. At a 75 W gaming load it is {_g['cpu_tj_c']:.0f} C.")
 
 val = S.get("validation")
 val_lines = ""
@@ -154,6 +169,8 @@ entering the block):
 
 Headline: **{headline} simulated 4090 hot spot at full load** with aluminium blocks.
 
+{cpu_line}
+
 {m2_line}
 
 **Frame** (`sim/fea`, {fea['elements']:,} hex elements, {fea['mass_components_kg']:.1f} kg of hardware on a {fea['mass_frame_kg']:.2f} kg frame):
@@ -187,7 +204,9 @@ on the cold-plate temperature rises.
    (the SUPRIM's own 240 mm radiator is aluminium), stainless or anodised fittings, and coolant with aluminium inhibitors.
 5. **Post-process the prints.** Tap the G1/4 ports (11.8 mm pilots) and spot-face their seats, tap the M3/M4 pilots,
    lap the die / IHS / memory lands flat, then leak-test at 1 bar before filling. Thin printed aluminium often needs sealing.
-6. **Check the riser.** The card sits below the board on a 200 mm PCIe 4.0 riser that runs behind the PCB.
+6. **Tail joint.** The monoblock's tail lands on the M.2 sink with a 0.5 mm gap pad (6 W/mK assumed) and two M3 x 6
+   screws into blind holes. Fit the sink first, then the monoblock; check the gap on your board before choosing the pad.
+7. **Check the riser.** The card sits below the board on a 200 mm PCIe 4.0 riser that runs behind the PCB.
 
 ## Repository map
 
@@ -197,7 +216,7 @@ on the cold-plate temperature rises.
 | `design/sdf.py`, `part.py`, `meshfix.py` | Implicit-modelling toolkit (gyroid, Voronoi, bones), meshing, watertight export |
 | `design/gpu_block.py`, `monoblock.py`, `heart.py`, `m2_sink.py`, `frame.py` | Generators for the nine printed parts |
 | `sim/cell/` | Resolved lattice flow and heat transfer (LBM + finite volume) |
-| `sim/macro/` | Block-level conjugate model, passive sink model |
+| `sim/macro/` | Block-level conjugate model, M.2 sink model |
 | `sim/loop/`, `sim/fea/` | Loop operating point and temperatures; frame FEA |
 | `sim/validation/`, `sim/post/` | Kernel validation; figures and site data |
 | `render/` | Procedural PC hardware, scene assembly, shots (Blender 4.5, Cycles) |
