@@ -38,6 +38,7 @@ $BLENDER -b build/marrow_hero.blend --python render/shots.py -- orbit orbit --fr
 (cd media/score && $PY score.py)
 PYTHONPATH=. $PY media/film/simviz.py
 $PY media/film/make_film.py
+$PY media/film/make_film.py --short
 
 # 4. Web model + site
 $BLENDER -b build/marrow_web.blend --python render/export_web.py

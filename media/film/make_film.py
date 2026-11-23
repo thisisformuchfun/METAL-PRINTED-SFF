@@ -4,7 +4,9 @@ Rendered stills (build/stills/<shot>.png + depth) are turned into moving shots b
 parallax drift, simulation plates are animated from the solver output, supers are set in the site's
 typefaces, and everything is cut to the bar grid of the score (96 BPM, 2.5 s per bar).
 
-    /opt/venv/bin/python media/film/make_film.py [--preview] [--no-orbit]
+    /opt/venv/bin/python media/film/make_film.py [--short] [--preview] [--no-orbit]
+
+--short cuts the 30 s engineering film (cutaway, flow, heat, frame) to the music bed instead of the 84 s launch film.
 """
 from __future__ import annotations
 
@@ -210,9 +212,24 @@ def timeline(numbers):
     return T
 
 
+def timeline_short(numbers):
+    """The 30 s engineering cut, on the bar grid of the music bed (its end hit is at 27.5 s)."""
+    n = numbers
+    T = []
+    add = lambda start, dur, src, move=None, sup=None, fade=(0.0, 0.0), sup_in=0.35: T.append(dict(start=start, dur=dur, src=src, move=move or {}, sup=sup, fade=fade, sup_in=sup_in))
+    add(0.0, 5.0, "cut_gpu", dict(z0=1.14, z1=1.04, px=30, py=-6), super_("ORGAN I · CUT THROUGH THE DIE", "Inside the block.", "PORTS · SLOT NOZZLE · 5 MM GYROID CORE · DIVIDER · GALLERY"), fade=(1.6, 0.0), sup_in=1.2)
+    add(5.0, 5.0, "sim_flow", None, super_("ONE LATTICE CELL RESOLVED, THEN THE WHOLE BLOCK", "Coolant through a gyroid.", f"{n['gpu_dp']} KPA AT 3 L/MIN · LATTICE-BOLTZMANN + FINITE VOLUME"))
+    add(10.0, 5.0, "sim_heat", None, super_("SIMULATED · ALUMINIUM BLOCK", f"Die {n['gpu_rise']} K above coolant.", f"{n['gpu_die_w']} W THROUGH SIX SQUARE CENTIMETRES"))
+    add(15.0, 5.0, "gpu", dict(z0=1.12, z1=1.04, px=24), super_("WHY ONLY THE BONES ARE STEEL", "Aluminium carries the heat.", f"THE SAME BLOCK IN 316L: {n['steel_hot']} °C AT THE HOT SPOT"))
+    add(20.0, 5.0, "frame_only", dict(z0=1.03, z1=1.10, px=-18), super_("FINITE-ELEMENT MODEL · 1 G DOWN + 1 G SIDEWAYS", "Steel carries the load.", f"{n['fea_mpa']} MPA PEAK · {n['fea_sf']}× MARGIN ON YIELD"))
+    add(25.0, 2.5, "organs", dict(z0=1.08, z1=1.03, px=16), super_("EVERY PART FITS A 300 MM PRINTER", "Nine prints. One loop."), sup_in=0.1)
+    add(27.5, 2.5, "hero_front", dict(z0=1.06, z1=1.02, px=10, cx0=0.34), super_("DESIGN STUDY · ALL FIGURES SIMULATED", "MARROW", "Printed bone. Liquid marrow.", big=True), fade=(0.0, 1.1), sup_in=0.0)
+    return T
+
+
 def load_numbers():
     p = ROOT / "site" / "data" / "site.json"
-    n = dict(longest="283", gpu_w="450", gpu_rise="–", gpu_hot="–", heat_w="592")
+    n = dict(longest="283", gpu_w="450", gpu_rise="–", gpu_hot="–", heat_w="592", gpu_dp="–", gpu_die_w="390", steel_hot="–", fea_mpa="–", fea_sf="–")
     if p.exists():
         d = json.loads(p.read_text())
         try:
@@ -223,15 +240,23 @@ def load_numbers():
             r = [x for x in d["sims"]["loop"]["sweep"] if x["material"] == "AlSi10Mg" and x["load"] == "full" and x["rpm"] == 1500][0]
             n["gpu_hot"] = f"{r['gpu_hotspot_c']:.0f}"
             n["heat_w"] = f"{r['heat_w']:.0f}"
+            n["gpu_dp"] = f"{g['dp_Pa'] / 1000:.1f}"
+            n["gpu_die_w"] = f"{g['heaters']['1']['power_W']:.0f}"
+            rs = [x for x in d["sims"]["loop"]["sweep"] if x["material"] == "316L" and x["load"] == "full" and x["rpm"] == 1500][0]
+            n["steel_hot"] = f"{rs['gpu_hotspot_c']:.0f}"
+            lat = d["sims"]["fea"]["cases"][1]
+            n["fea_mpa"] = f"{lat['vm_max_smoothed_MPa']:.0f}"
+            n["fea_sf"] = f"{lat['safety_factor_yield']:.0f}"
         except Exception as ex:  # noqa: BLE001
             print("numbers incomplete:", ex)
     return n
 
 
-def main(preview=False):
+def main(preview=False, short=False):
     OUT.mkdir(parents=True, exist_ok=True)
     numbers = load_numbers()
-    tl = timeline(numbers)
+    tl = timeline_short(numbers) if short else timeline(numbers)
+    stem = "short" if short else "film"
     srcs = {}
     for sh in tl:
         k = sh["src"]
@@ -248,9 +273,9 @@ def main(preview=False):
         print(k, "ok" if srcs[k].ok else "MISSING", flush=True)
     vig = vignette()
     scr = scrims()
-    total = int(84.0 * FPS)
+    total = int((30.0 if short else 84.0) * FPS)
     step = 6 if preview else 1
-    raw = OUT / ("film_preview.mp4" if preview else "film_video.mp4")
+    raw = OUT / (f"{stem}_preview.mp4" if preview else f"{stem}_video.mp4")
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", str(FPS / step), "-i", "-",
            "-c:v", "libx264", "-preset", "slow", "-crf", "17" if not preview else "26", "-pix_fmt", "yuv420p", str(raw)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
@@ -290,16 +315,16 @@ def main(preview=False):
         print("wrote", raw)
         return
     # audio: theme at -1.5 dB (headroom for AAC), mux, plus a 15 MB web encode
-    final = OUT / "marrow_film.mp4"
-    wav = ROOT / "media" / "score" / "marrow_theme.wav"
+    final = OUT / ("marrow_short.mp4" if short else "marrow_film.mp4")
+    wav = ROOT / "media" / "score" / ("marrow_bed_30s.wav" if short else "marrow_theme.wav")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(raw), "-i", str(wav), "-filter:a", "volume=-1.5dB", "-c:v", "copy",
                     "-c:a", "aac", "-b:a", "256k", "-shortest", "-movflags", "+faststart", str(final)], check=True)
-    web = OUT / "film.mp4"
+    web = OUT / f"{stem}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(final), "-c:v", "libx264", "-preset", "slow", "-b:v", "1150k", "-maxrate", "1700k",
                     "-bufsize", "3400k", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(web)], check=True)
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "38.5", "-i", str(final), "-frames:v", "1", "-q:v", "3", str(OUT / "film_poster.jpg")], check=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "7.6" if short else "38.5", "-i", str(final), "-frames:v", "1", "-q:v", "3", str(OUT / f"{stem}_poster.jpg")], check=True)
     print("wrote", final, round(final.stat().st_size / 1e6, 1), "MB;", web, round(web.stat().st_size / 1e6, 1), "MB")
 
 
 if __name__ == "__main__":
-    main(preview="--preview" in sys.argv)
+    main(preview="--preview" in sys.argv, short="--short" in sys.argv)

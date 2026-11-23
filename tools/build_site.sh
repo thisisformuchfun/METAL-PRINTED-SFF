@@ -26,6 +26,7 @@ jpg $S/hero_low.png     site/media/hero_low.jpg      1600
 
 # film
 [ -f build/film/film.mp4 ] && cp build/film/film.mp4 site/media/film.mp4 && cp build/film/film_poster.jpg site/media/film_poster.jpg && echo "  film copied"
+[ -f build/film/short.mp4 ] && cp build/film/short.mp4 site/media/short.mp4 && cp build/film/short_poster.jpg site/media/short_poster.jpg && echo "  short cut copied"
 
 # web models (meshopt-compressed)
 if [ -f build/web_parts_raw.glb ]; then
