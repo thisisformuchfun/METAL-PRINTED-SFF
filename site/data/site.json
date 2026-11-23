@@ -1,0 +1,3048 @@
+{
+ "layout": {
+  "envelope": {
+   "width": 300.0,
+   "depth": 305.0,
+   "height": 376.0
+  },
+  "tilt": 25.0
+ },
+ "print": {
+  "env_316l": [
+   300.0,
+   300.0,
+   290.0
+  ],
+  "env_alu": [
+   300.0,
+   300.0,
+   300.0
+  ],
+  "soft_limit": 250.0,
+  "min_wall": 0.8,
+  "min_wall_structural": 1.5,
+  "min_hole": 1.5,
+  "min_escape_hole": 2.5,
+  "tol_small": 0.3,
+  "tol_pct": 0.4,
+  "rate_316l_usd_cm3": [
+   1.76,
+   2.68
+  ],
+  "rate_alu_usd_cm3": [
+   1.06,
+   1.5
+  ],
+  "rho_316l": 7.98,
+  "rho_alu": 2.67
+ },
+ "parts": {
+  "frame_cervical": {
+   "name": "frame_cervical",
+   "material": "316L",
+   "frame": "world",
+   "voxel_mm": 0.5,
+   "volume_cm3": 34.15,
+   "mass_g": 272.5,
+   "bbox_mm": [
+    234.2,
+    92.4,
+    121.7
+   ],
+   "bbox_lo": [
+    -117.09,
+    213.0,
+    254.0
+   ],
+   "bbox_hi": [
+    117.09,
+    305.41,
+    375.68
+   ],
+   "fits_envelope": true,
+   "longest_mm": 234.2,
+   "cost_usd_jlc_pcbway": [
+    60.1,
+    91.52
+   ],
+   "print_stl": {
+    "faces": 161636,
+    "watertight": true,
+    "topology": {
+     "faces": 161636,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 33.89
+   },
+   "surface_area_cm2": 145.0,
+   "islands_removed_voxels": 0
+  },
+  "frame_dorsal": {
+   "name": "frame_dorsal",
+   "material": "316L",
+   "frame": "world",
+   "voxel_mm": 0.5,
+   "volume_cm3": 65.55,
+   "mass_g": 523.1,
+   "bbox_mm": [
+    234.3,
+    22.7,
+    268.0
+   ],
+   "bbox_lo": [
+    -117.13,
+    283.7,
+    22.0
+   ],
+   "bbox_hi": [
+    117.13,
+    306.42,
+    290.0
+   ],
+   "fits_envelope": true,
+   "longest_mm": 268.0,
+   "cost_usd_jlc_pcbway": [
+    115.37,
+    175.68
+   ],
+   "print_stl": {
+    "faces": 302918,
+    "watertight": true,
+    "topology": {
+     "faces": 302918,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 65.0
+   },
+   "surface_area_cm2": 278.8,
+   "islands_removed_voxels": 0
+  },
+  "frame_lumbar": {
+   "name": "frame_lumbar",
+   "material": "316L",
+   "frame": "world",
+   "voxel_mm": 0.5,
+   "volume_cm3": 39.77,
+   "mass_g": 317.3,
+   "bbox_mm": [
+    239.3,
+    92.6,
+    202.7
+   ],
+   "bbox_lo": [
+    -118.29,
+    53.78,
+    13.69
+   ],
+   "bbox_hi": [
+    120.98,
+    146.4,
+    216.39
+   ],
+   "fits_envelope": true,
+   "longest_mm": 239.3,
+   "cost_usd_jlc_pcbway": [
+    69.99,
+    106.58
+   ],
+   "print_stl": {
+    "faces": 223086,
+    "watertight": true,
+    "topology": {
+     "faces": 223086,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 39.38
+   },
+   "surface_area_cm2": 192.3,
+   "islands_removed_voxels": 0
+  },
+  "frame_pelvis": {
+   "name": "frame_pelvis",
+   "material": "316L",
+   "frame": "world",
+   "voxel_mm": 0.5,
+   "volume_cm3": 105.14,
+   "mass_g": 839.0,
+   "bbox_mm": [
+    254.4,
+    282.5,
+    111.4
+   ],
+   "bbox_lo": [
+    -127.18,
+    18.82,
+    1.54
+   ],
+   "bbox_hi": [
+    127.18,
+    301.34,
+    112.99
+   ],
+   "fits_envelope": true,
+   "longest_mm": 282.5,
+   "cost_usd_jlc_pcbway": [
+    185.05,
+    281.78
+   ],
+   "print_stl": {
+    "faces": 400000,
+    "watertight": true,
+    "topology": {
+     "faces": 400000,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 104.16
+   },
+   "surface_area_cm2": 509.1,
+   "islands_removed_voxels": 0
+  },
+  "frame_thoracic": {
+   "name": "frame_thoracic",
+   "material": "316L",
+   "frame": "world",
+   "voxel_mm": 0.5,
+   "volume_cm3": 45.43,
+   "mass_g": 362.6,
+   "bbox_mm": [
+    200.2,
+    110.6,
+    214.4
+   ],
+   "bbox_lo": [
+    -129.26,
+    116.33,
+    147.82
+   ],
+   "bbox_hi": [
+    70.98,
+    226.95,
+    362.2
+   ],
+   "fits_envelope": true,
+   "longest_mm": 214.4,
+   "cost_usd_jlc_pcbway": [
+    79.96,
+    121.76
+   ],
+   "print_stl": {
+    "faces": 242848,
+    "watertight": true,
+    "topology": {
+     "faces": 242848,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 45.05
+   },
+   "surface_area_cm2": 205.8,
+   "islands_removed_voxels": 0
+  },
+  "gpu_block": {
+   "name": "gpu_block",
+   "material": "AlSi10Mg",
+   "frame": "gpu",
+   "voxel_mm": 0.25,
+   "volume_cm3": 183.95,
+   "mass_g": 491.1,
+   "bbox_mm": [
+    208.7,
+    124.0,
+    26.7
+   ],
+   "bbox_lo": [
+    17.5,
+    1.5,
+    0.15
+   ],
+   "bbox_hi": [
+    226.21,
+    125.5,
+    26.9
+   ],
+   "fits_envelope": true,
+   "longest_mm": 208.7,
+   "cost_usd_jlc_pcbway": [
+    194.98,
+    275.92
+   ],
+   "print_stl": {
+    "faces": 1099992,
+    "watertight": true,
+    "topology": {
+     "faces": 1099992,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 184.94
+   },
+   "surface_area_cm2": 1692.8,
+   "checks": {
+    "inlet_outlet_connected": true,
+    "wet_leaks_to_outside": false,
+    "wet_volume_ml": 55.908875,
+    "wetted_area_cm2_voxel": 985.5681000000001,
+    "closed_void_voxels": 235,
+    "die_floor_mm": 2.0,
+    "z_levels": {
+     "die": 3.0,
+     "floor": 5.0,
+     "core_top": 11.5,
+     "divider_top": 12.5,
+     "gallery_top": 17.5,
+     "roof_top": 19.1,
+     "boss_top": 26.900000000000002
+    },
+    "islands_removed_voxels": 99
+   }
+  },
+  "heart": {
+   "name": "heart",
+   "material": "AlSi10Mg",
+   "frame": "heart",
+   "voxel_mm": 0.25,
+   "volume_cm3": 58.35,
+   "mass_g": 155.8,
+   "bbox_mm": [
+    74.0,
+    112.7,
+    51.0
+   ],
+   "bbox_lo": [
+    -42.0,
+    -44.5,
+    -0.75
+   ],
+   "bbox_hi": [
+    32.0,
+    68.2,
+    50.3
+   ],
+   "fits_envelope": true,
+   "longest_mm": 112.7,
+   "cost_usd_jlc_pcbway": [
+    61.85,
+    87.52
+   ],
+   "print_stl": {
+    "faces": 500000,
+    "watertight": true,
+    "topology": {
+     "faces": 500000,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 58.26
+   },
+   "surface_area_cm2": 380.6,
+   "checks": {
+    "reservoir_ml": 40.9,
+    "islands_removed_voxels": 10,
+    "ports": {
+     "out": [
+      -21.5,
+      -22.0,
+      19.0
+     ],
+     "inlet_back": [
+      0.0,
+      47.0,
+      9.3
+     ],
+     "fill": [
+      0.0,
+      68.2,
+      28.5
+     ]
+    },
+    "ears": [
+     [
+      -37.0,
+      -6.0
+     ],
+     [
+      -27.0,
+      55.0
+     ],
+     [
+      23.0,
+      -39.5
+     ]
+    ],
+    "screws": [
+     [
+      -25.0,
+      -25.0
+     ],
+     [
+      25.0,
+      -25.0
+     ],
+     [
+      -25.0,
+      25.0
+     ],
+     [
+      25.0,
+      25.0
+     ]
+    ]
+   }
+  },
+  "m2_sink": {
+   "name": "m2_sink",
+   "material": "AlSi10Mg",
+   "frame": "board",
+   "voxel_mm": 0.25,
+   "volume_cm3": 11.75,
+   "mass_g": 31.4,
+   "bbox_mm": [
+    107.0,
+    27.0,
+    17.4
+   ],
+   "bbox_lo": [
+    27.98,
+    17.48,
+    2.4
+   ],
+   "bbox_hi": [
+    135.02,
+    44.52,
+    19.8
+   ],
+   "fits_envelope": true,
+   "longest_mm": 107.0,
+   "cost_usd_jlc_pcbway": [
+    12.45,
+    17.62
+   ],
+   "print_stl": {
+    "faces": 500000,
+    "watertight": true,
+    "topology": {
+     "faces": 500000,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 11.68
+   },
+   "surface_area_cm2": 126.9,
+   "checks": {
+    "struts": 1104,
+    "islands_removed_voxels": 1392,
+    "closed_void_voxels": 1,
+    "z_levels": {
+     "plate": [
+      4.6,
+      6.8
+     ],
+     "top": 19.8
+    },
+    "screws": [
+     [
+      112.5,
+      31.0
+     ],
+     [
+      33.0,
+      39.5
+     ]
+    ]
+   }
+  },
+  "monoblock": {
+   "name": "monoblock",
+   "material": "AlSi10Mg",
+   "frame": "board",
+   "voxel_mm": 0.25,
+   "volume_cm3": 72.96,
+   "mass_g": 194.8,
+   "bbox_mm": [
+    93.0,
+    122.3,
+    28.5
+   ],
+   "bbox_lo": [
+    28.5,
+    45.5,
+    2.45
+   ],
+   "bbox_hi": [
+    121.53,
+    167.78,
+    31.0
+   ],
+   "fits_envelope": true,
+   "longest_mm": 122.3,
+   "cost_usd_jlc_pcbway": [
+    77.33,
+    109.44
+   ],
+   "print_stl": {
+    "faces": 900000,
+    "watertight": true,
+    "topology": {
+     "faces": 900000,
+     "boundary_edges": 0,
+     "non_manifold_edges": 0,
+     "non_manifold_vertices": 0,
+     "components": 1,
+     "watertight": true
+    },
+    "mesh_volume_cm3": 73.13
+   },
+   "surface_area_cm2": 718.6,
+   "checks": {
+    "inlet_outlet_connected": true,
+    "wet_leaks_to_outside": false,
+    "wet_volume_ml": 49.653265625,
+    "wetted_area_cm2_voxel": 401.81707500000005,
+    "closed_void_voxels": 30,
+    "z_levels": {
+     "contact": 7.6,
+     "floor": 9.6,
+     "core_top": 16.1,
+     "divider_top": 17.1,
+     "gallery_top": 22.1,
+     "roof_top": 23.700000000000003,
+     "boss_top": 31.000000000000004,
+     "arm": [
+      6.0,
+      23.7
+     ],
+     "arm_channel": [
+      8.0,
+      22.1
+     ]
+    },
+    "islands_removed_voxels": 16
+   }
+  }
+ },
+ "sims": {
+  "cell": {
+   "fluid": {
+    "rho": 1030.0,
+    "cp": 3850.0,
+    "k": 0.5,
+    "nu": 1e-06,
+    "alpha": 1.2608750472828143e-07,
+    "Pr": 7.931
+   },
+   "lattices": {
+    "core": {
+     "name": "core",
+     "spec": {
+      "cell": 0.005,
+      "wall": 0.00085,
+      "lz": 0.0065,
+      "root": 0.0007,
+      "max_steps": 30000,
+      "note": "5 mm sheet gyroid, 0.85 mm wall with root thickening, between floor and divider (6.5 mm)"
+     },
+     "dx": 0.000125,
+     "porosity": 0.3205769230769231,
+     "runs": [
+      {
+       "dpdx_Pa_m": 1500.0,
+       "U_superficial": 0.0057298884660614575,
+       "U_interstitial": 0.017774758869181628,
+       "porosity": 0.29767857142857146,
+       "u_max": 0.07985413550989348,
+       "nu_lb": 0.0048000000000000004,
+       "dt": 7.500000000000002e-05,
+       "steps": 6000,
+       "settled_at": 3000,
+       "converged": true,
+       "mach_peak": 0.0829956220222552,
+       "smagorinsky": 0.0,
+       "seconds": 79.3,
+       "cells": 89600,
+       "heat": {
+        "U_superficial": 0.0057298884660614575,
+        "L_T_mm": 7.987452195663831,
+        "ha_W_m3K": 2828952.505675224,
+        "Tb_cells": [
+         0.5066102922177975,
+         0.26525869601726004,
+         0.14295285109492534,
+         0.07726178768975389
+        ],
+        "seconds": 62.7,
+        "steps": 4000
+       }
+      },
+      {
+       "dpdx_Pa_m": 6000.0,
+       "U_superficial": 0.014125314407691793,
+       "U_interstitial": 0.043851308898471664,
+       "porosity": 0.29767857142857146,
+       "u_max": 0.18351578021401713,
+       "nu_lb": 0.0015999999999999999,
+       "dt": 2.5e-05,
+       "steps": 6500,
+       "settled_at": 3500,
+       "converged": true,
+       "mach_peak": 0.06341540431649309,
+       "smagorinsky": 0.12,
+       "seconds": 99.8,
+       "cells": 89600,
+       "heat": {
+        "U_superficial": 0.014125314407691793,
+        "L_T_mm": 10.147998237574882,
+        "ha_W_m3K": 5493288.247914376,
+        "Tb_cells": [
+         0.6047074215422511,
+         0.36891294199414365,
+         0.22541224087236966,
+         0.13790908159156606
+        ],
+        "seconds": 72.6,
+        "steps": 5000
+       }
+      },
+      {
+       "dpdx_Pa_m": 20000.0,
+       "U_superficial": 0.029494755894613884,
+       "U_interstitial": 0.09234748484812762,
+       "porosity": 0.29767857142857146,
+       "u_max": 0.3593098046211448,
+       "nu_lb": 0.0007999999999999999,
+       "dt": 1.25e-05,
+       "steps": 9750,
+       "settled_at": 6000,
+       "converged": true,
+       "mach_peak": 0.062305755511746885,
+       "smagorinsky": 0.12,
+       "seconds": 79.4,
+       "cells": 89600,
+       "heat": {
+        "U_superficial": 0.029494755894613884,
+        "L_T_mm": 14.182974697879276,
+        "ha_W_m3K": 8277285.857438743,
+        "Tb_cells": [
+         0.694333063090899,
+         0.4876626745975485,
+         0.3427116178561329,
+         0.24114830486228328
+        ],
+        "seconds": 46.9,
+        "steps": 5500
+       }
+      },
+      {
+       "dpdx_Pa_m": 60000.0,
+       "U_superficial": 0.05558027335168982,
+       "U_interstitial": 0.17483720897442737,
+       "porosity": 0.29767857142857146,
+       "u_max": 0.6668312470220351,
+       "nu_lb": 0.00045,
+       "dt": 7.031250000000001e-06,
+       "steps": 6500,
+       "settled_at": 3500,
+       "converged": true,
+       "mach_peak": 0.06687299001288483,
+       "smagorinsky": 0.12,
+       "seconds": 51.9,
+       "cells": 89600,
+       "heat": {
+        "U_superficial": 0.05558027335168982,
+        "L_T_mm": 19.67689168249401,
+        "ha_W_m3K": 11295555.153523995,
+        "Tb_cells": [
+         0.7635502790697052,
+         0.5921307396914385,
+         0.4591953254873965,
+         0.356278355598117
+        ],
+        "seconds": 46.6,
+        "steps": 5500
+       }
+      },
+      {
+       "dpdx_Pa_m": 180000.0,
+       "U_superficial": 0.1009251429947398,
+       "U_interstitial": 0.3174067083921147,
+       "porosity": 0.29767857142857146,
+       "u_max": 1.2990961484706849,
+       "nu_lb": 0.00025714285714285715,
+       "dt": 4.017857142857144e-06,
+       "steps": 10500,
+       "settled_at": 6500,
+       "converged": true,
+       "mach_peak": 0.07329960642272458,
+       "smagorinsky": 0.12,
+       "seconds": 86.0,
+       "cells": 89600,
+       "heat": {
+        "U_superficial": 0.1009251429947398,
+        "L_T_mm": 25.31321226726071,
+        "ha_W_m3K": 15940393.966047898,
+        "Tb_cells": [
+         0.805394664333702,
+         0.6593993882573156,
+         0.5414604050775365,
+         0.4452345506304584
+        ],
+        "seconds": 44.5,
+        "steps": 5500
+       }
+      }
+     ],
+     "forchheimer": {
+      "A_Pa_s_m2": 175665.45933651767,
+      "B_Pa_s2_m3": 16404527.266360657,
+      "K_m2": 5.863417907483201e-09
+     },
+     "heat_fit": {
+      "c": 63772539.53273383,
+      "n": 0.5916808086261911,
+      "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+     },
+     "k_solid_ratio_z": 0.5290397931750818,
+     "k_solid_ratio_x": 0.5282791112079361,
+     "solid_fraction": 0.6794230769230769
+    },
+    "gallery": {
+     "name": "gallery",
+     "spec": {
+      "cell": 0.008,
+      "wall": 0.0009,
+      "lz": 0.005,
+      "root": 0.0,
+      "note": "8 mm sheet gyroid, 0.9 mm wall, 5 mm layer between divider and roof"
+     },
+     "dx": 0.000125,
+     "porosity": 0.6734619140625,
+     "runs": [
+      {
+       "dpdx_Pa_m": 400.0,
+       "U_superficial": 0.008568962124124137,
+       "U_interstitial": 0.013471589830876431,
+       "porosity": 0.6122381036931819,
+       "u_max": 0.07745976726694905,
+       "nu_lb": 0.0048000000000000004,
+       "dt": 7.500000000000002e-05,
+       "steps": 10500,
+       "settled_at": 6500,
+       "converged": true,
+       "mach_peak": 0.08042516692533606,
+       "smagorinsky": 0.0,
+       "seconds": 77.4,
+       "cells": 180224,
+       "heat": {
+        "U_superficial": 0.008568962124124137,
+        "L_T_mm": 17.42022524524547,
+        "ha_W_m3K": 2065266.401160331,
+        "Tb_cells": [
+         0.6500351618647544,
+         0.40767329687665255,
+         0.2585451159094757,
+         0.16370031084619752
+        ],
+        "seconds": 38.6,
+        "steps": 9000
+       }
+      },
+      {
+       "dpdx_Pa_m": 1500.0,
+       "U_superficial": 0.019605910429587516,
+       "U_interstitial": 0.03083314664408311,
+       "porosity": 0.6122381036931819,
+       "u_max": 0.1654829354160515,
+       "nu_lb": 0.0018,
+       "dt": 2.8125000000000003e-05,
+       "steps": 13000,
+       "settled_at": 8000,
+       "converged": true,
+       "mach_peak": 0.06501360329645024,
+       "smagorinsky": 0.12,
+       "seconds": 111.2,
+       "cells": 180224,
+       "heat": {
+        "U_superficial": 0.019605910429587516,
+        "L_T_mm": 23.22573509340856,
+        "ha_W_m3K": 3545352.1155453236,
+        "Tb_cells": [
+         0.7264356449054752,
+         0.5114249637620127,
+         0.3642878947411909,
+         0.2580320206360349
+        ],
+        "seconds": 41.1,
+        "steps": 10500
+       }
+      },
+      {
+       "dpdx_Pa_m": 5000.0,
+       "U_superficial": 0.03941114712065926,
+       "U_interstitial": 0.06175446154745666,
+       "porosity": 0.6122381036931819,
+       "u_max": 0.3190737178753009,
+       "nu_lb": 0.0009,
+       "dt": 1.4062500000000001e-05,
+       "steps": 9000,
+       "settled_at": 5500,
+       "converged": true,
+       "mach_peak": 0.060646220943581346,
+       "smagorinsky": 0.12,
+       "seconds": 73.8,
+       "cells": 180224,
+       "heat": {
+        "U_superficial": 0.03941114712065926,
+        "L_T_mm": 33.889762921929616,
+        "ha_W_m3K": 4866433.612882195,
+        "Tb_cells": [
+         0.7919116506266402,
+         0.6261634541083712,
+         0.4946690411327544,
+         0.3900048019757677
+        ],
+        "seconds": 41.9,
+        "steps": 10500
+       }
+      },
+      {
+       "dpdx_Pa_m": 15000.0,
+       "U_superficial": 0.07196938144248946,
+       "U_interstitial": 0.11319113019805456,
+       "porosity": 0.6122381036931819,
+       "u_max": 0.5636635242627581,
+       "nu_lb": 0.0005142857142857143,
+       "dt": 8.035714285714288e-06,
+       "steps": 13750,
+       "settled_at": 8500,
+       "converged": true,
+       "mach_peak": 0.06710501588151657,
+       "smagorinsky": 0.12,
+       "seconds": 127.2,
+       "cells": 180224,
+       "heat": {
+        "U_superficial": 0.07196938144248946,
+        "L_T_mm": 44.90085528133027,
+        "ha_W_m3K": 6732382.419532127,
+        "Tb_cells": [
+         0.8367363747978757,
+         0.6985740533009788,
+         0.5851261263056419,
+         0.4901341979235137
+        ],
+        "seconds": 54.7,
+        "steps": 12000
+       }
+      }
+     ],
+     "forchheimer": {
+      "A_Pa_s_m2": 24963.125482300984,
+      "B_Pa_s2_m3": 2575393.151901242,
+      "K_m2": 4.126085897097607e-08
+     },
+     "heat_fit": {
+      "c": 28857976.136536624,
+      "n": 0.5474681086525823,
+      "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+     },
+     "k_solid_ratio_z": 0.21588026991758047,
+     "k_solid_ratio_x": 0.2142692828210066,
+     "solid_fraction": 0.3265380859375
+    },
+    "arm": {
+     "name": "arm",
+     "spec": {
+      "cell": 0.012,
+      "wall": 0.0,
+      "lz": 0.014,
+      "root": 0.0,
+      "kind": "network",
+      "bias": 0.0014,
+      "dx": 0.00025,
+      "max_steps": 20000,
+      "note": "12 mm skeletal (strut) gyroid, ~2 mm struts, 14 mm tall VRM-arm channel"
+     },
+     "dx": 0.00025,
+     "porosity": 0.7903025793650793,
+     "runs": [
+      {
+       "dpdx_Pa_m": 500.0,
+       "U_superficial": 0.06394826692297714,
+       "U_interstitial": 0.08480645063954004,
+       "porosity": 0.7376157407407408,
+       "u_max": 0.2491914653310448,
+       "nu_lb": 0.0007199999999999999,
+       "dt": 4.5e-05,
+       "steps": 20000,
+       "settled_at": null,
+       "converged": false,
+       "mach_peak": 0.07769021017786346,
+       "smagorinsky": 0.12,
+       "seconds": 354.2,
+       "cells": 138240,
+       "heat": {
+        "U_superficial": 0.06394826692297714,
+        "L_T_mm": 226.2081084861633,
+        "ha_W_m3K": 1174930.2154633019,
+        "Tb_cells": [
+         0.9459908650554174,
+         0.8971419275826333,
+         0.8508932187705643,
+         0.8067768149993277
+        ],
+        "seconds": 63.4,
+        "steps": 7000
+       }
+      },
+      {
+       "dpdx_Pa_m": 2000.0,
+       "U_superficial": 0.13290334664719353,
+       "U_interstitial": 0.17589677861874914,
+       "porosity": 0.7376157407407408,
+       "u_max": 0.5173308815251783,
+       "nu_lb": 0.00035999999999999997,
+       "dt": 2.25e-05,
+       "steps": 20000,
+       "settled_at": 20000,
+       "converged": true,
+       "mach_peak": 0.08064390340134037,
+       "smagorinsky": 0.12,
+       "seconds": 341.4,
+       "cells": 138240,
+       "heat": {
+        "U_superficial": 0.13290334664719353,
+        "L_T_mm": 309.5305164315303,
+        "ha_W_m3K": 1780925.5605785502,
+        "Tb_cells": [
+         0.9600816634024789,
+         0.9230520141808075,
+         0.8880842594342432,
+         0.8546255030478306
+        ],
+        "seconds": 29.6,
+        "steps": 7500
+       }
+      },
+      {
+       "dpdx_Pa_m": 6000.0,
+       "U_superficial": 0.23848890394729458,
+       "U_interstitial": 0.3164437062045702,
+       "porosity": 0.7376157407407408,
+       "u_max": 0.7602581791889046,
+       "nu_lb": 0.00025,
+       "dt": 1.5625e-05,
+       "steps": 20000,
+       "settled_at": 14000,
+       "converged": true,
+       "mach_peak": 0.09790256782219664,
+       "smagorinsky": 0.12,
+       "seconds": 494.3,
+       "cells": 138240,
+       "heat": {
+        "U_superficial": 0.23848890394729458,
+        "L_T_mm": 444.31679319294204,
+        "ha_W_m3K": 2232004.6137755,
+        "Tb_cells": [
+         0.9722227170331958,
+         0.9458893908248068,
+         0.9208904899084156,
+         0.8964900778374296
+        ],
+        "seconds": 111.6,
+        "steps": 6500
+       }
+      }
+     ],
+     "forchheimer": {
+      "A_Pa_s_m2": 1421.0934989207637,
+      "B_Pa_s2_m3": 100676.58235715875,
+      "K_m2": 7.24793970827552e-07
+     },
+     "heat_fit": {
+      "c": 4610690.809466083,
+      "n": 0.4908514805063627,
+      "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+     },
+     "k_solid_ratio_z": 0.10526553962825023,
+     "k_solid_ratio_x": 0.10146392426057727,
+     "solid_fraction": 0.20969742063492064
+    }
+   }
+  },
+  "fea": {
+   "voxel_mm": 1.5,
+   "elements": 86648,
+   "nodes": 128365,
+   "dof": 385095,
+   "material": {
+    "E_GPa": 180.0,
+    "nu": 0.3,
+    "rho": 7980.0,
+    "yield_MPa": 400.0,
+    "source": "JLC3DP 316L SLM datasheet values"
+   },
+   "mass_frame_kg": 2.3336472600000002,
+   "mass_components_kg": 6.2219999999999995,
+   "loads": [
+    {
+     "label": "gpu",
+     "mass_kg": 0.2568,
+     "at": [
+      -113.71000000000001,
+      65.90030149245814,
+      62.609812802072
+     ]
+    },
+    {
+     "label": "gpu",
+     "mass_kg": 0.2568,
+     "at": [
+      -113.69,
+      107.08867728170671,
+      150.93856972666393
+     ]
+    },
+    {
+     "label": "gpu",
+     "mass_kg": 0.2568,
+     "at": [
+      66.41999999999999,
+      111.21343151629593,
+      159.7841337281416
+     ]
+    },
+    {
+     "label": "gpu",
+     "mass_kg": 0.2568,
+     "at": [
+      86.81,
+      62.95042602550806,
+      56.28378444855619
+     ]
+    },
+    {
+     "label": "board",
+     "mass_kg": 0.265,
+     "at": [
+      -124.65,
+      195.41266640321354,
+      330.8141832646417
+     ]
+    },
+    {
+     "label": "board",
+     "mass_kg": 0.265,
+     "at": [
+      32.83000000000001,
+      185.75161293982114,
+      310.0959872529839
+     ]
+    },
+    {
+     "label": "board",
+     "mass_kg": 0.265,
+     "at": [
+      -124.65,
+      129.93219292910956,
+      190.39085474118318
+     ]
+    },
+    {
+     "label": "board",
+     "mass_kg": 0.265,
+     "at": [
+      32.83000000000001,
+      129.93219292910956,
+      190.39085474118318
+     ]
+    },
+    {
+     "label": "heart",
+     "mass_kg": 0.145,
+     "at": [
+      56.0,
+      141.92112356147084,
+      241.1829362332074
+     ]
+    },
+    {
+     "label": "heart",
+     "mass_kg": 0.145,
+     "at": [
+      66.0,
+      167.70083752765348,
+      296.46771124244304
+     ]
+    },
+    {
+     "label": "heart",
+     "mass_kg": 0.145,
+     "at": [
+      116.0,
+      127.76341179315739,
+      210.82162536747964
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -112.5,
+      286.0,
+      245.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -112.5,
+      286.0,
+      350.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -7.5,
+      286.0,
+      245.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -7.5,
+      286.0,
+      350.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      7.5,
+      286.0,
+      245.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      7.5,
+      286.0,
+      350.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      112.5,
+      286.0,
+      245.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      112.5,
+      286.0,
+      350.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -112.5,
+      286.0,
+      125.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -112.5,
+      286.0,
+      230.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -7.5,
+      286.0,
+      125.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      -7.5,
+      286.0,
+      230.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      7.5,
+      286.0,
+      125.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      7.5,
+      286.0,
+      230.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      112.5,
+      286.0,
+      125.5
+     ]
+    },
+    {
+     "label": "radiator",
+     "mass_kg": 0.1062,
+     "at": [
+      112.5,
+      286.0,
+      230.5
+     ]
+    },
+    {
+     "label": "psu",
+     "mass_kg": 0.5,
+     "at": [
+      0.0,
+      134.0,
+      24.5
+     ]
+    },
+    {
+     "label": "psu",
+     "mass_kg": 0.5,
+     "at": [
+      0.0,
+      248.0,
+      24.5
+     ]
+    },
+    {
+     "label": "psu",
+     "mass_kg": 0.5,
+     "at": [
+      -68.0,
+      191.0,
+      24.5
+     ]
+    },
+    {
+     "label": "psu",
+     "mass_kg": 0.5,
+     "at": [
+      68.0,
+      191.0,
+      24.5
+     ]
+    }
+   ],
+   "cases": [
+    {
+     "name": "LC1 standing 1g",
+     "cg_iters": 56,
+     "rel_residual": 2.8257077945373545e-09,
+     "max_disp_mm": 0.15924722697904542,
+     "vm_max_raw_MPa": 16.015194045851974,
+     "vm_max_smoothed_MPa": 10.954263687443799,
+     "vm_p999_MPa": 7.31883004834243,
+     "vm_p99_MPa": 4.8435267149672185,
+     "safety_factor_yield": 36.51546205323645,
+     "reaction_N": [
+      -9.426400326972839e-09,
+      3.6291991822867686e-07,
+      -83.93090025641723
+     ],
+     "applied_N": [
+      0.0,
+      0.0,
+      -83.93089962060002
+     ],
+     "vm_max_location_mm": [
+      -109.25,
+      288.75,
+      3.75
+     ],
+     "vm_max_part": "pelvis"
+    },
+    {
+     "name": "LC2 standing 1g + 1g lateral",
+     "cg_iters": 58,
+     "rel_residual": 2.770197185819956e-08,
+     "max_disp_mm": 1.3706347384342366,
+     "vm_max_raw_MPa": 35.412464819938876,
+     "vm_max_smoothed_MPa": 27.158422825894757,
+     "vm_p999_MPa": 22.268353114947427,
+     "vm_p99_MPa": 17.094284406321197,
+     "safety_factor_yield": 14.728395774831657,
+     "reaction_N": [
+      83.93090618216837,
+      7.619858182206229e-07,
+      -83.93090045968364
+     ],
+     "applied_N": [
+      83.93089962060002,
+      0.0,
+      -83.93089962060002
+     ],
+     "vm_max_location_mm": [
+      12.25,
+      291.75,
+      17.25
+     ],
+     "vm_max_part": "pelvis"
+    },
+    {
+     "name": "LC3 lifted by the crown 1g",
+     "cg_iters": 57,
+     "rel_residual": 1.6017087808194553e-08,
+     "max_disp_mm": 0.4983361195540052,
+     "vm_max_raw_MPa": 25.474658900172443,
+     "vm_max_smoothed_MPa": 17.788769423867127,
+     "vm_p999_MPa": 10.533338068154833,
+     "vm_p99_MPa": 7.110823193588899,
+     "safety_factor_yield": 22.48609729368472,
+     "reaction_N": [
+      1.115639347348818e-06,
+      3.828126101002027e-06,
+      -83.93090129382448
+     ],
+     "applied_N": [
+      0.0,
+      0.0,
+      -83.93089962060002
+     ],
+     "vm_max_location_mm": [
+      -4.25,
+      228.75,
+      371.25
+     ],
+     "vm_max_part": "cervical"
+    }
+   ],
+   "wall_time_s": 351.9355630874634,
+   "notes": [
+    "joints modelled as bonded (clamped by 2 x M5 each)",
+    "voxel hex-8 mesh: bending of the slimmest ribs is resolved by only ~4-6 elements, so deflections are likely under-predicted by 10-25 %; stresses are neighbourhood-averaged"
+   ]
+  },
+  "loop": {
+   "assumptions": {
+    "coolant": "30 % ethylene-glycol / water with aluminium-safe inhibitors",
+    "rho": 1035.0,
+    "cp": 3750.0,
+    "pump_p0_kpa": 52.79742,
+    "pump_qmax_lpm": 15.0,
+    "pump_exp": 1.6,
+    "pump_heat_w": 14.0,
+    "k_radiator": 0.07678226469289712,
+    "k_fittings": 0.011168329409875943,
+    "n_fittings": 6,
+    "k_heart": 0.04188123528703479,
+    "rad_wk_at_1500": 17.0,
+    "rad_rpm_exp": 0.72,
+    "rad_uncertainty": 0.2,
+    "gpu_tim_k_per_w": 0.01295001295001295,
+    "gpu_hotspot_k": 4.0,
+    "cpu_tim_k_per_w": 0.02,
+    "cpu_package_k_per_w": 0.3,
+    "ambient_c": 25.0
+   },
+   "loads": {
+    "gaming": {
+     "label": "4K gaming",
+     "gpu": 380.0,
+     "cpu": 75.0,
+     "vrm": 12.0
+    },
+    "full": {
+     "label": "Synthetic full load",
+     "gpu": 450.0,
+     "cpu": 120.0,
+     "vrm": 22.0
+    }
+   },
+   "blocks": {
+    "gpu_block": {
+     "316L": {
+      "k": 0.6565435109054892,
+      "n": 1.8771166780745785,
+      "R_k": 0.4034255944982046,
+      "R_n": -0.22992310996531956,
+      "heater_w": 390.0,
+      "die_share": 0.8666666666666667,
+      "runs": [
+       {
+        "flow_lpm": 3.0,
+        "dp_kpa": 5.115594248954387,
+        "R": 0.3133734832432117
+       }
+      ]
+     },
+     "AlSi10Mg": {
+      "k": 0.6565435109054892,
+      "n": 1.8771166780745785,
+      "R_k": 0.08107114335462745,
+      "R_n": -0.22992310996531956,
+      "heater_w": 390.0,
+      "die_share": 0.8666666666666667,
+      "runs": [
+       {
+        "flow_lpm": 1.5,
+        "dp_kpa": 1.4101851490550132,
+        "R": 0.07398231717796275
+       },
+       {
+        "flow_lpm": 3.0,
+        "dp_kpa": 5.115594248954079,
+        "R": 0.06268093271456178
+       },
+       {
+        "flow_lpm": 4.5,
+        "dp_kpa": 11.11553883737104,
+        "R": 0.0575384566564143
+       }
+      ]
+     }
+    },
+    "monoblock": {
+     "316L": {
+      "k": 0.6293496709239783,
+      "n": 1.909005443213681,
+      "R_k": 0.44785710571250226,
+      "R_n": -0.23021126565544348,
+      "heater_w": 120.0,
+      "die_share": 1.0,
+      "runs": [
+       {
+        "flow_lpm": 3.0,
+        "dp_kpa": 5.089595503764264,
+        "R": 0.34777693943827515
+       }
+      ]
+     },
+     "AlSi10Mg": {
+      "k": 0.6293496709239783,
+      "n": 1.909005443213681,
+      "R_k": 0.090750550676452,
+      "R_n": -0.23021126565544348,
+      "heater_w": 120.0,
+      "die_share": 1.0,
+      "runs": [
+       {
+        "flow_lpm": 1.5,
+        "dp_kpa": 1.3682693857934414,
+        "R": 0.08278984952649877
+       },
+       {
+        "flow_lpm": 3.0,
+        "dp_kpa": 5.089595503761232,
+        "R": 0.0701788106329786
+       },
+       {
+        "flow_lpm": 4.5,
+        "dp_kpa": 11.163326808951687,
+        "R": 0.06435924653382959
+       }
+      ]
+     }
+    }
+   },
+   "sweep": [
+    {
+     "material": "AlSi10Mg",
+     "rpm": 800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 46.6,
+     "coolant_max_c": 47.9,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 22.9,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 68.9,
+     "gpu_hotspot_c": 72.9,
+     "cpu_ihs_c": 52.3,
+     "cpu_tj_c": 76.3,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      69.1,
+      78.4
+     ],
+     "cpu_tj_band_c": [
+      72.5,
+      81.8
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 43.3,
+     "coolant_max_c": 44.6,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 19.6,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 65.6,
+     "gpu_hotspot_c": 69.6,
+     "cpu_ihs_c": 49.0,
+     "cpu_tj_c": 73.0,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      66.4,
+      74.3
+     ],
+     "cpu_tj_band_c": [
+      69.8,
+      77.7
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1200,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 41.0,
+     "coolant_max_c": 42.3,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 17.3,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 63.2,
+     "gpu_hotspot_c": 67.2,
+     "cpu_ihs_c": 46.6,
+     "cpu_tj_c": 70.6,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      64.5,
+      71.4
+     ],
+     "cpu_tj_band_c": [
+      67.9,
+      74.8
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1500,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 38.5,
+     "coolant_max_c": 39.8,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 14.8,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 60.8,
+     "gpu_hotspot_c": 64.8,
+     "cpu_ihs_c": 44.2,
+     "cpu_tj_c": 68.2,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      62.4,
+      68.3
+     ],
+     "cpu_tj_band_c": [
+      65.8,
+      71.7
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 36.8,
+     "coolant_max_c": 38.1,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 13.1,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 59.0,
+     "gpu_hotspot_c": 63.0,
+     "cpu_ihs_c": 42.4,
+     "cpu_tj_c": 66.4,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      61.0,
+      66.1
+     ],
+     "cpu_tj_band_c": [
+      64.4,
+      69.5
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 2000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 35.9,
+     "coolant_max_c": 37.2,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 12.2,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 58.1,
+     "gpu_hotspot_c": 62.1,
+     "cpu_ihs_c": 41.5,
+     "cpu_tj_c": 65.5,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      60.2,
+      65.0
+     ],
+     "cpu_tj_band_c": [
+      63.6,
+      68.4
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 52.2,
+     "coolant_max_c": 53.9,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 28.9,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 78.6,
+     "gpu_hotspot_c": 82.6,
+     "cpu_ihs_c": 60.8,
+     "cpu_tj_c": 99.2,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      77.9,
+      89.6
+     ],
+     "cpu_tj_band_c": [
+      94.5,
+      106.2
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 48.1,
+     "coolant_max_c": 49.7,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 24.7,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 74.4,
+     "gpu_hotspot_c": 78.4,
+     "cpu_ihs_c": 56.6,
+     "cpu_tj_c": 95.0,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      74.4,
+      84.4
+     ],
+     "cpu_tj_band_c": [
+      91.1,
+      101.0
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1200,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 45.1,
+     "coolant_max_c": 46.8,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 21.8,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 71.5,
+     "gpu_hotspot_c": 75.5,
+     "cpu_ihs_c": 53.7,
+     "cpu_tj_c": 92.1,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      72.0,
+      80.7
+     ],
+     "cpu_tj_band_c": [
+      88.6,
+      97.3
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1500,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 42.0,
+     "coolant_max_c": 43.7,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 18.7,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 68.4,
+     "gpu_hotspot_c": 72.4,
+     "cpu_ihs_c": 50.6,
+     "cpu_tj_c": 89.0,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      69.4,
+      76.8
+     ],
+     "cpu_tj_band_c": [
+      86.0,
+      93.5
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 1800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 39.8,
+     "coolant_max_c": 41.5,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 16.5,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 66.2,
+     "gpu_hotspot_c": 70.2,
+     "cpu_ihs_c": 48.4,
+     "cpu_tj_c": 86.8,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      67.6,
+      74.1
+     ],
+     "cpu_tj_band_c": [
+      84.2,
+      90.7
+     ]
+    },
+    {
+     "material": "AlSi10Mg",
+     "rpm": 2000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 38.7,
+     "coolant_max_c": 40.3,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 15.3,
+     "R_gpu_k_per_w": 0.0545,
+     "R_cpu_k_per_w": 0.061,
+     "gpu_die_c": 65.0,
+     "gpu_hotspot_c": 69.0,
+     "cpu_ihs_c": 47.3,
+     "cpu_tj_c": 85.7,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      66.6,
+      72.6
+     ],
+     "cpu_tj_band_c": [
+      83.3,
+      89.3
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 46.6,
+     "coolant_max_c": 47.9,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 22.9,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 140.3,
+     "gpu_hotspot_c": 144.3,
+     "cpu_ihs_c": 70.3,
+     "cpu_tj_c": 94.3,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      140.6,
+      149.8
+     ],
+     "cpu_tj_band_c": [
+      90.6,
+      99.8
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 43.3,
+     "coolant_max_c": 44.6,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 19.6,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 137.0,
+     "gpu_hotspot_c": 141.0,
+     "cpu_ihs_c": 67.0,
+     "cpu_tj_c": 91.0,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      137.8,
+      145.7
+     ],
+     "cpu_tj_band_c": [
+      87.8,
+      95.7
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1200,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 41.0,
+     "coolant_max_c": 42.3,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 17.3,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 134.6,
+     "gpu_hotspot_c": 138.6,
+     "cpu_ihs_c": 64.6,
+     "cpu_tj_c": 88.6,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      135.9,
+      142.8
+     ],
+     "cpu_tj_band_c": [
+      85.9,
+      92.8
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1500,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 38.5,
+     "coolant_max_c": 39.8,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 14.8,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 132.2,
+     "gpu_hotspot_c": 136.2,
+     "cpu_ihs_c": 62.2,
+     "cpu_tj_c": 86.2,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      133.8,
+      139.7
+     ],
+     "cpu_tj_band_c": [
+      83.8,
+      89.7
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 36.8,
+     "coolant_max_c": 38.1,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 13.1,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 130.4,
+     "gpu_hotspot_c": 134.4,
+     "cpu_ihs_c": 60.4,
+     "cpu_tj_c": 84.4,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      132.4,
+      137.5
+     ],
+     "cpu_tj_band_c": [
+      82.4,
+      87.5
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 2000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 481.0,
+     "coolant_gpu_in_c": 35.9,
+     "coolant_max_c": 37.2,
+     "coolant_rise_k": 1.3,
+     "delta_coolant_ambient_k": 12.2,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 129.5,
+     "gpu_hotspot_c": 133.5,
+     "cpu_ihs_c": 59.5,
+     "cpu_tj_c": 83.5,
+     "load": "gaming",
+     "gpu_hotspot_band_c": [
+      131.6,
+      136.4
+     ],
+     "cpu_tj_band_c": [
+      81.6,
+      86.4
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 52.2,
+     "coolant_max_c": 53.9,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 28.9,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 163.1,
+     "gpu_hotspot_c": 167.1,
+     "cpu_ihs_c": 89.6,
+     "cpu_tj_c": 128.0,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      162.5,
+      174.1
+     ],
+     "cpu_tj_band_c": [
+      123.3,
+      135.0
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 48.1,
+     "coolant_max_c": 49.7,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 24.7,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 159.0,
+     "gpu_hotspot_c": 163.0,
+     "cpu_ihs_c": 85.5,
+     "cpu_tj_c": 123.9,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      159.0,
+      168.9
+     ],
+     "cpu_tj_band_c": [
+      119.9,
+      129.8
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1200,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 45.1,
+     "coolant_max_c": 46.8,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 21.8,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 156.0,
+     "gpu_hotspot_c": 160.0,
+     "cpu_ihs_c": 82.5,
+     "cpu_tj_c": 120.9,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      156.6,
+      165.3
+     ],
+     "cpu_tj_band_c": [
+      117.4,
+      126.2
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1500,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 42.0,
+     "coolant_max_c": 43.7,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 18.7,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 152.9,
+     "gpu_hotspot_c": 156.9,
+     "cpu_ihs_c": 79.4,
+     "cpu_tj_c": 117.8,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      154.0,
+      161.4
+     ],
+     "cpu_tj_band_c": [
+      114.8,
+      122.3
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 1800,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 39.8,
+     "coolant_max_c": 41.5,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 16.5,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 150.7,
+     "gpu_hotspot_c": 154.7,
+     "cpu_ihs_c": 77.2,
+     "cpu_tj_c": 115.6,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      152.1,
+      158.7
+     ],
+     "cpu_tj_band_c": [
+      113.0,
+      119.5
+     ]
+    },
+    {
+     "material": "316L",
+     "rpm": 2000,
+     "flow_lpm": 5.61,
+     "loop_dp_kpa": 41.9,
+     "dp_gpu_kpa": 16.7,
+     "dp_mono_kpa": 16.91,
+     "heat_w": 606.0,
+     "coolant_gpu_in_c": 38.7,
+     "coolant_max_c": 40.3,
+     "coolant_rise_k": 1.6,
+     "delta_coolant_ambient_k": 15.3,
+     "R_gpu_k_per_w": 0.2714,
+     "R_cpu_k_per_w": 0.3011,
+     "gpu_die_c": 149.6,
+     "gpu_hotspot_c": 153.6,
+     "cpu_ihs_c": 76.1,
+     "cpu_tj_c": 114.5,
+     "load": "full",
+     "gpu_hotspot_band_c": [
+      151.2,
+      157.2
+     ],
+     "cpu_tj_band_c": [
+      112.1,
+      118.1
+     ]
+    }
+   ]
+  },
+  "m2_sink": {
+   "power_w": {
+    "ssd": 7.0,
+    "chipset": 6.0
+   },
+   "exposed_area_cm2": 98.6884,
+   "k_alu": 130.0,
+   "voxel_mm": 0.5,
+   "cases": [
+    {
+     "h_W_m2K": 5.0,
+     "rise_ssd_K": 261.87862710270423,
+     "rise_chipset_K": 273.38988664779964,
+     "rise_max_K": 274.0109695232359,
+     "rise_min_K": 255.63900897347642,
+     "balance_pct": 3.256950265040359e-10
+    },
+    {
+     "h_W_m2K": 7.0,
+     "rise_ssd_K": 186.65180422621444,
+     "rise_chipset_K": 197.9677729021045,
+     "rise_max_K": 198.58309134645074,
+     "rise_min_K": 180.53950959947892,
+     "balance_pct": 1.0023093466315913e-10
+    },
+    {
+     "h_W_m2K": 10.0,
+     "rise_ssd_K": 130.26257456912265,
+     "rise_chipset_K": 141.30097210765334,
+     "rise_max_K": 141.90802632733954,
+     "rise_min_K": 124.33043214240693,
+     "balance_pct": 1.5309975509580909e-10
+    },
+    {
+     "h_W_m2K": 30.0,
+     "rise_ssd_K": 42.79158915554983,
+     "rise_chipset_K": 52.34643260941842,
+     "rise_max_K": 52.90910132753722,
+     "rise_min_K": 37.803599773128184,
+     "balance_pct": 9.321432514752814e-11
+    }
+   ],
+   "power_for_45K_W": 3.13417811536932,
+   "power_for_45K_with_airflow_W": 13.670910838891544
+  },
+  "validation": {
+   "poiseuille": [
+    {
+     "cells_across": 8,
+     "smagorinsky": 0.0,
+     "U_lbm": 0.08617694901993467,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": 0.8423280365815522,
+     "Re_Dh": 277.735639158576
+    },
+    {
+     "cells_across": 8,
+     "smagorinsky": 0.1,
+     "U_lbm": 0.07801668320521499,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": -8.70663153453657,
+     "Re_Dh": 277.735639158576
+    },
+    {
+     "cells_across": 13,
+     "smagorinsky": 0.0,
+     "U_lbm": 0.08574087875677791,
+     "U_analytic": 0.08545711974110035,
+     "error_pct": 0.3320484197656626,
+     "Re_Dh": 277.73563915857613
+    },
+    {
+     "cells_across": 13,
+     "smagorinsky": 0.1,
+     "U_lbm": 0.08269348150430253,
+     "U_analytic": 0.08545711974110035,
+     "error_pct": -3.2339473237226968,
+     "Re_Dh": 277.73563915857613
+    },
+    {
+     "cells_across": 16,
+     "smagorinsky": 0.0,
+     "U_lbm": 0.08564854666975966,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": 0.224003487643043,
+     "Re_Dh": 277.735639158576
+    },
+    {
+     "cells_across": 16,
+     "smagorinsky": 0.1,
+     "U_lbm": 0.08362942674048898,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": -2.1387252532597323,
+     "Re_Dh": 277.735639158576
+    },
+    {
+     "cells_across": 24,
+     "smagorinsky": 0.0,
+     "U_lbm": 0.08554659671274156,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": 0.10470394030637209,
+     "Re_Dh": 277.735639158576
+    },
+    {
+     "cells_across": 24,
+     "smagorinsky": 0.1,
+     "U_lbm": 0.0846378077242742,
+     "U_analytic": 0.0854571197411003,
+     "error_pct": -0.9587404996895255,
+     "Re_Dh": 277.735639158576
+    }
+   ],
+   "plates_heat": [
+    {
+     "cells_across": 8,
+     "U": 0.001,
+     "Pe": 25.77575,
+     "graetz": 2.5775749999999995,
+     "Nu": 7.264037118547792,
+     "Nu_ref": 7.616069255068,
+     "error_pct": -4.622228668495277
+    },
+    {
+     "cells_across": 8,
+     "U": 0.02,
+     "Pe": 515.515,
+     "graetz": 12.887875,
+     "Nu": 7.501547013346723,
+     "Nu_ref": 7.896380200401352,
+     "error_pct": -5.00017953839863
+    },
+    {
+     "cells_across": 8,
+     "U": 0.1,
+     "Pe": 2577.575,
+     "graetz": 64.43937499999998,
+     "Nu": 7.915948458839595,
+     "Nu_ref": 9.078724207845363,
+     "error_pct": -12.80769987484539
+    },
+    {
+     "cells_across": 13,
+     "U": 0.001,
+     "Pe": 25.775750000000002,
+     "graetz": 4.1885593750000005,
+     "Nu": 7.284008017102883,
+     "Nu_ref": 7.661641154040578,
+     "error_pct": -4.92888050151683
+    },
+    {
+     "cells_across": 13,
+     "U": 0.02,
+     "Pe": 515.5150000000001,
+     "graetz": 20.942796875000006,
+     "Nu": 7.53547641409248,
+     "Nu_ref": 8.101184845011907,
+     "error_pct": -6.983033244424086
+    },
+    {
+     "cells_across": 13,
+     "U": 0.1,
+     "Pe": 2577.5750000000003,
+     "graetz": 104.71398437500001,
+     "Nu": 8.451541430706152,
+     "Nu_ref": 9.858605358967829,
+     "error_pct": -14.272443992108352
+    },
+    {
+     "cells_across": 16,
+     "U": 0.001,
+     "Pe": 25.77575,
+     "graetz": 5.155149999999999,
+     "Nu": 7.288265858311229,
+     "Nu_ref": 7.6886066996908,
+     "error_pct": -5.206936146124763
+    },
+    {
+     "cells_across": 16,
+     "U": 0.02,
+     "Pe": 515.515,
+     "graetz": 25.77575,
+     "Nu": 7.554555268206691,
+     "Nu_ref": 8.219539238360742,
+     "error_pct": -8.0902828111162
+    },
+    {
+     "cells_across": 16,
+     "U": 0.1,
+     "Pe": 2577.575,
+     "graetz": 128.87874999999997,
+     "Nu": 8.776082012181805,
+     "Nu_ref": 10.286542820704424,
+     "error_pct": -14.683852824511778
+    }
+   ]
+  },
+  "macro": {
+   "gpu_block_316L_3": {
+    "case": "gpu_block",
+    "material": "316L",
+    "k_metal": 15.1,
+    "flow_lpm": 3.0,
+    "flow_check_lpm": 2.9999999999976046,
+    "dp_Pa": 5115.594248954387,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 143.33107632386853,
+    "T_out_rise_K": 2.2695750850706355,
+    "energy_in_W": 450.0,
+    "energy_out_W": 449.999999992021,
+    "energy_closure_pct": -1.773114988168345e-09,
+    "heaters": {
+     "1": {
+      "name": "GPU die",
+      "power_W": 390.0,
+      "cells": 2444,
+      "T_mean_rise_K": 122.21565846485255,
+      "T_max_rise_K": 143.33107632386853,
+      "R_K_per_W": 0.3133734832432117,
+      "R_total_K_per_W": 0.2715903521441168
+     },
+     "2": {
+      "name": "memory (12 x GDDR6X)",
+      "power_W": 30.0,
+      "cells": 7280,
+      "T_mean_rise_K": 10.596011828529221,
+      "T_max_rise_K": 13.4098395721488,
+      "R_K_per_W": 0.3532003942843074,
+      "R_total_K_per_W": 0.023546692952287156
+     },
+     "3": {
+      "name": "VRM power stages",
+      "power_W": 30.0,
+      "cells": 6307,
+      "T_mean_rise_K": 76.87983909427618,
+      "T_max_rise_K": 81.64319664461527,
+      "R_K_per_W": 2.5626613031425394,
+      "R_total_K_per_W": 0.17084408687616928
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.04309820586605763,
+     "p95": 0.0923725167292232,
+     "max": 0.3005100638477024
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 3.788178051635071e-10,
+    "unknowns": 2553822,
+    "wall_time_s": 118.9,
+    "h_open_W_m2K": 600.0
+   },
+   "gpu_block_AlSi10Mg_1.5": {
+    "case": "gpu_block",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 1.5,
+    "flow_check_lpm": 1.500000000000058,
+    "dp_Pa": 1410.1851490550132,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 35.02037858385429,
+    "T_out_rise_K": 4.539150166401799,
+    "energy_in_W": 450.0,
+    "energy_out_W": 449.9999996216758,
+    "energy_closure_pct": -8.407204932225909e-08,
+    "heaters": {
+     "1": {
+      "name": "GPU die",
+      "power_W": 390.0,
+      "cells": 2444,
+      "T_mean_rise_K": 28.853103699405473,
+      "T_max_rise_K": 35.02037858385429,
+      "R_K_per_W": 0.07398231717796275,
+      "R_total_K_per_W": 0.06411800822090105
+     },
+     "2": {
+      "name": "memory (12 x GDDR6X)",
+      "power_W": 30.0,
+      "cells": 7280,
+      "T_mean_rise_K": 6.169665061982266,
+      "T_max_rise_K": 8.043398803305744,
+      "R_K_per_W": 0.20565550206607552,
+      "R_total_K_per_W": 0.013710366804405036
+     },
+     "3": {
+      "name": "VRM power stages",
+      "power_W": 30.0,
+      "cells": 6307,
+      "T_mean_rise_K": 14.6517505735885,
+      "T_max_rise_K": 16.06206121448169,
+      "R_K_per_W": 0.4883916857862833,
+      "R_total_K_per_W": 0.032559445719085554
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.02141952808476924,
+     "p95": 0.04601724035638028,
+     "max": 0.15251199647696195
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 7.143819510328667e-10,
+    "unknowns": 2553822,
+    "wall_time_s": 127.1,
+    "h_open_W_m2K": 600.0
+   },
+   "gpu_block_AlSi10Mg_3": {
+    "case": "gpu_block",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 3.0,
+    "flow_check_lpm": 2.999999999999988,
+    "dp_Pa": 5115.594248954079,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 29.78918218413226,
+    "T_out_rise_K": 2.2695750847407385,
+    "energy_in_W": 450.0,
+    "energy_out_W": 449.99999992696814,
+    "energy_closure_pct": -1.6229306787352016e-08,
+    "heaters": {
+     "1": {
+      "name": "GPU die",
+      "power_W": 390.0,
+      "cells": 2444,
+      "T_mean_rise_K": 24.445563758679093,
+      "T_max_rise_K": 29.78918218413226,
+      "R_K_per_W": 0.06268093271456178,
+      "R_total_K_per_W": 0.054323475019286874
+     },
+     "2": {
+      "name": "memory (12 x GDDR6X)",
+      "power_W": 30.0,
+      "cells": 7280,
+      "T_mean_rise_K": 3.6760559248913007,
+      "T_max_rise_K": 4.858171709842244,
+      "R_K_per_W": 0.12253519749637669,
+      "R_total_K_per_W": 0.008169013166425113
+     },
+     "3": {
+      "name": "VRM power stages",
+      "power_W": 30.0,
+      "cells": 6307,
+      "T_mean_rise_K": 11.895862468964225,
+      "T_max_rise_K": 12.878820314195083,
+      "R_K_per_W": 0.3965287489654742,
+      "R_total_K_per_W": 0.02643524993103161
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.043098205866055964,
+     "p95": 0.09237251672921244,
+     "max": 0.3005100638476694
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 5.11789815805825e-10,
+    "unknowns": 2553822,
+    "wall_time_s": 126.4,
+    "h_open_W_m2K": 600.0
+   },
+   "gpu_block_AlSi10Mg_4.5": {
+    "case": "gpu_block",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 4.5,
+    "flow_check_lpm": 4.499999999998735,
+    "dp_Pa": 11115.538837371041,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 27.34750574950434,
+    "T_out_rise_K": 1.513050056499002,
+    "energy_in_W": 450.0,
+    "energy_out_W": 449.9999999283829,
+    "energy_closure_pct": -1.5914902729008418e-08,
+    "heaters": {
+     "1": {
+      "name": "GPU die",
+      "power_W": 390.0,
+      "cells": 2444,
+      "T_mean_rise_K": 22.439998096001577,
+      "T_max_rise_K": 27.34750574950434,
+      "R_K_per_W": 0.0575384566564143,
+      "R_total_K_per_W": 0.04986666243555906
+     },
+     "2": {
+      "name": "memory (12 x GDDR6X)",
+      "power_W": 30.0,
+      "cells": 7280,
+      "T_mean_rise_K": 2.8193931447626643,
+      "T_max_rise_K": 3.7270979150931947,
+      "R_K_per_W": 0.09397977149208882,
+      "R_total_K_per_W": 0.006265318099472587
+     },
+     "3": {
+      "name": "VRM power stages",
+      "power_W": 30.0,
+      "cells": 6307,
+      "T_mean_rise_K": 10.928663940529464,
+      "T_max_rise_K": 11.753992907436263,
+      "R_K_per_W": 0.3642887980176488,
+      "R_total_K_per_W": 0.024285919867843255
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.06481180690253613,
+     "p95": 0.13876680411807119,
+     "max": 0.44840075297566784
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 6.086701617516796e-10,
+    "unknowns": 2553822,
+    "wall_time_s": 126.3,
+    "h_open_W_m2K": 600.0
+   },
+   "monoblock_316L_3": {
+    "case": "monoblock",
+    "material": "316L",
+    "k_metal": 15.1,
+    "flow_lpm": 3.0,
+    "flow_check_lpm": 2.999999999998802,
+    "dp_Pa": 5089.595503764264,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 49.84842586974134,
+    "T_out_rise_K": 0.7161770268411949,
+    "energy_in_W": 142.0,
+    "energy_out_W": 141.9999999968812,
+    "energy_closure_pct": -2.196343107385701e-09,
+    "heaters": {
+     "1": {
+      "name": "CPU (IHS hot patch)",
+      "power_W": 120.0,
+      "cells": 2173,
+      "T_mean_rise_K": 41.73323273259302,
+      "T_max_rise_K": 49.84842586974134,
+      "R_K_per_W": 0.34777693943827515,
+      "R_total_K_per_W": 0.29389600515910574
+     },
+     "2": {
+      "name": "VRM power stages",
+      "power_W": 22.0,
+      "cells": 3198,
+      "T_mean_rise_K": 19.20732423936963,
+      "T_max_rise_K": 20.686743772988013,
+      "R_K_per_W": 0.8730601926986196,
+      "R_total_K_per_W": 0.13526284675612416
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.06969816946217568,
+     "p95": 0.12394631832059608,
+     "max": 0.2933886118703296
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     },
+     "arm": {
+      "A": 1421.0934989207637,
+      "B": 100676.58235715875,
+      "heat_fit": {
+       "c": 4610690.809466083,
+       "n": 0.4908514805063627,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.10526553962825023
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 3.349697080094551e-10,
+    "unknowns": 1455047,
+    "wall_time_s": 78.8,
+    "h_open_W_m2K": 600.0
+   },
+   "monoblock_AlSi10Mg_1.5": {
+    "case": "monoblock",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 1.5,
+    "flow_check_lpm": 1.4999999999998481,
+    "dp_Pa": 1368.2693857934414,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 12.591239511429608,
+    "T_out_rise_K": 1.4323540539221862,
+    "energy_in_W": 142.0,
+    "energy_out_W": 142.00000002069638,
+    "energy_closure_pct": 1.4574919049437085e-08,
+    "heaters": {
+     "1": {
+      "name": "CPU (IHS hot patch)",
+      "power_W": 120.0,
+      "cells": 2173,
+      "T_mean_rise_K": 9.934781943179853,
+      "T_max_rise_K": 12.591239511429608,
+      "R_K_per_W": 0.08278984952649877,
+      "R_total_K_per_W": 0.06996325312098488
+     },
+     "2": {
+      "name": "VRM power stages",
+      "power_W": 22.0,
+      "cells": 3198,
+      "T_mean_rise_K": 4.960354358133335,
+      "T_max_rise_K": 5.291786675795212,
+      "R_K_per_W": 0.22547065264242433,
+      "R_total_K_per_W": 0.034932072944600955
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.03455392603335425,
+     "p95": 0.0621740990521578,
+     "max": 0.14932155313850548
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     },
+     "arm": {
+      "A": 1421.0934989207637,
+      "B": 100676.58235715875,
+      "heat_fit": {
+       "c": 4610690.809466083,
+       "n": 0.4908514805063627,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.10526553962825023
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 1.7828087510524154e-10,
+    "unknowns": 1455047,
+    "wall_time_s": 74.3,
+    "h_open_W_m2K": 600.0
+   },
+   "monoblock_AlSi10Mg_3": {
+    "case": "monoblock",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 3.0,
+    "flow_check_lpm": 2.9999999999985754,
+    "dp_Pa": 5089.595503761232,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 10.676190791298554,
+    "T_out_rise_K": 0.7161770268022211,
+    "energy_in_W": 142.0,
+    "energy_out_W": 141.99999998914294,
+    "energy_closure_pct": -7.64581731260705e-09,
+    "heaters": {
+     "1": {
+      "name": "CPU (IHS hot patch)",
+      "power_W": 120.0,
+      "cells": 2173,
+      "T_mean_rise_K": 8.421457275957431,
+      "T_max_rise_K": 10.676190791298554,
+      "R_K_per_W": 0.0701788106329786,
+      "R_total_K_per_W": 0.0593060371546298
+     },
+     "2": {
+      "name": "VRM power stages",
+      "power_W": 22.0,
+      "cells": 3198,
+      "T_mean_rise_K": 3.9973791792601667,
+      "T_max_rise_K": 4.303609552276605,
+      "R_K_per_W": 0.18169905360273486,
+      "R_total_K_per_W": 0.02815055760042371
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.06969816946215238,
+     "p95": 0.12394631832055472,
+     "max": 0.2933886118702403
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     },
+     "arm": {
+      "A": 1421.0934989207637,
+      "B": 100676.58235715875,
+      "heat_fit": {
+       "c": 4610690.809466083,
+       "n": 0.4908514805063627,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.10526553962825023
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 4.4424086314353894e-10,
+    "unknowns": 1455047,
+    "wall_time_s": 73.0,
+    "h_open_W_m2K": 600.0
+   },
+   "monoblock_AlSi10Mg_4.5": {
+    "case": "monoblock",
+    "material": "AlSi10Mg",
+    "k_metal": 130.0,
+    "flow_lpm": 4.5,
+    "flow_check_lpm": 4.4999999999966365,
+    "dp_Pa": 11163.326808951688,
+    "picard_iters": 5,
+    "voxel_mm": 0.5,
+    "T_solid_max_rise_K": 9.764304063798972,
+    "T_out_rise_K": 0.4774513512629526,
+    "energy_in_W": 142.0,
+    "energy_out_W": 142.00000000738675,
+    "energy_closure_pct": 5.2019277774206785e-09,
+    "heaters": {
+     "1": {
+      "name": "CPU (IHS hot patch)",
+      "power_W": 120.0,
+      "cells": 2173,
+      "T_mean_rise_K": 7.723109584059551,
+      "T_max_rise_K": 9.764304063798972,
+      "R_K_per_W": 0.06435924653382959,
+      "R_total_K_per_W": 0.0543880956623912
+     },
+     "2": {
+      "name": "VRM power stages",
+      "power_W": 22.0,
+      "cells": 3198,
+      "T_mean_rise_K": 3.611905175616961,
+      "T_max_rise_K": 3.899880882286309,
+      "R_K_per_W": 0.16417750798258915,
+      "R_total_K_per_W": 0.025435951940964516
+     }
+    },
+    "core_superficial_velocity": {
+     "mean": 0.10488421524314766,
+     "p95": 0.18561891840481598,
+     "max": 0.43728770235571335
+    },
+    "closures": {
+     "core": {
+      "A": 175665.45933651767,
+      "B": 16404527.266360657,
+      "heat_fit": {
+       "c": 63772539.53273383,
+       "n": 0.5916808086261911,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.5290397931750818
+     },
+     "gallery": {
+      "A": 24963.125482300984,
+      "B": 2575393.151901242,
+      "heat_fit": {
+       "c": 28857976.136536624,
+       "n": 0.5474681086525823,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.21588026991758047
+     },
+     "arm": {
+      "A": 1421.0934989207637,
+      "B": 100676.58235715875,
+      "heat_fit": {
+       "c": 4610690.809466083,
+       "n": 0.4908514805063627,
+       "form": "h*a = c * U^n  [W/m3K], U superficial in m/s"
+      },
+      "k_ratio_z": 0.10526553962825023
+     }
+    },
+    "fluid": {
+     "rho": 1030.0,
+     "cp": 3850.0,
+     "k": 0.5,
+     "nu": 1e-06,
+     "alpha": 1.2608750472828143e-07,
+     "Pr": 7.931
+    },
+    "linear_residual": 4.80792648274469e-10,
+    "unknowns": 1455047,
+    "wall_time_s": 76.7,
+    "h_open_W_m2K": 600.0
+   }
+  },
+  "gpu_thermal_scale_K": 29.789182662963867,
+  "mono_thermal_scale_K": 10.676190376281738
+ }
+}

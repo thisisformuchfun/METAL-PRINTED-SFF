@@ -68,7 +68,7 @@ def run(h_mm=0.5):
     res = dict(power_w=dict(ssd=BD["m2_power_w"], chipset=BD["chipset_power_w"]), exposed_area_cm2=area_exposed * 1e4,
                k_alu=K_ALU, voxel_mm=h_mm, cases=[])
     Tsave = None
-    for hf in (5.0, 7.0, 10.0):
+    for hf in (5.0, 7.0, 10.0, 30.0):      # 5-10: still air (natural convection + radiation); 30: a light draught, ~1.5 m/s
         film = hf * exposed * h * h * 0.68
         film[pad] = hf * (exposed[pad] - 1).clip(0) * h * h * 0.68       # pad faces are covered by the chip
         A = sp.coo_matrix((np.concatenate(vals + [diag_c + film]), (np.concatenate(rows + [np.arange(n)]), np.concatenate(cols + [np.arange(n)]))),
@@ -86,6 +86,7 @@ def run(h_mm=0.5):
     # how much power keeps the SSD pad at +45 K (70 C in a 25 C room)?
     mid = res["cases"][1]
     res["power_for_45K_W"] = 45.0 / (mid["rise_ssd_K"] / sum(res["power_w"].values()))
+    res["power_for_45K_with_airflow_W"] = 45.0 / (res["cases"][3]["rise_ssd_K"] / sum(res["power_w"].values()))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "summary.json").write_text(json.dumps(res, indent=1))
     np.savez_compressed(OUT / "fields.npz", Ts=Tsave.reshape(solid.shape), origin_mm=np.array(grid.lo), dx_mm=h_mm)
