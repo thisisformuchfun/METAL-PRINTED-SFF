@@ -10,7 +10,8 @@ metal printer at JLC3DP or PCBWay.
 > pressure and stress quoted here comes from the simulations in `sim/`. Read "Before you order" first.
 
 - **Site (source):** `site/index.html` - serve the `site/` folder, or open the published link from the pull request.
-- **Film:** `site/media/film.mp4` (84 s, original synthesised score).
+- **Films:** `site/media/film.mp4` (84 s launch film) and `site/media/short.mp4` (30 s engineering cut). The score is original and
+  synthesised; it was checked by measurement only (`media/score/QA.md`), nobody has listened to it.
 - **Print files:** `exports/print/*.3mf` (nine parts).
 
 ## The build this was designed around
