@@ -239,6 +239,12 @@ def drill_rear(f, grid, holes):
         sdf.add_cyl(f, grid, (x, y0 + 4.2, z), (x, y0 + 30, z), 3.4, op="cut")          # head access
 
 
+def rad_seat(f, grid):
+    """Nothing of the rear segments may reach into the radiator / fan stack: flat seats on its rear face."""
+    R = P.RAD
+    sdf.add_box(f, grid, (-140.0, R["y_fan0"] - 1.0, R["centres_z"][1] - 60.5), (140.0, R["y_rear"], R["centres_z"][0] + 60.5), op="cut")
+
+
 def rad_z():
     za, zb = P.RAD["centres_z"]
     return dict(top=za + 52.5, mid_hi=za - 52.5, mid_lo=zb + 52.5, bot=zb - 52.5)
@@ -259,6 +265,7 @@ def build_dorsal(h):
         for zz in (rz["bot"], rz["mid_lo"], rz["mid_hi"]):
             sdf.add_capsule(f, grid, (0, REAR_Y - 2.5, zz), (sgn * 7.5, P.RAD["y_rear"] + 2.6, zz), 4.2, 3.6, k=2.0)
             rear_pad(f, grid, sgn * 7.5, zz, holes)
+    rad_seat(f, grid)
     drill_rear(f, grid, holes)
     lap_cut(f, grid, JOINTS["J4"], "high")
     lap_cut(f, grid, JOINTS["J2"], "low")
@@ -288,6 +295,7 @@ def build_cervical(h):
         rear_rib(f, grid, sgn, rz["top"] - 20.0, [rz["top"]], holes)
         sdf.add_capsule(f, grid, (0, REAR_Y - 2.5, rz["top"]), (sgn * 7.5, P.RAD["y_rear"] + 2.6, rz["top"]), 4.2, 3.6, k=2.0)
         rear_pad(f, grid, sgn * 7.5, rz["top"], holes)
+    rad_seat(f, grid)
     drill_rear(f, grid, holes)
     # flat seat against the thoracic head + M5 clearance + counterbore
     sl = grid.box(top - 16, top + 16)
@@ -348,6 +356,8 @@ def build_pelvis(h):
                    ((feet[0][0] * 0.48, Kf[1] + (feet[0][1] - Kf[1]) * 0.55, 9.5), (xb + 1.6, y0 + 6.0, z0 + 5.0))):
         m = 0.5 * (np.array(a) + np.array(b)) + np.array([-6.0, 0.0, -2.0])
         bone(f, grid, [a, m, b], R_RIB0, R_RIB1 + 0.3, k=3.0)
+    # the PSU body itself is a keep-out: flat pedestal tops, nothing bulging into it
+    sdf.add_box(f, grid, psu_lo + np.array([-0.2, -0.2, 0.0]), psu_lo + psu_sz + np.array([0.2, 0.2, 0.2]), op="cut")
     for (sy, sz) in scr:
         sdf.add_cyl(f, grid, (xb - 6, sy, sz), (xb + 6, sy, sz), 2.0, op="cut")          # 6-32 clearance
     # riser shelf (plate normal to e_s) just below the PCIe fingers

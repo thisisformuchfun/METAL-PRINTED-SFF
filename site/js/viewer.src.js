@@ -68,29 +68,38 @@ function start() {
 
   const loader = new GLTFLoader();
   loader.setMeshoptDecoder(MeshoptDecoder);
-  loader.load('model/marrow.glb', (gltf) => {
+  function adopt(gltf) {
     scene.add(gltf.scene);
     LAYERS.forEach((n) => {
       const g = gltf.scene.getObjectByName(n);
-      if (g) { S.groups[n] = g; S.base[n] = g.position.clone(); }
+      if (g && !S.groups[n]) { S.groups[n] = g; S.base[n] = g.position.clone(); }
     });
+    gltf.scene.traverse((o) => {
+      if (!o.isMesh) { return; }
+      let layer = null, p = o;
+      while (p) { if (LAYERS.includes(p.name)) { layer = p.name; break; } p = p.parent; }
+      o.userData.layer = layer;
+      o.userData.hasHeat = layer === 'alu' && !!o.geometry.getAttribute('color');
+      if (layer === 'alu') { o.material = S.mats.alu; }
+      if (layer === 'steel') { o.material = S.mats.steel; }
+      if (layer === 'host' || layer === 'loop') {
+        const m = o.material;
+        if (m && m.vertexColors) { m.vertexColors = false; m.needsUpdate = true; }
+      }
+      o.userData.orig = o.material;
+    });
+  }
+  // the hardware the chassis carries is a second, heavier file: show the printed parts first
+  const loadHost = () => loader.load('model/marrow_host.glb', (g2) => { adopt(g2); apply(); }, undefined, () => {});
+  loader.load('model/marrow.glb', (gltf) => {
     const alu = new THREE.MeshStandardMaterial({ color: 0xcdd4da, metalness: 1, roughness: 0.42 });
     const steel = new THREE.MeshStandardMaterial({ color: 0x77828d, metalness: 1, roughness: 0.3 });
     const heat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0, roughness: 0.75 });
     const ghost = new THREE.MeshStandardMaterial({ color: 0xcfd8df, metalness: 0.2, roughness: 0.5, transparent: true, opacity: 0.13, depthWrite: false });
     const dim = new THREE.MeshStandardMaterial({ color: 0x1a232c, metalness: 0.1, roughness: 0.8, transparent: true, opacity: 0.22, depthWrite: false });
     S.mats = { alu, steel, heat, ghost, dim };
-    gltf.scene.traverse((o) => {
-      if (!o.isMesh) { return; }
-      let layer = null, p = o;
-      while (p) { if (LAYERS.includes(p.name)) { layer = p.name; break; } p = p.parent; }
-      o.userData.layer = layer;
-      o.userData.hasHeat = !!o.geometry.getAttribute('color');
-      if (layer === 'alu') { o.material = alu; }
-      if (layer === 'steel') { o.material = steel; }
-      if (o.material && o.material.vertexColors && layer !== 'alu') { o.material.vertexColors = false; }
-      o.userData.orig = o.material;
-    });
+    adopt(gltf);
+    loadHost();
     poster.hidden = true;
     btn.hidden = true;
     hint.hidden = false;

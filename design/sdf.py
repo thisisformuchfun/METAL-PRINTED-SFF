@@ -547,7 +547,9 @@ def mesh(field, grid, sl=None, step=1):
         sl = (slice(None),) * 3
     sub = field[sl]
     # pad with 'outside' so the surface closes at the grid boundary
-    sub = np.pad(sub, 1, mode="constant", constant_values=float(grid.h))
+    # Features that sit exactly on a grid plane give node values of exactly 0, which marching cubes turns into
+    # zero-area triangles and open edges. A 0.4 micron bias keeps every node off the iso-surface.
+    sub = np.pad(sub + np.float32(3.7e-4), 1, mode="constant", constant_values=float(grid.h))
     v, f, _, _ = measure.marching_cubes(sub, level=0.0, spacing=(grid.h,) * 3, step_size=step,
                                         gradient_direction="ascent", allow_degenerate=False)
     o = np.array(grid.origin_of(sl)) - grid.h
