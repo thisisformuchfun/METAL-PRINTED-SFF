@@ -10,7 +10,7 @@ metal printer at JLC3DP or PCBWay.
 > pressure and stress quoted here comes from the simulations in `sim/`. Read "Before you order" first.
 
 - **Site (source):** `site/index.html` - serve the `site/` folder, or open the published link from the pull request.
-- **Film:** `site/media/film.mp4` (80 s, original synthesised score).
+- **Film:** `site/media/film.mp4` (84 s, original synthesised score).
 - **Print files:** `exports/print/*.3mf` (nine parts).
 
 ## The build this was designed around
@@ -132,7 +132,9 @@ on the cold-plate temperature rises.
 Rebuild everything: `tools/build_all.sh` (CAD, simulations, renders, film, site). It needs Python 3.13 with the packages in
 `requirements.txt`, Blender 4.5 LTS and ffmpeg; the web viewer is bundled with esbuild and the web models are packed with
 gltfpack (`tools/build_site.sh`). `pymeshlab` needs the system library `libopengl0`. The scripts look for the tools under
-`/opt`; set `PY`, `BLENDER` and `GLTFPACK` to point elsewhere. Path tracing is on the CPU: allow about an hour for the stills
+`/opt`; set `PY`, `BLENDER` and `GLTFPACK` to point elsewhere. Two inputs are not stored in git: the studio light
+(`studio_small_09_2k.hdr` from Poly Haven, CC0, into `render/hdri/`) and the uncompressed score (`media/score/score.py`
+writes it; the MP3 and M4A are in the repository). Path tracing is on the CPU: allow about an hour for the stills
 and another for the camera arc on four cores.
 
 ## Credits
