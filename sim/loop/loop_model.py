@@ -133,7 +133,8 @@ def solve(material, blocks, load, rpm, pump_speed=1.0, rad_scale=1.0):
     _, Tg_in, Tm_in, Tr_in = loop(T0)
     Rg = g["R_k"] * q ** g["R_n"]
     Rc = m["R_k"] * q ** m["R_n"]
-    gpu_die = Tg_in + Rg * g["heater_w"] / g["heater_w"] * load["gpu"] * g["die_share"] + a["gpu_tim_k_per_w"] * load["gpu"] * g["die_share"]
+    p_die = load["gpu"] * g["die_share"]
+    gpu_die = Tg_in + Rg * p_die + a["gpu_tim_k_per_w"] * p_die
     gpu_hot = gpu_die + a["gpu_hotspot_k"]
     cpu_ihs = Tm_in + Rc * load["cpu"]
     cpu_tj = cpu_ihs + (a["cpu_tim_k_per_w"] + a["cpu_package_k_per_w"]) * load["cpu"]
@@ -163,9 +164,15 @@ def gather_blocks():
             Rs = [h["R_K_per_W"] for h in h1]
             k, n = fit_power(qs, dps, 1.8)
             Rk, Rn = fit_power(qs, Rs, -0.25)
-            share = 1.0
+            share = h1[0]["power_W"] / lst[0]["energy_in_W"] if blk == "gpu_block" else 1.0
             res[mat] = dict(k=k, n=n, R_k=Rk, R_n=Rn, heater_w=h1[0]["power_W"], die_share=share,
                             runs=[dict(flow_lpm=q_, dp_kpa=d_, R=r_) for q_, d_, r_ in zip(qs, dps, Rs)])
+        # hydraulics do not depend on the metal: a metal simulated at one flow rate borrows the exponents
+        ref = res.get("AlSi10Mg")
+        for mat, v in res.items():
+            if ref and mat != "AlSi10Mg" and len(v["runs"]) < 2:
+                v["k"], v["n"], v["R_n"] = ref["k"], ref["n"], ref["R_n"]
+                v["R_k"] = v["runs"][0]["R"] / v["runs"][0]["flow_lpm"] ** ref["R_n"]
         out[blk] = res
     return out
 
@@ -176,13 +183,6 @@ def main():
     if missing:
         print("No CHT results yet for:", missing, "- run the cold-plate simulations first.")
         return None
-    # hydraulics are material-independent; reuse flow fits across metals when only thermal differs
-    for blk in blocks:
-        mats = blocks[blk]
-        ref = next(iter(mats.values()))
-        for mat in ("AlSi10Mg", "316L"):
-            if mat in mats:
-                mats[mat].setdefault("k", ref["k"])
     res = dict(assumptions=ASSUME, loads=LOADS, blocks=blocks, sweep=[])
     mats = [m for m in ("AlSi10Mg", "316L") if all(m in blocks[b] for b in blocks)]
     for mat in mats:
