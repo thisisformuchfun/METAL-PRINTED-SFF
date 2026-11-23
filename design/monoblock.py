@@ -43,6 +43,16 @@ HOT = (SX + BD["hotspot_offset"][0], SY + BD["hotspot_offset"][1])
 OUT = M["outlet"]
 
 
+def trench(x, y, z):
+    """Open V-trench in the CPU core under the nozzle (the slot runs along x)."""
+    wt, wb, keep = M["trench"]
+    jl, jw = M["jet"]
+    z0, z1 = Z_FLOOR + keep, Z_CORE1 + 0.3
+    w = wb + (wt - wb) * np.clip((z - z0) / (Z_CORE1 - z0), 0.0, 1.0)
+    return np.maximum(np.maximum(np.abs(y - HOT[1]) - 0.5 * w, np.abs(x - HOT[0]) - (0.5 * jl + 0.8)),
+                      np.maximum(z0 - z, z - z1))
+
+
 def lugs():
     ax, ay = BD["am5_holes"]
     return [(SX - ax / 2, SY - ay / 2), (SX + ax / 2, SY - ay / 2), (SX - ax / 2, SY + ay / 2), (SX + ax / 2, SY + ay / 2)]
@@ -136,6 +146,7 @@ def build(h=0.25, verbose=True):
     del lat
     div = np.maximum(chamber2(xs, ys, shrink=M["riser_gap"]), np.maximum(Z_CORE1 - zs, zs - Z_DIV1))
     f[sl] = np.minimum(f[sl], div)
+    f[sl] = np.maximum(f[sl], -trench(xs, ys, zs))
     # inlet plenum + slot nozzle (slot runs along x over the hot spot)
     jl, jw = M["jet"]
     plo = (min(IN[0], HOT[0]) - jl / 2 - 1.0, min(IN[1], HOT[1]) - 7.0)

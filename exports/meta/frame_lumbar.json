@@ -17,7 +17,7 @@
  ],
  "bbox_hi": [
   120.98,
-  146.39,
+  146.4,
   216.39
  ],
  "fits_envelope": true,
@@ -27,9 +27,17 @@
   106.58
  ],
  "print_stl": {
-  "faces": 223090,
+  "faces": 223086,
   "watertight": true,
-  "mesh_volume_cm3": 39.39
+  "topology": {
+   "faces": 223086,
+   "boundary_edges": 0,
+   "non_manifold_edges": 0,
+   "non_manifold_vertices": 0,
+   "components": 1,
+   "watertight": true
+  },
+  "mesh_volume_cm3": 39.38
  },
  "surface_area_cm2": 192.3,
  "islands_removed_voxels": 0

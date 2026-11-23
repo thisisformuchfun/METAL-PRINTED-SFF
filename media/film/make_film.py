@@ -187,7 +187,7 @@ def timeline(numbers):
     add(20.0, 5.0, "frame_only", dict(z0=1.03, z1=1.10, px=-18), super_("FIVE SEGMENTS · TEN BOLTS", "A skeleton.", f"LONGEST PART {n['longest']} MM · FITS A 300 MM BUILD PLATE"))
     add(25.0, 5.0, "organs", dict(z0=1.10, z1=1.03, px=22), super_("FOUR PRINTED ALUMINIUM PARTS", "Its organs.", "GYROID INSIDE · BONE SKIN OUTSIDE · NO GASKETS"))
     add(30.0, 4.85, "sim_flow", None, super_("RESOLVED, THEN SCALED UP", "Coolant through a gyroid.", "LATTICE-BOLTZMANN FLOW · FINITE-VOLUME HEAT"))
-    add(35.0, 10.0, "orbit", None, super_("PRE-LAUNCH PREVIEW", "MARROW", "Printed bone. Liquid marrow.", big=True), sup_in=0.05)
+    add(35.0, 10.0, "orbit", dict(z0=1.0, z1=1.16, px=-44, py=8), super_("PRE-LAUNCH PREVIEW", "MARROW", "Printed bone. Liquid marrow.", big=True), sup_in=0.05)
     add(45.0, 5.0, "board", dict(z0=1.04, z1=1.12, px=-20, py=6), super_("ORGAN II", "CPU and VRM, one block."))
     add(50.0, 5.0, "gpu", dict(z0=1.12, z1=1.04, px=24), super_("ORGAN I", "A 4090, under gyroid.", f"{n['gpu_w']} W · DIE +{n['gpu_rise']} K OVER COOLANT · SIMULATED"))
     add(55.0, 5.0, "rear_ribs", dict(z0=1.03, z1=1.10, px=-24), super_("TWO 240 MM RADIATORS", "Ribs over lungs."))
@@ -231,6 +231,8 @@ def main(preview=False):
             srcs[k] = Sequence(SIMV / k, "*.png")
         else:
             srcs[k] = Still(k)
+        if k == "orbit" and not srcs[k].ok:
+            srcs[k] = Still("hero_right")          # no rendered orbit yet: drift across the three-quarter still instead
         print(k, "ok" if srcs[k].ok else "MISSING", flush=True)
     vig = vignette()
     total = int(84.0 * FPS)

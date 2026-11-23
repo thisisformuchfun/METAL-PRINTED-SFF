@@ -63,6 +63,16 @@ def chamber2(x, y, shrink=0.0, r=6.0):
                      (B["chamber_x"][1] - shrink, B["chamber_y"][1] - shrink), r=max(r - shrink, 1.5))
 
 
+def trench(x, y, z):
+    """Open V-trench in the core under the nozzle: lets the jet spread before it enters the lattice."""
+    wt, wb, keep = B["trench"]
+    jw, jl = B["jet"]
+    z0, z1 = Z_FLOOR + keep, Z_CORE1 + 0.3
+    w = wb + (wt - wb) * np.clip((z - z0) / (Z_CORE1 - z0), 0.0, 1.0)
+    return np.maximum(np.maximum(np.abs(x - B["inlet"][0]) - 0.5 * w, np.abs(y - B["inlet"][1]) - (0.5 * jl + 0.8)),
+                      np.maximum(z0 - z, z - z1))
+
+
 def mem_bars():
     """Pad pedestals: one rectangle per memory chip, slightly inset."""
     out = []
@@ -159,6 +169,7 @@ def build(h=0.25, verbose=True):
     # divider plate
     div = np.maximum(chamber2(xs, ys, shrink=B["riser_gap"]), np.maximum(Z_CORE1 - zs, zs - Z_DIV1))
     f[sl] = np.minimum(f[sl], div)
+    f[sl] = np.maximum(f[sl], -trench(xs, ys, zs))
     # solid pillars carrying the four GPU mounting threads up through the wet core
     for (px, py) in G["core_holes"]:
         pil = np.maximum(sdf.circle2(xs, ys, (px, py), 3.75), np.maximum(Z_UNDER - 0.3 - zs, zs - 9.6))

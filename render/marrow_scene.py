@@ -164,7 +164,7 @@ def materials():
     MATS["tube"] = mat_tube()
     MATS["fitting"] = mat_simple("MAT_fit_blacknickel", (0.09, 0.09, 0.10), rough=0.22, metallic=1.0)
     MATS["rubber"] = mat_simple("MAT_rubber", (0.02, 0.02, 0.022), rough=0.7)
-    MATS["floor"] = mat_simple("MAT_floor", (0.006, 0.0065, 0.0075), rough=0.42)
+    MATS["floor"] = mat_simple("MAT_floor", (0.0045, 0.005, 0.006), rough=0.5)
     return MATS
 
 
@@ -490,7 +490,7 @@ def set_world(hdri="studio_small_09_2k.hdr", strength=0.35, rot_deg=0.0, bg=(0.0
     return w
 
 
-def add_floor(z=0.0, size=6.0):
+def add_floor(z=0.0, size=120.0):
     bpy.ops.mesh.primitive_plane_add(size=size, location=(0, 0.15, z))
     o = bpy.context.object
     o.name = "floor"
@@ -530,6 +530,19 @@ def light_rig(key=1.0, rim=1.0, fill=1.0, top=1.0, warm=(1.0, 0.92, 0.82), cool=
         area_light("top", c + Vector((0, 60, 900)), c, 5.0 * top, 1100, (1, 1, 1), size_y_mm=700),
     ]
     STATE["lights"] = lights
+    # rim lights are for the metal, not the floor: exclude the floor from them (Cycles light linking)
+    floor = bpy.data.objects.get("floor")
+    if floor is not None:
+        try:
+            coll = bpy.data.collections.new("LL_no_floor")
+            coll.objects.link(floor)
+            for co in coll.collection_objects:
+                co.light_linking.link_state = "EXCLUDE"
+            for l in lights:
+                if l.name.startswith("rim"):
+                    l.light_linking.receiver_collection = coll
+        except Exception as ex:  # noqa: BLE001
+            print("light linking unavailable:", ex)
     return lights
 
 

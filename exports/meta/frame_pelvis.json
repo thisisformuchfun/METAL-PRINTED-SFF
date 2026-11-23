@@ -3,8 +3,8 @@
  "material": "316L",
  "frame": "world",
  "voxel_mm": 0.5,
- "volume_cm3": 105.59,
- "mass_g": 842.6,
+ "volume_cm3": 105.14,
+ "mass_g": 839.0,
  "bbox_mm": [
   254.4,
   282.5,
@@ -23,14 +23,22 @@
  "fits_envelope": true,
  "longest_mm": 282.5,
  "cost_usd_jlc_pcbway": [
-  185.84,
-  282.99
+  185.05,
+  281.78
  ],
  "print_stl": {
   "faces": 400000,
   "watertight": true,
-  "mesh_volume_cm3": 104.64
+  "topology": {
+   "faces": 400000,
+   "boundary_edges": 0,
+   "non_manifold_edges": 0,
+   "non_manifold_vertices": 0,
+   "components": 1,
+   "watertight": true
+  },
+  "mesh_volume_cm3": 104.16
  },
- "surface_area_cm2": 509.2,
+ "surface_area_cm2": 509.1,
  "islands_removed_voxels": 0
 }

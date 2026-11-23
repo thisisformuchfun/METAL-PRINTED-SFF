@@ -38,10 +38,10 @@ SHOTS = {
     "gpu": dict(loc=S(200, 10, 400), tgt=S(-10, 88, 10), lens=70, fstop=6.3),
     "heart": dict(loc=S(300, 320, 260), tgt=S(90, 250, 22), lens=85, fstop=5.0),
     # --- macro
-    "macro_skin": dict(loc=S(-70, 30, 78), tgt=S(-8, 78, 22), lens=95, fstop=3.2),
-    "macro_ports": dict(loc=S(-150, 196, 120), tgt=S(-52, 262, 30), lens=100, fstop=3.2),
+    "macro_skin": dict(loc=S(-205, 6, 96), tgt=S(-84, 70, 14), lens=90, fstop=5.6),
+    "macro_ports": dict(loc=S(-190, 170, 190), tgt=S(-52, 262, 32), lens=90, fstop=6.3),
     "macro_knuckle": dict(loc=Vector((-170, 420, 300)), tgt=Vector((0, 292, 272)), lens=100, fstop=3.5),
-    "macro_tube": dict(loc=S(60, 150, 150), tgt=S(-30, 150, 62), lens=100, fstop=2.8),
+    "macro_tube": dict(loc=S(120, 30, 190), tgt=S(-34, 86, 46), lens=90, fstop=5.6),
 }
 
 

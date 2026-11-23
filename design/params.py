@@ -239,7 +239,8 @@ GPU_BLOCK = dict(
     core_h=6.5, divider=1.0, gallery_h=5.0, roof=1.6, skin_h=7.5,
     chamber_x=(71.0, 162.0), chamber_y=(20.0, 105.5), wall=2.0,
     riser_gap=3.5,                # perimeter slot where coolant rises from core to gallery
-    jet=(2.4, 20.0),              # slot nozzle (x width, y length) over the die
+    jet=(4.0, 24.0),              # slot nozzle (x width, y length) over the die
+    trench=(5.0, 2.0, 3.2),       # entry trench under the nozzle: top width, bottom width, lattice left on the floor
     inlet=(116.55, 59.20), outlet=(116.55 - 34.0, 59.20),
     pedestal_die=(30.0, 33.0), pad_mem=1.0, pad_vrm=1.5, pad_ind=1.0,
     wing_top=9.7,
@@ -251,7 +252,8 @@ MONOBLOCK = dict(
     material="AlSi10Mg",
     floor=2.0, core_h=6.5, divider=1.0, gallery_h=5.0, roof=1.6, skin_h=7.0,
     contact=(42.0, 42.0), chamber=(46.0, 46.0), wall=2.0, riser_gap=3.0,
-    jet=(22.0, 2.6),              # slot nozzle (x length, y width) over the CCD hot spot
+    jet=(24.0, 4.0),              # slot nozzle (x length, y width) over the CCD hot spot
+    trench=(6.0, 2.5, 2.0),
     inlet_offset=(0.0, -4.0),     # port position relative to socket centre
     arm_left=dict(x=(28.5, 48.6), y=(68.0, 147.0)),
     arm_top=dict(x=(28.5, 120.0), y=(145.5, 167.5)),

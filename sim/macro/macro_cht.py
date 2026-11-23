@@ -72,7 +72,7 @@ def gpu_case(h=0.5):
     pill = np.zeros_like(ch)
     for (px, py) in P.GPU["core_holes"]:
         pill |= sdf.circle2(x, y, (px, py), 3.75) < 0
-    core = ch & (z >= GB.Z_FLOOR) & (z < GB.Z_CORE1) & ~(pill & (z < 9.6))
+    core = ch & (z >= GB.Z_FLOOR) & (z < GB.Z_CORE1) & ~(pill & (z < 9.6)) & ~(GB.trench(x, y, z) < 0)
     gal = ch & (z < GB.Z_GAL1) & (z >= GB.Z_DIV1) & ~pl_o & ~(pocket & (z >= GB.Z_DIV1 + 0.9))
     zone[core] = 3
     zone[gal] = 4
@@ -117,7 +117,7 @@ def mono_case(h=0.5):
     plo = (min(IN[0], HOT[0]) - jl / 2 - 1.0, min(IN[1], HOT[1]) - 7.0)
     phi = (max(IN[0], HOT[0]) + jl / 2 + 1.0, max(IN[1], HOT[1]) + 7.0)
     pl_o = sdf.rect2(x, y, (plo[0] - 1.4, plo[1] - 1.4), (phi[0] + 1.4, phi[1] + 1.4), r=6.4) < 0
-    core = ch & (z >= MB.Z_FLOOR) & (z < MB.Z_CORE1)
+    core = ch & (z >= MB.Z_FLOOR) & (z < MB.Z_CORE1) & ~(MB.trench(x, y, z) < 0)
     gal = ch & (z < MB.Z_GAL1) & (z >= MB.Z_DIV1) & ~pl_o
     W = M["wall"]
     ai = MB.arms2(x, y, shrink=W) < 0
