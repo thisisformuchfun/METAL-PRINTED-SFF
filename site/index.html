@@ -63,7 +63,7 @@ nav.top ul a:hover { color: var(--ruby-ink); }
 .hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,8,11,0.93) 0%, rgba(5,8,11,0.62) 34%, rgba(5,8,11,0) 62%), linear-gradient(0deg, rgba(5,8,11,0.85) 0%, rgba(5,8,11,0) 30%); }
 .hero .copy { position: absolute; inset: 0; display: flex; align-items: center; }
 .hero .copy .wrap { width: 100%; }
-.hero h1 { font-size: clamp(3.6rem, 13vw, 10.5rem); font-weight: 600; letter-spacing: 0.02em; line-height: 0.86; color: #f1f5f8; }
+.hero h1 { font-size: clamp(3.4rem, 8.6vw, 7.4rem); font-weight: 600; letter-spacing: 0.02em; line-height: 0.86; color: #f1f5f8; }
 .hero .tag { font-family: var(--display); font-style: italic; font-size: clamp(1.3rem, 2.9vw, 2.25rem); margin-top: 0.8rem; color: #f1f5f8; }
 .hero .tag em { font-style: italic; color: #ff5f7a; }
 .hero p.lede { margin-top: 1.1rem; max-width: 44ch; color: #b7c4cf; font-size: 1.02rem; }
@@ -182,9 +182,11 @@ footer p + p { margin-top: 0.6rem; }
   .readout > div:nth-child(3) { padding-left: 1rem; }
   nav.top ul { gap: 0.8rem; }
   nav.top ul li.opt { display: none; }
-  .hero .veil { background: linear-gradient(0deg, rgba(5,8,11,0.95) 0%, rgba(5,8,11,0.55) 55%, rgba(5,8,11,0.15) 100%); }
-  .hero .copy { align-items: flex-end; padding-bottom: 1.6rem; }
-  .hero img.bg { object-position: 88% 50%; }
+  /* narrow screens: the picture first, the words under it on the plain ground */
+  .hero img.bg { height: clamp(260px, 62vw, 420px); object-position: 100% 50%; }
+  .hero .veil { inset: 0 0 auto 0; height: clamp(260px, 62vw, 420px); background: linear-gradient(0deg, rgba(5,8,11,1) 0%, rgba(5,8,11,0) 40%); }
+  .hero .copy { position: static; padding: 0.3rem 0 1.8rem; }
+  .hero h1 { font-size: clamp(3.4rem, 17vw, 6rem); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
@@ -277,10 +279,10 @@ footer p + p { margin-top: 0.6rem; }
 
 <section id="bones"><div class="wrap">
   <div class="head">
-    <div><div class="mono plate-no">Plate III &middot; Skeleton</div><h2>Five bones, ten bolts.</h2></div>
+    <div><div class="mono plate-no">Plate III &middot; Skeleton</div><h2>Five bones, nine bolts.</h2></div>
     <div>
       <p>The frame is one closed ring down the middle of the machine: a front spine leaning back 25° behind the board and the graphics card, a rear spine behind the radiators, a crown and a keel. Ribs reach out to every mounting hole. The radiators hang off the rear spine like lungs, and the power supply sits low in the pelvis as ballast.</p>
-      <p>It prints as five 316L segments joined by half-lap knuckles with two M5 bolts each, so the longest piece clears a 300&nbsp;mm build plate at both JLC3DP and PCBWay.</p>
+      <p>It prints as five 316L segments. Four half-lap knuckles take two M5 bolts each and one more bolt runs down through the crown, so the longest piece clears a 300&nbsp;mm build plate at both JLC3DP and PCBWay.</p>
     </div>
   </div>
   <div class="two">
@@ -302,8 +304,13 @@ footer p + p { margin-top: 0.6rem; }
     <div><p>Each cold plate is a single aluminium print. Coolant runs through a sheet-gyroid core that needs no supports and leaves no sealed pockets, so powder shakes out through the two ports. The outside wears a bone-like gyroid skin swollen over a Voronoi pattern; it is dry, and there for the look and a little passive area.</p></div>
   </div>
 
+  <div class="two" style="margin-bottom:1.25rem">
+    <figure class="plate"><img src="media/organs.jpg" alt="The four printed aluminium parts laid out on a dark table: the graphics-card block, the L-shaped CPU and VRM block with its tail, the pump top with its capsule reservoir, and the small M.2 sink." loading="lazy"><figcaption><b>Fig. 5</b> &nbsp;The four organs as they come off the plate, before tapping and lapping.</figcaption></figure>
+    <figure class="plate"><img src="media/cut_gpu.jpg" alt="Cutaway of the graphics-card block showing a fine gyroid layer under a coarser one, with two threaded ports." loading="lazy"><figcaption><b>Fig. 6</b> &nbsp;The 4090 block cut through the die: ports, plenum and slot nozzle, 5 mm gyroid core, divider, gallery, bone skin.</figcaption></figure>
+  </div>
+
   <article class="organ">
-    <figure><img src="media/cut_gpu.jpg" alt="Cutaway of the graphics-card block showing a fine gyroid layer under a coarser one, with two threaded ports." loading="lazy"></figure>
+    <figure><img src="media/gpu.jpg" alt="The graphics card under its printed aluminium block, with two coolant tubes rising from the ports over the GPU." loading="lazy"></figure>
     <div class="body">
       <div class="mono">Organ I &middot; replaces the 4090's stock cooler</div>
       <h3>Full-cover block for the RTX 4090 SUPRIM LIQUID</h3>
@@ -400,10 +407,10 @@ footer p + p { margin-top: 0.6rem; }
     <div><p>The cold plates were simulated at two scales. A patch of each lattice was resolved directly with a lattice-Boltzmann flow solver and a finite-volume heat solver. Its measured resistance and heat transfer then drive a block-level conjugate model built from the same CAD fields as the print files.</p></div>
   </div>
   <div class="two">
-    <figure class="plate"><img src="sim/sim_cell.png" alt="Speed of the coolant inside the gyroid core, in plan and in side view." loading="lazy"><figcaption><b>Fig. 5</b> &nbsp;Resolved flow in the 5 mm gyroid core between its floor and divider (0.125 mm voxels).</figcaption></figure>
-    <figure class="plate"><img src="sim/sim_gpu_flow.png" alt="Flow spreading from the central nozzle across the gyroid core." loading="lazy"><figcaption><b>Fig. 6</b> &nbsp;Block-level flow in the 4090 core. The dashed slot is the nozzle; the red outline is the die.</figcaption></figure>
-    <figure class="plate"><img src="sim/sim_gpu_metal.png" alt="Temperature of the underside of the graphics-card block." loading="lazy"><figcaption><b>Fig. 7</b> &nbsp;Metal temperature on the underside: die, memory lands and the two VRM rails.</figcaption></figure>
-    <figure class="plate"><img src="sim/sim_mono.png" alt="Flow path and temperature of the CPU and VRM monoblock." loading="lazy"><figcaption><b>Fig. 8</b> &nbsp;Monoblock: coolant path through core, bridge and arm, and the underside temperature.</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_cell.png" alt="Speed of the coolant inside the gyroid core, in plan and in side view." loading="lazy"><figcaption><b>Fig. 7</b> &nbsp;Resolved flow in the 5 mm gyroid core between its floor and divider (0.125 mm voxels).</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_gpu_flow.png" alt="Flow spreading from the central nozzle across the gyroid core." loading="lazy"><figcaption><b>Fig. 8</b> &nbsp;Block-level flow in the 4090 core. The dashed slot is the nozzle; the red outline is the die.</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_gpu_metal.png" alt="Temperature of the underside of the graphics-card block." loading="lazy"><figcaption><b>Fig. 9</b> &nbsp;Metal temperature on the underside: die, memory lands and the two VRM rails.</figcaption></figure>
+    <figure class="plate"><img src="sim/sim_mono.png" alt="Flow path and temperature of the CPU and VRM monoblock." loading="lazy"><figcaption><b>Fig. 10</b> &nbsp;Monoblock: coolant path through core, bridge and arm, and the underside temperature.</figcaption></figure>
   </div>
   <div class="two" style="margin-top:1.25rem">
     <div class="chart"><div class="mono" style="margin-bottom:0.5rem">Lattice resistance, resolved &rarr; fitted</div><svg id="dp-chart" viewBox="0 0 440 280" role="img" aria-label="Pressure gradient against speed for three lattices"></svg></div>

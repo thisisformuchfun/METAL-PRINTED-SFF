@@ -40,8 +40,18 @@ import pathlib, re
 s = pathlib.Path('site/index.html').read_text()
 body = s[s.index('<!--PAGE-->') + len('<!--PAGE-->'):s.index('<!--/PAGE-->')]
 body = re.sub(r'<!--HEADEND-->.*?<!--/HEADEND-->', '', body, flags=re.S)
-pathlib.Path('build/artifact').mkdir(parents=True, exist_ok=True)
-pathlib.Path('build/artifact/marrow.html').write_text(body.strip() + '\n')
+# that host serves web data types only: wrap each GLB as base64 in JSON and tell the viewer
+import base64, json
+out = pathlib.Path('build/artifact')
+(out / 'model').mkdir(parents=True, exist_ok=True)
+for name in ('marrow', 'marrow_host'):
+    src = pathlib.Path('site/model') / (name + '.glb')
+    if src.exists():
+        (out / 'model' / (name + '.b64.json')).write_text(json.dumps({'b64': base64.b64encode(src.read_bytes()).decode()}))
+flag = '<script>window.MARROW_MODEL_B64 = true;</script>\n'
+i = body.index('<script src="js/app.js">')
+body = body[:i] + flag + body[i:]
+(out / 'marrow.html').write_text(body.strip() + '\n')
 print('  artifact page', len(body), 'chars')
 PYEOF
 du -sh site

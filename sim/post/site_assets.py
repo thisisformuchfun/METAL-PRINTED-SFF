@@ -358,7 +358,8 @@ def main():
         flows["gpu"] = pack_lines(streamlines(ref_g, "gpu"))
     if (OUTD / ref_m / "fields.npz").exists():
         fig_mono(ref_m, out)
-        tmax = vertex_colours(ref_m, "monoblock")
+        # one colour scale for both blocks, so the legend on the site reads true for either
+        tmax = vertex_colours(ref_m, "monoblock", tmax=site["sims"].get("gpu_thermal_scale_K"))
         site["sims"]["mono_thermal_scale_K"] = tmax
         flows["mono"] = pack_lines(streamlines(ref_m, "board", n=110))
     fig_cell(out)

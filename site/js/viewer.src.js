@@ -16,6 +16,35 @@ const S = { mode: 'material', explode: 0, groups: {}, base: {}, flow: null, mats
 const EN = new THREE.Vector3(0, Math.sin(25 * Math.PI / 180), Math.cos(25 * Math.PI / 180));
 const OFFS = { steel: -0.07, alu: 0.07, loop: 0.16, host: 0 };
 
+// The hardware's render materials are procedural, so their colours do not survive the glTF export.
+// Restore the ones that matter by name; give the rest a sensible roughness.
+const FIX = [
+  [/pcb_black/, { color: 0x0b0e12, roughness: 0.5, metalness: 0 }],
+  [/pcb_(dark)?green/, { color: 0x0c2a1d, roughness: 0.5, metalness: 0 }],
+  [/sleeve_black|ribbon_black|wire_black/, { color: 0x0b0b0d, roughness: 0.85, metalness: 0 }],
+  [/mlcc_tan/, { color: 0x8f6f4c, roughness: 0.6, metalness: 0 }],
+  [/mlcc_grey/, { color: 0x5d5f63, roughness: 0.6, metalness: 0 }],
+  [/inductor_grey/, { color: 0x3a3d42, roughness: 0.7, metalness: 0.2 }],
+  [/silicon_die/, { color: 0x1d2128, roughness: 0.12, metalness: 1 }],
+  [/coolant_ruby/, { color: 0xc10b24, roughness: 0.18, metalness: 0, transmission: 0, transparent: true, opacity: 0.92 }],
+  [/pvc_clear/, { color: 0xdfe8ee, roughness: 0.06, metalness: 0, transmission: 0, transparent: true, opacity: 0.16, depthWrite: false }],
+];
+function fixMaterial(m) {
+  if (!m || m.userData.fixed) { return; }
+  m.userData.fixed = true;
+  let hit = false;
+  FIX.forEach(([re, props]) => {
+    if (!re.test(m.name)) { return; }
+    hit = true;
+    Object.keys(props).forEach((k) => { if (k === 'color') { m.color.setHex(props.color); } else { m[k] = props[k]; } });
+  });
+  if (!hit && m.roughness >= 0.99) { m.roughness = m.metalness > 0.7 ? 0.34 : 0.62; }
+  if ('sheen' in m) { m.sheen = 0; }
+  if ('clearcoat' in m) { m.clearcoat = Math.min(m.clearcoat, 0.3); }
+  m.vertexColors = false;
+  m.needsUpdate = true;
+}
+
 function inferno(t) {
   const c = [[0, 0, 4], [66, 10, 104], [147, 38, 103], [221, 81, 58], [252, 165, 10], [252, 255, 164]];
   const x = Math.min(0.9999, Math.max(0, t)) * 5, i = Math.floor(x), f = x - i;
@@ -34,7 +63,7 @@ function start() {
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 0.95;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   stage.appendChild(renderer.domElement);
   const scene = new THREE.Scene();
@@ -83,15 +112,23 @@ function start() {
       if (layer === 'alu') { o.material = S.mats.alu; }
       if (layer === 'steel') { o.material = S.mats.steel; }
       if (layer === 'host' || layer === 'loop') {
-        const m = o.material;
-        if (m && m.vertexColors) { m.vertexColors = false; m.needsUpdate = true; }
+        (Array.isArray(o.material) ? o.material : [o.material]).forEach(fixMaterial);
       }
       o.userData.orig = o.material;
     });
   }
   // the hardware the chassis carries is a second, heavier file: show the printed parts first
-  const loadHost = () => loader.load('model/marrow_host.glb', (g2) => { adopt(g2); apply(); }, undefined, () => {});
-  loader.load('model/marrow.glb', (gltf) => {
+  // Hosts that only serve web data types get the same GLB wrapped as base64 in JSON (window.MARROW_MODEL_B64).
+  function loadModel(name, onLoad, onErr) {
+    if (!window.MARROW_MODEL_B64) { loader.load('model/' + name + '.glb', onLoad, undefined, onErr); return; }
+    fetch('model/' + name + '.b64.json').then((r) => r.json()).then((j) => {
+      const bin = atob(j.b64), buf = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) { buf[i] = bin.charCodeAt(i); }
+      loader.parse(buf.buffer, '', onLoad, onErr);
+    }).catch(onErr);
+  }
+  const loadHost = () => loadModel('marrow_host', (g2) => { adopt(g2); apply(); }, () => {});
+  loadModel('marrow', (gltf) => {
     const alu = new THREE.MeshStandardMaterial({ color: 0xcdd4da, metalness: 1, roughness: 0.42 });
     const steel = new THREE.MeshStandardMaterial({ color: 0x77828d, metalness: 1, roughness: 0.3 });
     const heat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0, roughness: 0.75 });
@@ -106,7 +143,7 @@ function start() {
     S.ready = true;
     resize();
     apply();
-  }, undefined, () => { btn.textContent = 'Model failed to load'; });
+  }, () => { btn.textContent = 'Model failed to load'; });
 
   function buildFlow(data) {
     const grp = new THREE.Group();

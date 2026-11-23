@@ -26,7 +26,7 @@ tot = [0.0, 0.0, 0.0]
 steel_g = 0.0
 for k in ORDER:
     p = P[k]
-    bb = " x ".join(str(round(v)) for v in p["bbox_mm"])
+    bb = " x ".join(str(int(v + 0.5)) for v in p["bbox_mm"])
     ok = "yes" if p["fits_envelope"] else "NO"
     wt = "yes" if p["print_stl"]["watertight"] else "NO"
     rows.append(f"| `{k}.3mf` | {NAMES[k]} | {p['material']} | {p['mass_g']:.0f} g | {bb} | {ok} | {wt} | {money(p['cost_usd_jlc_pcbway'][0])} | {money(p['cost_usd_jlc_pcbway'][1])} |")

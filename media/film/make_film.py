@@ -192,7 +192,7 @@ def timeline(numbers):
     add(0.0, 7.5, "macro_skin", dict(z0=1.16, z1=1.04, px=26, py=-8), None, fade=(2.4, 0.0))
     add(7.5, 5.0, "macro_knuckle", dict(z0=1.04, z1=1.13, px=-22), super_("316L STAINLESS STEEL", "Printed bone."))
     add(12.5, 7.5, "macro_tube", dict(z0=1.12, z1=1.03, px=20, py=10), super_("ONE LOOP", "Liquid marrow."))
-    add(20.0, 5.0, "frame_only", dict(z0=1.03, z1=1.10, px=-18), super_("FIVE SEGMENTS · TEN BOLTS", "A skeleton.", f"LONGEST PART {n['longest']} MM · FITS A 300 MM BUILD PLATE"))
+    add(20.0, 5.0, "frame_only", dict(z0=1.03, z1=1.10, px=-18), super_("FIVE SEGMENTS · NINE BOLTS", "A skeleton.", f"LONGEST PART {n['longest']} MM · FITS A 300 MM BUILD PLATE"))
     add(25.0, 5.0, "organs", dict(z0=1.10, z1=1.03, px=22), super_("FOUR PRINTED ALUMINIUM PARTS", "Its organs.", "GYROID INSIDE · BONE SKIN OUTSIDE · EACH ONE PIECE"))
     add(30.0, 4.85, "sim_flow", None, super_("RESOLVED, THEN SCALED UP", "Coolant through a gyroid.", "LATTICE-BOLTZMANN FLOW · FINITE-VOLUME HEAT"))
     add(35.0, 10.0, "orbit", dict(z0=1.0, z1=1.14, px=-44, py=8, cx0=0.34), super_("PRE-LAUNCH PREVIEW", "MARROW", "Printed bone. Liquid marrow.", big=True), sup_in=0.05)
@@ -212,7 +212,7 @@ def load_numbers():
     if p.exists():
         d = json.loads(p.read_text())
         try:
-            n["longest"] = str(round(max(v["longest_mm"] for k, v in d["parts"].items() if v["material"] == "316L")))
+            n["longest"] = str(int(max(v["longest_mm"] for k, v in d["parts"].items() if v["material"] == "316L") + 0.5))
             g = d["sims"]["macro"]["gpu_block_AlSi10Mg_3"]
             n["gpu_rise"] = f"{g['heaters']['1']['T_mean_rise_K']:.0f}"
             n["gpu_w"] = f"{g['energy_in_W']:.0f}"

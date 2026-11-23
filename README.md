@@ -34,10 +34,10 @@ Prices are automated, pre-review quotes scaled by volume (JLC3DP / PCBWay, Novem
 | File | Part | Metal | Mass | Bounding box (mm) | Fits 300 x 300 x 290 | Watertight | JLC3DP | PCBWay |
 |---|---|---|---|---|---|---|---|---|
 | `gpu_block.3mf` | Organ I - RTX 4090 full-cover block | AlSi10Mg | 491 g | 209 x 124 x 27 | yes | yes | $195 | $276 |
-| `monoblock.3mf` | Organ II - CPU + VRM monoblock (AM5) | AlSi10Mg | 212 g | 93 x 131 x 28 | yes | yes | $84 | $119 |
+| `monoblock.3mf` | Organ II - CPU + VRM monoblock (AM5) | AlSi10Mg | 212 g | 93 x 131 x 29 | yes | yes | $84 | $119 |
 | `heart.3mf` | Organ III - pump top + 41 mL reservoir | AlSi10Mg | 156 g | 74 x 113 x 51 | yes | yes | $62 | $88 |
 | `m2_sink.3mf` | Organ IV - M.2 / chipset sink (clamped to the monoblock tail) | AlSi10Mg | 33 g | 107 x 27 x 17 | yes | yes | $13 | $18 |
-| `frame_pelvis.3mf` | Pelvis - keel, feet, PSU cradle, riser shelf | 316L | 839 g | 254 x 282 x 111 | yes | yes | $185 | $282 |
+| `frame_pelvis.3mf` | Pelvis - keel, feet, PSU cradle, riser shelf | 316L | 839 g | 254 x 283 x 111 | yes | yes | $185 | $282 |
 | `frame_lumbar.3mf` | Lumbar - lower front spine, GPU ribs | 316L | 317 g | 239 x 93 x 203 | yes | yes | $70 | $107 |
 | `frame_thoracic.3mf` | Thoracic - upper front spine, board ribs | 316L | 363 g | 200 x 111 x 214 | yes | yes | $80 | $122 |
 | `frame_dorsal.3mf` | Dorsal - lower rear spine, radiator ribs | 316L | 523 g | 234 x 23 x 268 | yes | yes | $115 | $176 |
