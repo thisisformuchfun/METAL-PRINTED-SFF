@@ -227,7 +227,11 @@ on the cold-plate temperature rises.
 | `site/` | The website (static) |
 | `exports/print/` | 3MF print files; `exports/meta/` per-part mass, size, cost, checks |
 
-Rebuild everything: `tools/build_all.sh` (CAD, simulations, site data), then the render and film steps listed in it.
+Rebuild everything: `tools/build_all.sh` (CAD, simulations, renders, film, site). It needs Python 3.13 with the packages in
+`requirements.txt`, Blender 4.5 LTS and ffmpeg; the web viewer is bundled with esbuild and the web models are packed with
+gltfpack (`tools/build_site.sh`). `pymeshlab` needs the system library `libopengl0`. The scripts look for the tools under
+`/opt`; set `PY`, `BLENDER` and `GLTFPACK` to point elsewhere. Path tracing is on the CPU: allow about an hour for the stills
+and another for the camera arc on four cores.
 
 ## Credits
 

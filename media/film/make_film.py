@@ -93,7 +93,8 @@ class Still:
 
 
 class Sequence:
-    def __init__(self, folder, pattern):
+    def __init__(self, folder, pattern, trim=0.0):
+        self.trim = trim
         self.files = sorted(pathlib.Path(folder).glob(pattern))
         self.ok = len(self.files) > 0
         self.cache = {}
@@ -112,6 +113,9 @@ class Sequence:
             if len(self.cache) > 6:
                 self.cache.pop(next(iter(self.cache)))
             im = cv2.imread(str(self.files[i]), cv2.IMREAD_COLOR).astype(np.float32) / 255.0
+            if self.trim:                               # shave the frame edge (stray edge pixels from the renderer)
+                dy, dx = int(im.shape[0] * self.trim), int(im.shape[1] * self.trim)
+                im = im[dy:im.shape[0] - dy, dx:im.shape[1] - dx]
             self.cache[i] = cv2.resize(im, (W, H), interpolation=cv2.INTER_AREA if im.shape[1] >= W else cv2.INTER_CUBIC)
         return self.cache[i]
 
@@ -234,7 +238,7 @@ def main(preview=False):
         if k in srcs:
             continue
         if k == "orbit":
-            srcs[k] = Sequence(ORBIT, "orbit_*.png")
+            srcs[k] = Sequence(ORBIT, "orbit_*.png", trim=0.012)
         elif k.startswith("sim_"):
             srcs[k] = Sequence(SIMV / k, "*.png")
         else:

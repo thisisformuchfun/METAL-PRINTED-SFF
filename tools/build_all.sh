@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Regenerate MARROW from source. Needs /opt/venv (see requirements in the README) and Blender 4.5.
+# Regenerate MARROW from source. Needs the Python packages in requirements.txt, Blender 4.5 and ffmpeg.
+# Override the interpreter and tools with PY=..., BLENDER=..., GLTFPACK=... if they are not under /opt.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-PY=/opt/venv/bin/python
+PY=${PY:-/opt/venv/bin/python}
 BLENDER=${BLENDER:-/opt/tools/blender/blender}
 
 # 1. CAD: parameters -> nine printed parts (print STL, render meshes, metadata)

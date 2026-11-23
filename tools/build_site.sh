@@ -2,8 +2,8 @@
 # Assemble site/ from rendered stills, the film, simulation figures and the web models.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-PY=/opt/venv/bin/python
-GLTFPACK=/opt/tools/gltf/node_modules/.bin/gltfpack
+PY=${PY:-/opt/venv/bin/python}
+GLTFPACK=${GLTFPACK:-/opt/tools/gltf/node_modules/.bin/gltfpack}
 mkdir -p site/media site/model site/data site/sim
 
 # stills -> JPEG
