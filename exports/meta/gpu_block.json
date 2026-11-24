@@ -1,0 +1,61 @@
+{
+ "name": "gpu_block",
+ "material": "AlSi10Mg",
+ "frame": "gpu",
+ "voxel_mm": 0.25,
+ "volume_cm3": 183.95,
+ "mass_g": 491.1,
+ "bbox_mm": [
+  208.7,
+  124.0,
+  26.7
+ ],
+ "bbox_lo": [
+  17.5,
+  1.5,
+  0.15
+ ],
+ "bbox_hi": [
+  226.21,
+  125.5,
+  26.9
+ ],
+ "fits_envelope": true,
+ "longest_mm": 208.7,
+ "cost_usd_jlc_pcbway": [
+  194.98,
+  275.92
+ ],
+ "print_stl": {
+  "faces": 1099992,
+  "watertight": true,
+  "topology": {
+   "faces": 1099992,
+   "boundary_edges": 0,
+   "non_manifold_edges": 0,
+   "non_manifold_vertices": 0,
+   "components": 1,
+   "watertight": true
+  },
+  "mesh_volume_cm3": 184.94
+ },
+ "surface_area_cm2": 1692.8,
+ "checks": {
+  "inlet_outlet_connected": true,
+  "wet_leaks_to_outside": false,
+  "wet_volume_ml": 55.908875,
+  "wetted_area_cm2_voxel": 985.5681000000001,
+  "closed_void_voxels": 235,
+  "die_floor_mm": 2.0,
+  "z_levels": {
+   "die": 3.0,
+   "floor": 5.0,
+   "core_top": 11.5,
+   "divider_top": 12.5,
+   "gallery_top": 17.5,
+   "roof_top": 19.1,
+   "boss_top": 26.900000000000002
+  },
+  "islands_removed_voxels": 99
+ }
+}

@@ -1,0 +1,14 @@
+build/
+sim/out/
+render/out/
+__pycache__/
+*.pyc
+.numba_cache/
+exports/print/*.stl
+render/hdri/*.hdr
+sim/cht/_build/
+*.nbc
+*.nbi
+media/score/*.wav
+media/score/stems/
+build/
